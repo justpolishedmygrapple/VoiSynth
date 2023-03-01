@@ -21,6 +21,8 @@ const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
 class MainActivity : AppCompatActivity() {
     private val service = UserInterface.create()
+
+    private val mediaPlayer = MediaPlayer()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,12 +57,20 @@ class MainActivity : AppCompatActivity() {
 
         val uri = Uri.parse(url)
 
-        val mediaPlayer = MediaPlayer()
+
 
         val context = this
         mediaPlayer.setDataSource(this, Uri.parse(url), header)
         mediaPlayer.prepare()
         mediaPlayer.start()
+    }
+
+    //Allows for the mediaPlayer to play the whole audio clip
+    //Error I was getting before: 'MediaPlayer finalized without being released'
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.stop()
+        mediaPlayer.release()
     }
 
 
