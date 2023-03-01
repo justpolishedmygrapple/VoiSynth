@@ -53,14 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         header["xi-api-key"] = ELEVEN_LABS_API
 
-        val url = urlSchemeBuilder("HwVUitQTLIxLzWQTCkhA")
-
-        val uri = Uri.parse(url)
-
+        val uri = urlSchemeBuilder("YBvxnRxzT37PBA2MJqbP")
 
 
         val context = this
-        mediaPlayer.setDataSource(this, Uri.parse(url), header)
+        mediaPlayer.setDataSource(this, uri, header)
         mediaPlayer.prepare()
         mediaPlayer.start()
     }
@@ -75,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 
 
     //Function that will be useful later to dynamically get the path to a particular audio file
-    private fun urlSchemeBuilder(audioId: String): String{
-        return "https://api.elevenlabs.io/v1/history/${audioId}/audio"
+    private fun urlSchemeBuilder(audioId: String): Uri{
+        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
     }
 
 
