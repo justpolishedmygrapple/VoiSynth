@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import com.squareup.moshi.Moshi
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -15,10 +16,15 @@ interface UserInterface {
         "xi-api-key: $ELEVEN_LABS_API",
         "accept: application/json"
     )
-    fun search(
+    fun search() : Call<String>
 
 
-    ) : Call<String>
+    @GET("voices")
+    @Headers(
+        "xi-api-key: $ELEVEN_LABS_API",
+        "accept: application/json"
+    )
+    fun getVoices(): Call<String>
 
 
     companion object{
