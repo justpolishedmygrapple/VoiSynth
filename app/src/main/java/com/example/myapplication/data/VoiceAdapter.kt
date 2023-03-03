@@ -9,12 +9,12 @@ import com.example.myapplication.R
 
 class VoiceAdapter() : RecyclerView.Adapter<VoiceAdapter.VoiceViewHolder>() {
 
-    var voices: List<Voice> = listOf()
+    private var voiceList = listOf<Voice>()
 
-    override fun getItemCount() = voices.size
+    override fun getItemCount() = this.voiceList.size
 
     fun addVoice(newVoiceList: List<Voice>?){
-        voices = newVoiceList ?: listOf()
+        voiceList = newVoiceList ?: listOf()
         notifyDataSetChanged()
     }
 
@@ -26,7 +26,7 @@ class VoiceAdapter() : RecyclerView.Adapter<VoiceAdapter.VoiceViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: VoiceViewHolder, position: Int) {
-        holder.bind(voices[position])
+        holder.bind(this.voiceList[position])
     }
 
     class VoiceViewHolder(view: View): RecyclerView.ViewHolder(view){

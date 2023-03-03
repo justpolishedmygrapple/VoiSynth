@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     private val voiceAdapter = VoiceAdapter()
 
 
+    private lateinit var voiceResultsRV: RecyclerView
+
+
 
 
 
@@ -58,14 +61,13 @@ class MainActivity : AppCompatActivity() {
         dummyVoices.add(dummyVoice4)
 
 
-        val voiceRV: RecyclerView = findViewById(R.id.rv_voice_list)
+        voiceResultsRV= findViewById(R.id.rv_voice_list)
 
-        voiceRV.layoutManager = LinearLayoutManager(this)
-        voiceRV.setHasFixedSize(true)
+        voiceResultsRV.layoutManager = LinearLayoutManager(this)
+        voiceResultsRV.setHasFixedSize(true)
 
-        val adapter = VoiceAdapter()
 
-        voiceRV.adapter = adapter
+        voiceResultsRV.adapter = voiceAdapter
 
         queryVoices()
 
