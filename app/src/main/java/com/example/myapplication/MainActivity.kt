@@ -10,12 +10,14 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
+import com.example.myapplication.data.TextToVoiceQuery
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import org.chromium.net.CronetEngine
 import org.chromium.net.UrlRequest
 import retrofit2.Call
@@ -23,7 +25,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import java.io.ByteArrayInputStream
 import java.util.concurrent.Executor
+import kotlin.io.path.pathString
+import kotlin.io.path.writeBytes
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
@@ -71,6 +76,52 @@ class MainActivity : AppCompatActivity() {
 
         queryVoices()
 
+
+        val testQuery = TextToVoiceQuery("this is a test")
+//
+        voiceservice.generateVoiceAudio("pAzk0hvNdRe26GUDhQ3N", generateTextQuery(
+            "Obama says this is going to be the best app ever"
+        )).enqueue(
+            object: Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Log.d("response", response.body().toString())
+                    val audioBytes = response.body()?.bytes()
+
+                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
+
+                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
+
+                    val mediaPlayer = MediaPlayer()
+
+                    mediaPlayer.setDataSource(tempMP3.pathString)
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
+
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            }
+
+        )
+
+
+    }
+
+    private fun generateTextQuery(text: String): String{
+
+        return "{\n" +
+                "  \"text\": \"${text}\",\n" +
+                "  \"voice_settings\": {\n" +
+                "    \"stability\": 0,\n" +
+                "    \"similarity_boost\": 0\n" +
+                "  }\n" +
+                "}"
+
     }
 
     override fun onResume() {
@@ -111,11 +162,11 @@ class MainActivity : AppCompatActivity() {
 
         val uri = urlSchemeBuilder("YBvxnRxzT37PBA2MJqbP")
 
-
-        val context = this
-        mediaPlayer.setDataSource(this, uri, header)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
+//
+//        val context = this
+//        mediaPlayer.setDataSource(this, uri, header)
+//        mediaPlayer.prepare()
+//        mediaPlayer.start()
     }
 
     //Allows for the mediaPlayer to play the whole audio clip
