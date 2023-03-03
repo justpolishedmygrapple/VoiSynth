@@ -7,6 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R.*
+import com.example.myapplication.data.Voice
+import com.example.myapplication.data.VoiceAdapter
 import okhttp3.OkHttpClient
 import org.chromium.net.CronetEngine
 import org.chromium.net.UrlRequest
@@ -22,11 +27,42 @@ const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 class MainActivity : AppCompatActivity() {
     private val service = UserInterface.create()
 
+
+
+
     private val mediaPlayer = MediaPlayer()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout.activity_main)
 
+
+
+
+
+        val dummyVoices = mutableListOf<Voice>()
+
+        val dummyVoice: Voice = Voice("1234", "Obama")
+        val dummyVoice2: Voice = Voice("5678", "Darth Vader")
+        val dummyVoice3: Voice = Voice("12123", "Trump")
+        val dummyVoice4: Voice = Voice("1313133", "Eddie Van Halen")
+
+        dummyVoices.add(dummyVoice)
+        dummyVoices.add(dummyVoice2)
+        dummyVoices.add(dummyVoice3)
+        dummyVoices.add(dummyVoice4)
+
+
+        val voiceRV: RecyclerView = findViewById(R.id.rv_voice_list)
+
+        voiceRV.layoutManager = LinearLayoutManager(this)
+        voiceRV.setHasFixedSize(true)
+
+        val adapter = VoiceAdapter()
+        voiceRV.adapter = adapter
+
+        for(voice in dummyVoices){
+            adapter.addVoice(voice)
+        }
     }
 
     override fun onResume() {
