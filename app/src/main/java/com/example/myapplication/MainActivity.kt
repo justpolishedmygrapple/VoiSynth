@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
+import com.example.myapplication.data.VoiceResponse
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import org.chromium.net.CronetEngine
 import org.chromium.net.UrlRequest
@@ -25,7 +28,10 @@ import java.util.concurrent.Executor
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
 class MainActivity : AppCompatActivity() {
-    private val service = UserInterface.create()
+    private val voiceservice = UserInterface.create()
+
+    private val voiceAdapter = VoiceAdapter()
+
 
 
 
@@ -58,26 +64,38 @@ class MainActivity : AppCompatActivity() {
         voiceRV.setHasFixedSize(true)
 
         val adapter = VoiceAdapter()
+
         voiceRV.adapter = adapter
 
-        for(voice in dummyVoices){
-            adapter.addVoice(voice)
-        }
+        queryVoices()
+
     }
 
     override fun onResume() {
         super.onResume()
-        val serviceTest = service.search().enqueue(
-            object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("apicall", response.body().toString())
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            }
-        )
+//        val serviceTest = service.getVoices().enqueue(
+//            object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    Log.d("apicall", response.body().toString())
+//
+//                    if(response.isSuccessful){
+//                        val moshi = Moshi.Builder().build()
+//
+//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
+//                            moshi.adapter(VoiceResponse::class.java)
+//
+//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
+//
+//                        Log.d("help", voiceSearchResults.toString())
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("Error", "Error making API call: ${t.message}")
+//                }
+//            }
+//        )
 
         //        Testing playing a music file streamed from the internet... works.
         //Now, how to apply headers?
@@ -110,6 +128,34 @@ class MainActivity : AppCompatActivity() {
     //Function that will be useful later to dynamically get the path to a particular audio file
     private fun urlSchemeBuilder(audioId: String): Uri{
         return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
+    }
+
+    private fun queryVoices(){
+        val serviceTest = voiceservice.getVoices().enqueue(
+            object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.d("apicall", response.body().toString())
+
+                    if(response.isSuccessful){
+                        val moshi = Moshi.Builder().build()
+
+                        val jsonAdapter: JsonAdapter<VoiceResponse> =
+                            moshi.adapter(VoiceResponse::class.java)
+
+                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
+
+
+                        voiceAdapter.addVoice(voiceSearchResults?.voices)
+
+                        Log.d("help", voiceSearchResults.toString())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("Error", "Error making API call: ${t.message}")
+                }
+            })
     }
 
 

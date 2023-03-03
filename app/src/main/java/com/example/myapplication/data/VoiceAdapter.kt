@@ -7,15 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
-class VoiceAdapter : RecyclerView.Adapter<VoiceAdapter.VoiceViewHolder>() {
+class VoiceAdapter() : RecyclerView.Adapter<VoiceAdapter.VoiceViewHolder>() {
 
-    val voices: MutableList<Voice> = mutableListOf()
+    var voices: List<Voice> = listOf()
 
     override fun getItemCount() = voices.size
 
-    fun addVoice(voice: Voice){
-        voices.add(0, voice)
-        notifyItemInserted(0)
+    fun addVoice(newVoiceList: List<Voice>?){
+        voices = newVoiceList ?: listOf()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoiceViewHolder {
@@ -33,7 +33,7 @@ class VoiceAdapter : RecyclerView.Adapter<VoiceAdapter.VoiceViewHolder>() {
         private val voiceNameTV: TextView = view.findViewById(R.id.tv_voice_name)
         private val voiceIDTV: TextView = view.findViewById(R.id.tv_voice_id)
 
-        private var currentVoice: Voice? = null
+        private lateinit var currentVoice: Voice
 
         fun bind(voice: Voice){
             currentVoice = voice
