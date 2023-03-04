@@ -1,12 +1,12 @@
 package com.example.myapplication
 
-import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.net.toUri
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
@@ -16,24 +16,17 @@ import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
-import org.chromium.net.CronetEngine
-import org.chromium.net.UrlRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import java.io.ByteArrayInputStream
-import java.util.concurrent.Executor
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
 class MainActivity : AppCompatActivity() {
-    private val voiceservice = UserInterface.create()
+    private val voiceservice = VoiceInterface.create()
 
     private val voiceAdapter = VoiceAdapter()
 
@@ -79,35 +72,35 @@ class MainActivity : AppCompatActivity() {
 
         val testQuery = TextToVoiceQuery("this is a test")
 //
-        voiceservice.generateVoiceAudio("pAzk0hvNdRe26GUDhQ3N", generateTextQuery(
-            "Obama says this is going to be the best app ever"
-        )).enqueue(
-            object: Callback<ResponseBody>{
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    Log.d("response", response.body().toString())
-                    val audioBytes = response.body()?.bytes()
-
-                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
-
-                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
-
-                    val mediaPlayer = MediaPlayer()
-
-                    mediaPlayer.setDataSource(tempMP3.pathString)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            }
-
-        )
+//        voiceservice.generateVoiceAudio("pAzk0hvNdRe26GUDhQ3N", generateTextQuery(
+//            "Obama says this is going to be the best app ever"
+//        )).enqueue(
+//            object: Callback<ResponseBody>{
+//                override fun onResponse(
+//                    call: Call<ResponseBody>,
+//                    response: Response<ResponseBody>
+//                ) {
+//                    Log.d("response", response.body().toString())
+//                    val audioBytes = response.body()?.bytes()
+//
+//                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
+//
+//                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
+//
+//                    val mediaPlayer = MediaPlayer()
+//
+//                    mediaPlayer.setDataSource(tempMP3.pathString)
+//                    mediaPlayer.prepare()
+//                    mediaPlayer.start()
+//
+//                }
+//
+//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                    TODO("Not yet implemented")
+//                }
+//            }
+//
+//        )
 
 
     }
@@ -162,11 +155,11 @@ class MainActivity : AppCompatActivity() {
 
         val uri = urlSchemeBuilder("YBvxnRxzT37PBA2MJqbP")
 
-//
-//        val context = this
-//        mediaPlayer.setDataSource(this, uri, header)
-//        mediaPlayer.prepare()
-//        mediaPlayer.start()
+
+        val context = this
+        mediaPlayer.setDataSource(this, uri, header)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
     }
 
     //Allows for the mediaPlayer to play the whole audio clip
@@ -175,6 +168,21 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         mediaPlayer.stop()
         mediaPlayer.release()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_voice_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_voice_list ->{
+                //TODO: make a new activity to list voices
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 

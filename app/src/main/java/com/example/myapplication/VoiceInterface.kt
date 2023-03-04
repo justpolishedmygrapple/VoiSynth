@@ -1,8 +1,5 @@
 package com.example.myapplication
 
-import android.provider.MediaStore.Audio
-import com.example.myapplication.data.TextToVoiceQuery
-import com.squareup.moshi.Moshi
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -10,7 +7,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
 
-interface UserInterface {
+interface VoiceInterface {
 
     @GET("user")
     @Headers(
@@ -40,12 +37,12 @@ interface UserInterface {
     companion object{
         private const val BASE_URL = "https://api.elevenlabs.io/v1/"
 
-        fun create(): UserInterface {
+        fun create(): VoiceInterface {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
-                .create(UserInterface::class.java)
+                .create(VoiceInterface::class.java)
     }
 
     }
