@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +15,14 @@ import com.example.myapplication.data.TextToVoiceQuery
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
+import com.example.myapplication.ui.VoiceListActivity
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
@@ -28,7 +31,11 @@ const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 class MainActivity : AppCompatActivity() {
     private val voiceservice = VoiceInterface.create()
 
-    private val voiceAdapter = VoiceAdapter()
+//    private val voiceAdapter = VoiceAdapter()
+
+    private fun onVoiceItemClick(voice: Voice) {
+
+    }
 
 
     private lateinit var voiceResultsRV: RecyclerView
@@ -43,31 +50,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(layout.activity_main)
 
 
+        //Creating dir for app voice file data
+        val audioFolder = filesDir
+        val folder = File(audioFolder, "ai_voice")
+        folder.mkdir()
 
-
-
-        val dummyVoices = mutableListOf<Voice>()
-
-        val dummyVoice: Voice = Voice("1234", "Obama")
-        val dummyVoice2: Voice = Voice("5678", "Darth Vader")
-        val dummyVoice3: Voice = Voice("12123", "Trump")
-        val dummyVoice4: Voice = Voice("1313133", "Eddie Van Halen")
-
-        dummyVoices.add(dummyVoice)
-        dummyVoices.add(dummyVoice2)
-        dummyVoices.add(dummyVoice3)
-        dummyVoices.add(dummyVoice4)
-
-
-        voiceResultsRV= findViewById(R.id.rv_voice_list)
-
-        voiceResultsRV.layoutManager = LinearLayoutManager(this)
-        voiceResultsRV.setHasFixedSize(true)
-
-
-        voiceResultsRV.adapter = voiceAdapter
-
-        queryVoices()
+//
+//        voiceResultsRV = findViewById(R.id.rv_voice_list)
+//
+//        voiceResultsRV.layoutManager = LinearLayoutManager(this)
+//        voiceResultsRV.setHasFixedSize(true)
+//
+//
+//        voiceResultsRV.adapter = voiceAdapter
+//
+//        queryVoices()
 
 
         val testQuery = TextToVoiceQuery("this is a test")
@@ -149,17 +146,17 @@ class MainActivity : AppCompatActivity() {
 
 
         //Simply playing one single audio file in the main activity for now
-        val header = HashMap<String,String>()
-
-        header["xi-api-key"] = ELEVEN_LABS_API
-
-        val uri = urlSchemeBuilder("YBvxnRxzT37PBA2MJqbP")
-
-
-        val context = this
-        mediaPlayer.setDataSource(this, uri, header)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
+//        val header = HashMap<String,String>()
+//
+//        header["xi-api-key"] = ELEVEN_LABS_API
+//
+//        val uri = urlSchemeBuilder("YBvxnRxzT37PBA2MJqbP")
+//
+//
+//        val context = this
+//        mediaPlayer.setDataSource(this, uri, header)
+//        mediaPlayer.prepare()
+//        mediaPlayer.start()
     }
 
     //Allows for the mediaPlayer to play the whole audio clip
@@ -177,8 +174,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.action_voice_list ->{
-                //TODO: make a new activity to list voices
+            R.id.action_voice_list -> {
+                val intent = Intent(this, VoiceListActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -206,7 +204,7 @@ class MainActivity : AppCompatActivity() {
                         val voiceSearchResults = jsonAdapter.fromJson(response.body())
 
 
-                        voiceAdapter.addVoice(voiceSearchResults?.voices)
+//                        voiceAdapter.addVoice(voiceSearchResults?.voices)
 
                         Log.d("help", voiceSearchResults.toString())
 
