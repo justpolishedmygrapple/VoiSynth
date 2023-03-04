@@ -124,6 +124,13 @@ class VoiceGeneratorActivity : AppCompatActivity() {
     }
 
 
+    //audio stops playing when user leaves the screen
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
+    }
+
+
     //Allows for media to keep playing during rotates.
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
