@@ -90,7 +90,10 @@ class VoiceGeneratorActivity : AppCompatActivity() {
             ).show()
         }
 
-        else if(!mediaPlayer.isPlaying){
+        //Fixed critical bug
+        //Not checking that userRequestedText == "" before would send an API call anyway with
+        // An empty string and generate garbage audio.
+        else if(!mediaPlayer.isPlaying and (userRequestedText != "")){
         voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
         generateTextQuery(userRequestedText)).enqueue(
             object: Callback<ResponseBody>{
