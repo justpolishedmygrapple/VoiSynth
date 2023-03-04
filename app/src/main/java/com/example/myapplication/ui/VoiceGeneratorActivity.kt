@@ -7,10 +7,12 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
 import com.example.myapplication.R.*
 import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.Voice
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,7 +62,17 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
         val userRequestedText: String = findViewById<EditText>(R.id.edit_generated_text).text.toString()
 
+        if(userRequestedText == "") {
 
+            Log.d("userText", "user text is null")
+            Snackbar.make(
+                this.findViewById(android.R.id.content),
+                "You have to enter some text in order to generate audio",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+        else{
         voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
         generateTextQuery(userRequestedText)).enqueue(
             object: Callback<ResponseBody>{
@@ -81,7 +93,7 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             }
-        )
+        )}
     }
 
     private fun generateTextQuery(text: String): String{
