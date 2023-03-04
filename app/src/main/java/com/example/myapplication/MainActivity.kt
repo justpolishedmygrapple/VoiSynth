@@ -16,6 +16,7 @@ import com.example.myapplication.data.TextToVoiceQuery
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
+import com.example.myapplication.ui.HistoryView
 import com.example.myapplication.ui.VoiceListActivity
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private lateinit var voiceResponse: VoiceResponse
     private lateinit var voiceResultsRV: RecyclerView
 
 
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         val audioFolder = filesDir
         val folder = File(audioFolder, "ai_voice")
         folder.mkdir()
+
 
 //
 //        voiceResultsRV = findViewById(R.id.rv_voice_list)
@@ -168,6 +171,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_history_list, menu)
         menuInflater.inflate(R.menu.activity_voice_list, menu)
         return true
     }
@@ -176,6 +180,11 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId){
             R.id.action_voice_list -> {
                 val intent = Intent(this, VoiceListActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.action_show_history ->{
+                val intent = Intent(this, HistoryView::class.java)
                 startActivity(intent)
                 true
             }
@@ -203,8 +212,11 @@ class MainActivity : AppCompatActivity() {
 
                         val voiceSearchResults = jsonAdapter.fromJson(response.body())
 
+                        voiceResponse = voiceSearchResults!!
 
-//                        voiceAdapter.addVoice(voiceSearchResults?.voices)
+                        for(i in voiceResponse.voices){
+                            Log.d("voices", i.name)
+                        }
 
                         Log.d("help", voiceSearchResults.toString())
 

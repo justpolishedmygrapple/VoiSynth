@@ -3,6 +3,9 @@
 
     <string name="action_voices">Voices</string>
 
+    <string name="action_history">History</string>
+
+
     <string name="voice_name">Voice selected: %1$s</string>
 
     <string name="generate_hint">Enter some text you\'d like to hear %1$s say</string>
@@ -10,8 +13,7 @@
     <string name="generate_button">Generate</string>
 
 
-
-<!--  Default text choices that the user can choose from<-->
+    <!--  Default text choices that the user can choose from<-->
 
     <string name="linux_copypasta"> "I'd just like to interject for a moment. What you're referring
         toas Linux, is in fact, guhnoo slash Linux, or as I've recently taken to calling it, guhnoo
