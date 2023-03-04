@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-    private val mediaPlayer = MediaPlayer()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
@@ -116,8 +114,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
+//    override fun onResume() {
+//        super.onResume()
 //        val serviceTest = service.getVoices().enqueue(
 //            object : Callback<String> {
 //                override fun onResponse(call: Call<String>, response: Response<String>) {
@@ -159,15 +157,15 @@ class MainActivity : AppCompatActivity() {
 //        mediaPlayer.setDataSource(this, uri, header)
 //        mediaPlayer.prepare()
 //        mediaPlayer.start()
-    }
+//    }
 
     //Allows for the mediaPlayer to play the whole audio clip
     //Error I was getting before: 'MediaPlayer finalized without being released'
-    override fun onStop() {
-        super.onStop()
-        mediaPlayer.stop()
-        mediaPlayer.release()
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        mediaPlayer.stop()
+//        mediaPlayer.release()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_voice_list, menu)

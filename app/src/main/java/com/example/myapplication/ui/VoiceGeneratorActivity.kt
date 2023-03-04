@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,10 +32,17 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
     private var userGeneratedText: String? = null
 
+    private val mediaPlayer = MediaPlayer()
+
 //    private val GenerateButton: Button = findViewById<Button>(R.id.button_generate_text)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_voice_generator)
+
+    if (savedInstanceState != null){
+        val position = savedInstanceState.getInt("position")
+        mediaPlayer.seekTo(position)
+    }
 
 
         if(intent != null && intent.hasExtra(EXTRA_CHARACTER_VOICE)){
@@ -62,6 +70,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
         val userRequestedText: String = findViewById<EditText>(R.id.edit_generated_text).text.toString()
 
+
+
         if(userRequestedText == "") {
 
             Log.d("userText", "user text is null")
@@ -72,7 +82,15 @@ class VoiceGeneratorActivity : AppCompatActivity() {
             ).show()
         }
 
-        else{
+        if(mediaPlayer.isPlaying){
+            Snackbar.make(
+                this.findViewById(android.R.id.content),
+                "Please wait until audio is done playing before generating a new request",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+        else if(!mediaPlayer.isPlaying){
         voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
         generateTextQuery(userRequestedText)).enqueue(
             object: Callback<ResponseBody>{
@@ -83,18 +101,39 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                     val audioBytes = response.body()?.bytes()
                     val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
                     tempMP3.writeBytes(audioBytes ?: byteArrayOf())
-                    val mediaPlayer = MediaPlayer()
+
                     mediaPlayer.setDataSource(tempMP3.pathString)
                     mediaPlayer.prepare()
                     mediaPlayer.start()
+
+                    if(!mediaPlayer.isPlaying){
+                        mediaPlayer.release()
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.d("onfailure", t.message.toString())
                 }
             }
         )}
     }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.release()
+    }
+
+
+    //Allows for media to keep playing during rotates.
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("position", mediaPlayer.currentPosition)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+    }
+
 
     private fun generateTextQuery(text: String): String{
 
