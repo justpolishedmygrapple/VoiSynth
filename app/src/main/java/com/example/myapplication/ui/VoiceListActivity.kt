@@ -50,7 +50,9 @@ class VoiceListActivity : AppCompatActivity() {
         Log.d("onVoiceItemClick", "voice item clicked")
         Log.d("voiceID", voice.voice_id)
 
-        val intent = Intent(this, VoiceGeneratorActivity::class.java)
+        val intent = Intent(this, VoiceGeneratorActivity::class.java).apply {
+            putExtra(EXTRA_CHARACTER_VOICE, voice)
+        }
 
         startActivity(intent)
 

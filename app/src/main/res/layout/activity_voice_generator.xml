@@ -6,9 +6,9 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="115dp"
-        android:layout_height="0dp"
+        android:id="@+id/tv_selected_voice"
+        android:layout_width="179dp"
+        android:layout_height="37dp"
         android:layout_marginTop="43dp"
         android:layout_marginBottom="13dp"
         android:text="@string/voice_name"

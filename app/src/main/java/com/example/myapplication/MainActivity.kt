@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Directory
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +28,7 @@ import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
+
 
 class MainActivity : AppCompatActivity() {
     private val voiceservice = VoiceInterface.create()

@@ -3,9 +3,9 @@
 
     <string name="action_voices">Voices</string>
 
-    <string name="voice_name">Voice Selected: %1$s</string>
+    <string name="voice_name">Voice selected: %1$s</string>
 
-    <string name="generate_hint">Enter some text you\'d like to hear a personality say</string>
+    <string name="generate_hint">Enter some text you\'d like to hear %1$s say</string>
 
     <string name="generate_button">Generate</string>
 
