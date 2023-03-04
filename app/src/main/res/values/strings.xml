@@ -2,4 +2,65 @@
     <string name="app_name">My Application</string>
 
     <string name="action_voices">Voices</string>
+
+    <string name="voice_name">Voice Selected: %1$s</string>
+
+    <string name="generate_hint">Enter some text you\'d like to hear a personality say</string>
+
+    <string name="generate_button">Generate</string>
+
+
+
+<!--  Default text choices that the user can choose from<-->
+
+    <string name="linux_copypasta"> "I'd just like to interject for a moment. What you're referring
+        toas Linux, is in fact, guhnoo slash Linux, or as I've recently taken to calling it, guhnoo
+        plus Linux. Linux is not an operating system unto itself, but rather another free component
+        of a fully functioning guhnoo system made useful by the guhnoo corelibs, shell utilities and
+        vital system components comprising a full OS as defined by pozix." </string>
+
+    <string name="declaration_of_independence">"We hold these truths to be self-evident, that all men are created equal, that they
+        are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.
+        That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed,
+        That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it,
+        and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall
+        seem most likely to effect their Safety and Happiness."</string>
+
+    <string name="trump_best_class_ever">"People are saying and let me tell you i've asked a lot of people,
+        some of the best people are saying it, that CS 492 is the best class of all time. believe me,
+        it's what they're saying. now when it comes to professor hess, he has the best android coding skills of all,
+        of well when he talked about recycler views for example he made some of the highest quality apps i had ever seen.
+        Apple is really sending their worst people when it comes to mobile developers and when it comes to mobile developers,
+        believe me I know the best of the best when it comes to developers. Some of the best developers even work for me and,
+        well when they made this app, the people absolutely loved, they really loved it."</string>
+
+    <string name="dropdown_default_texts">dropDownTextMenu</string>
+    <string-array name="default_texts">
+        <item>
+        "People are saying and let me tell you i've asked a lot of people,
+        some of the best people are saying it, that CS 492 is the best class of all time. believe me,
+        it's what they're saying. now when it comes to professor hess, he has the best android coding skills of all,
+        of well when he talked about recycler views for example he made some of the highest quality apps i had ever seen.
+        Apple is really sending their worst people when it comes to mobile developers and when it comes to mobile developers,
+        believe me I know the best of the best when it comes to developers. Some of the best developers even work for me and,
+        well when they made this app, the people absolutely loved, they really loved it."
+        </item>
+
+        <item>
+            "We hold these truths to be self-evident, that all men are created equal, that they
+        are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.
+        That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed,
+        That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it,
+        and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall
+        seem most likely to effect their Safety and Happiness."
+        </item>
+
+        <item>
+            "I'd just like to interject for a moment. What you're referring
+        toas Linux, is in fact, guhnoo slash Linux, or as I've recently taken to calling it, guhnoo
+        plus Linux. Linux is not an operating system unto itself, but rather another free component
+        of a fully functioning guhnoo system made useful by the guhnoo corelibs, shell utilities and
+        vital system components comprising a full OS as defined by pozix."
+        </item>
+    </string-array>
 </resources>

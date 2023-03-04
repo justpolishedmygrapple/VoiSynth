@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -47,6 +48,11 @@ class VoiceListActivity : AppCompatActivity() {
     fun onVoiceItemClick(voice: Voice){
 
         Log.d("onVoiceItemClick", "voice item clicked")
+        Log.d("voiceID", voice.voice_id)
+
+        val intent = Intent(this, VoiceGeneratorActivity::class.java)
+
+        startActivity(intent)
 
     }
 
