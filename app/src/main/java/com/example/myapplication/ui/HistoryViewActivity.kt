@@ -63,8 +63,6 @@ class HistoryViewActivity : AppCompatActivity() {
                             val jsonAdapter: JsonAdapter<HistoryResponse> =
                                 moshi.adapter(HistoryResponse::class.java)
 
-                            val historyResults = jsonAdapter.fromJson(response.body())
-
                             historyItems = jsonAdapter.fromJson(response.body())!!
 
                             val intent = Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
