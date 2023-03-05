@@ -1,32 +1,25 @@
 package com.example.myapplication
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Directory
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
 import com.example.myapplication.data.TextToVoiceQuery
 import com.example.myapplication.data.Voice
-import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
-import com.example.myapplication.ui.HistoryView
+import com.example.myapplication.ui.HistoryViewActivity
 import com.example.myapplication.ui.VoiceListActivity
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import kotlin.io.path.pathString
-import kotlin.io.path.writeBytes
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
@@ -184,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_show_history ->{
-                val intent = Intent(this, HistoryView::class.java)
+                val intent = Intent(this, HistoryViewActivity::class.java)
                 startActivity(intent)
                 true
             }

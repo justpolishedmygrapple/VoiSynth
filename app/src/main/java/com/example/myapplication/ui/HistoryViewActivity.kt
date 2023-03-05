@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import android.widget.AdapterView.OnItemSelectedListener
 import com.example.myapplication.R
 import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.HistoryAdapter
+import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceResponse
 import com.squareup.moshi.JsonAdapter
@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HistoryView : AppCompatActivity() {
+class HistoryViewActivity : AppCompatActivity() {
 
     private lateinit var arrayAdapter: HistoryAdapter
 
@@ -34,6 +34,8 @@ class HistoryView : AppCompatActivity() {
 
     val voiceservice = VoiceInterface.create()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        queryVoices(voiceArray)
@@ -42,6 +44,53 @@ class HistoryView : AppCompatActivity() {
         spinner = findViewById<Spinner>(R.id.spinner_history)
 
         queryVoices(voiceArray)
+
+        val button: Button = findViewById(R.id.button_history)
+
+
+
+        button.setOnClickListener {
+
+            var historyItems: HistoryResponse
+
+            voiceservice.getHistory().enqueue(
+                object: Callback<String>{
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        Log.d("button response", response.body().toString())
+
+                        if(response.isSuccessful){
+                            val moshi = Moshi.Builder().build()
+                            val jsonAdapter: JsonAdapter<HistoryResponse> =
+                                moshi.adapter(HistoryResponse::class.java)
+
+                            val historyResults = jsonAdapter.fromJson(response.body())
+
+                            historyItems = jsonAdapter.fromJson(response.body())!!
+
+                            val intent = Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
+                                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
+                                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
+                                }
+
+                            startActivity(intent)
+                            }
+
+
+                        }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                }
+            )
+
+
+
+                }
+
+
+
+
 
 
 
@@ -54,7 +103,7 @@ class HistoryView : AppCompatActivity() {
                 val selectedVoice = p0?.getItemAtPosition(p2) as? Voice
 
                 selectedVoice?.let {
-                    Toast.makeText(this@HistoryView, "Selected item: ${it.voice_id}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@HistoryViewActivity, "Selected item: ${it.voice_id}", Toast.LENGTH_SHORT).show()
                 }
 
                 Log.d("selection", selectedVoice!!.name)
@@ -104,7 +153,7 @@ class HistoryView : AppCompatActivity() {
 
                         Log.d("help", voiceSearchResults.toString())
 
-                        spinner.adapter = HistoryAdapter(this@HistoryView, voiceArray)
+                        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
 
 
 
