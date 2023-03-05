@@ -7,9 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
-class HistoryTextAdapter : RecyclerView.Adapter<HistoryTextAdapter.ViewHolder>(){
+class HistoryTextAdapter(private val onClick: (HistoryItem) -> Unit) : RecyclerView.Adapter<HistoryTextAdapter.ViewHolder>(){
+
 
     private var historyItemList = listOf<HistoryItem>()
+
 
     override fun getItemCount() = this.historyItemList.size
 
@@ -21,7 +23,7 @@ class HistoryTextAdapter : RecyclerView.Adapter<HistoryTextAdapter.ViewHolder>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.history_result_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, onClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -29,10 +31,16 @@ class HistoryTextAdapter : RecyclerView.Adapter<HistoryTextAdapter.ViewHolder>()
     }
 
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class ViewHolder(view: View, val onClick: (HistoryItem) -> Unit): RecyclerView.ViewHolder(view){
         private val textFromHistoryItem: TextView = view.findViewById(R.id.tv_history_item_text)
 
         private lateinit var currentHistoryItem: HistoryItem
+
+        init{
+            itemView.setOnClickListener {
+                currentHistoryItem?.let(onClick)
+            }
+        }
 
 
         fun bind(historyItem: HistoryItem){

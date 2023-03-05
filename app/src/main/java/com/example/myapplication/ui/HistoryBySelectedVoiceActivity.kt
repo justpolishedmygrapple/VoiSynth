@@ -1,10 +1,16 @@
 package com.example.myapplication.ui
 
+import android.media.MediaParser
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.BuildConfig.ELEVEN_LABS_API
 import com.example.myapplication.R
 import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.HistoryItem
@@ -57,7 +63,8 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
         }
 
-        historyTextAdapter = HistoryTextAdapter()
+
+        historyTextAdapter = HistoryTextAdapter(::onHistoryItemClick)
 
         historyTextAdapter.addHistoryItem(historyResponseSearchResults)
 
@@ -67,5 +74,27 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
         historyTextRV.setHasFixedSize(true)
 
         historyTextRV.adapter = historyTextAdapter
+    }
+
+    private fun onHistoryItemClick(historyItem: HistoryItem){
+        Log.d("itempress", "Item ID is: ${historyItem.history_item_id}")
+
+        val mediaPlayer = MediaPlayer()
+
+        val uri = uriSchemeBuilder(historyItem.history_item_id)
+
+        val header = HashMap<String,String>()
+
+        header["xi-api-key"] = ELEVEN_LABS_API
+
+        //TODO: possibly make mediaplayer global
+        //TODO: handle playing and stopping of mediaplayer resource gracefully as was implemented in the voicegenerator activity
+        mediaPlayer.setDataSource(this, uri, header)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+    }
+
+    private fun uriSchemeBuilder(audioId: String): Uri {
+        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
     }
 }
