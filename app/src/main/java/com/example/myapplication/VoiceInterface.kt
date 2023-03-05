@@ -33,6 +33,13 @@ interface VoiceInterface {
     )
      fun generateVoiceAudio(@Path("voiceID") voiceID: String, @Body text: String): Call<ResponseBody>
 
+     @GET("history")
+     @Headers(
+         "xi-api-key: $ELEVEN_LABS_API",
+         "accept: application/json"
+     )
+     fun getHistory(): Call<String>
+
 
     companion object{
         private const val BASE_URL = "https://api.elevenlabs.io/v1/"

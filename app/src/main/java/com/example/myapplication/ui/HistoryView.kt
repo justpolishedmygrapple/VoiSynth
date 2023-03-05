@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -41,7 +42,6 @@ class HistoryView : AppCompatActivity() {
         spinner = findViewById<Spinner>(R.id.spinner_history)
 
         queryVoices(voiceArray)
-
 
 
 
