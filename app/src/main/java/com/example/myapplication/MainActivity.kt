@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
 import com.example.myapplication.data.TextToVoiceQuery
 import com.example.myapplication.data.Voice
+import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
 import com.example.myapplication.ui.HistoryViewActivity
 import com.example.myapplication.ui.VoiceListActivity
@@ -25,32 +26,32 @@ const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
 
 class MainActivity : AppCompatActivity() {
-    private val voiceservice = VoiceInterface.create()
-
-//    private val voiceAdapter = VoiceAdapter()
-
-    private fun onVoiceItemClick(voice: Voice) {
-
-    }
-
-
-    private lateinit var voiceResponse: VoiceResponse
-    private lateinit var voiceResultsRV: RecyclerView
-
-
-
-
+//    private val voiceservice = VoiceInterface.create()
+//
+////    private val voiceAdapter = VoiceAdapter()
+//
+//    private fun onVoiceItemClick(voice: Voice) {
+//
+//    }
+//
+//
+//    private lateinit var voiceResponse: VoiceResponse
+//    private lateinit var voiceResultsRV: RecyclerView
+//
+//
+//
+//
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(layout.activity_main)
-
-
-        //Creating dir for app voice file data
-        val audioFolder = filesDir
-        val folder = File(audioFolder, "ai_voice")
-        folder.mkdir()
-
-
+    super.onCreate(savedInstanceState)
+    setContentView(layout.activity_main)
+}
+//
+//        //Creating dir for app voice file data
+//        val audioFolder = filesDir
+//        val folder = File(audioFolder, "ai_voice")
+//        folder.mkdir()
+//
+//
 //
 //        voiceResultsRV = findViewById(R.id.rv_voice_list)
 //
@@ -63,42 +64,42 @@ class MainActivity : AppCompatActivity() {
 //        queryVoices()
 
 
-        val testQuery = TextToVoiceQuery("this is a test")
-//
+//        val testQuery = TextToVoiceQuery("this is a test")
+////
 //        voiceservice.generateVoiceAudio("pAzk0hvNdRe26GUDhQ3N", generateTextQuery(
 //            "Obama says this is going to be the best app ever"
-//        )).enqueue(
+////        )).enqueue(/
 //            object: Callback<ResponseBody>{
 //                override fun onResponse(
 //                    call: Call<ResponseBody>,
 //                    response: Response<ResponseBody>
 //                ) {
-//                    Log.d("response", response.body().toString())
+////                    Log.d("response", response.body().toString())/
 //                    val audioBytes = response.body()?.bytes()
-//
+////
 //                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
-//
+////
 //                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
-//
+////
 //                    val mediaPlayer = MediaPlayer()
-//
+////
 //                    mediaPlayer.setDataSource(tempMP3.pathString)
 //                    mediaPlayer.prepare()
 //                    mediaPlayer.start()
-//
+////
 //                }
 //
 //                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 //                    TODO("Not yet implemented")
 //                }
 //            }
-//
+////
 //        )
+//
+//
+//    }
 
-
-    }
-
-    private fun generateTextQuery(text: String): String{
+    private fun generateTextQuery(text: String): String {
 
         return "{\n" +
                 "  \"text\": \"${text}\",\n" +
@@ -136,12 +137,11 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        )
 
-        //        Testing playing a music file streamed from the internet... works.
-        //Now, how to apply headers?
+    //        Testing playing a music file streamed from the internet... works.
+    //Now, how to apply headers?
 
 
-
-        //Simply playing one single audio file in the main activity for now
+    //Simply playing one single audio file in the main activity for now
 //        val header = HashMap<String,String>()
 //
 //        header["xi-api-key"] = ELEVEN_LABS_API
@@ -170,13 +170,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.action_voice_list -> {
                 val intent = Intent(this, VoiceListActivity::class.java)
                 startActivity(intent)
                 true
             }
-            R.id.action_show_history ->{
+            R.id.action_show_history -> {
                 val intent = Intent(this, HistoryViewActivity::class.java)
                 startActivity(intent)
                 true
@@ -184,43 +184,44 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+}
 
 
     //Function that will be useful later to dynamically get the path to a particular audio file
-    private fun urlSchemeBuilder(audioId: String): Uri{
-        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
-    }
+//    private fun urlSchemeBuilder(audioId: String): Uri{
+//        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
+//    }
 
-    private fun queryVoices(){
-        val serviceTest = voiceservice.getVoices().enqueue(
-            object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("apicall", response.body().toString())
-
-                    if(response.isSuccessful){
-                        val moshi = Moshi.Builder().build()
-
-                        val jsonAdapter: JsonAdapter<VoiceResponse> =
-                            moshi.adapter(VoiceResponse::class.java)
-
-                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
-
-                        voiceResponse = voiceSearchResults!!
-
-                        for(i in voiceResponse.voices){
-                            Log.d("voices", i.name)
-                        }
-
-                        Log.d("help", voiceSearchResults.toString())
-
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("Error", "Error making API call: ${t.message}")
-                }
-            })
-    }
-
-
-}
+//    private fun queryVoices(){
+//        val serviceTest = voiceservice.getVoices().enqueue(
+//            object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    Log.d("apicall", response.body().toString())
+//
+//                    if(response.isSuccessful){
+//                        val moshi = Moshi.Builder().build()
+//
+//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
+//                            moshi.adapter(VoiceResponse::class.java)
+//
+//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
+//
+//                        voiceResponse = voiceSearchResults!!
+//
+//                        for(i in voiceResponse.voices){
+//                            Log.d("voices", i.name)
+//                        }
+//
+//                        Log.d("help", voiceSearchResults.toString())
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("Error", "Error making API call: ${t.message}")
+//                }
+//            })
+//    }
+//
+//
+//}
