@@ -36,7 +36,8 @@ interface VoiceInterface {
         "accept: */*",
         "Content-Type: application/json",
     )
-    fun generateVoiceAudio(@Path("voiceID") voiceID: String, @Body text: RequestBody): Call<ResponseBody>
+    @Streaming
+    suspend fun generateVoiceAudio(@Path("voiceID") voiceID: String, @Body text: RequestBody): Response<ResponseBody>
 
 
     @GET("history")

@@ -12,6 +12,9 @@ import com.example.myapplication.R
 import com.example.myapplication.R.*
 import com.example.myapplication.data.Voice
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -20,6 +23,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.InputStream
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
@@ -42,7 +46,7 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
         mediaPlayer = MediaPlayer()
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             val position = savedInstanceState.getInt("position")
             mediaPlayer.seekTo(position)
         }
@@ -50,10 +54,12 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
 
 
-        if(intent != null && intent.hasExtra(EXTRA_CHARACTER_VOICE)){
+        if (intent != null && intent.hasExtra(EXTRA_CHARACTER_VOICE)) {
             selectedVoice = intent.getSerializableExtra(EXTRA_CHARACTER_VOICE) as Voice
-            findViewById<TextView>(R.id.tv_selected_voice).text = getString(R.string.voice_name,
-                selectedVoice!!.name)
+            findViewById<TextView>(R.id.tv_selected_voice).text = getString(
+                R.string.voice_name,
+                selectedVoice!!.name
+            )
 
             val editText = findViewById<EditText>(R.id.edit_generated_text)
 
@@ -71,13 +77,17 @@ class VoiceGeneratorActivity : AppCompatActivity() {
     }
 
     private fun onGenerateButtonClick(generateButton: Button) {
-        Log.d("buttonClick", "User entered: ${findViewById<EditText>(R.id.edit_generated_text).text.toString()}")
+        Log.d(
+            "buttonClick",
+            "User entered: ${findViewById<EditText>(R.id.edit_generated_text).text.toString()}"
+        )
 
-        val userRequestedText: String = findViewById<EditText>(R.id.edit_generated_text).text.toString()
+        val userRequestedText: String =
+            findViewById<EditText>(R.id.edit_generated_text).text.toString()
 
 
 
-        if(userRequestedText == "") {
+        if (userRequestedText == "") {
 
             Log.d("userText", "user text is null")
             Snackbar.make(
@@ -87,71 +97,72 @@ class VoiceGeneratorActivity : AppCompatActivity() {
             ).show()
         }
 
-//        if(mediaPlayer.isPlaying){
-//            Snackbar.make(
-//                this.findViewById(android.R.id.content),
-//                "Please wait until audio is done playing before generating a new request",
-//                Snackbar.LENGTH_LONG
-//            ).show()
-//        }
-
-
 
         //Fixed critical bug
         //Not checking that userRequestedText == "" before would send an API call anyway with
         // An empty string and generate garbage audio.
-        if((userRequestedText != "")){
+
+        //AHA! resetting mediaPlayer to a new mediaplayer instance fixes the bug where you can't
+        //generate more than one audio file per character per screen. Super annoying.
 
 
+        if ((userRequestedText != "")) {
+            GlobalScope.launch {
 
+                //Wrapping this in a try block fixed error where app would crash if disconnected
+                // from internet
+                try {
+                    val audioFile = getAudio(
+                        selectedVoice!!.voice_id,
+                        generateJsonRequestBody(userRequestedText)
+                    )!!
 
-            voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
-                generateJsonRequestBody(userRequestedText)).enqueue(
-                object: Callback<ResponseBody>{
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
+                    if (audioFile!!.isNotEmpty()) {
+                        val tmpMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
+                        tmpMP3.writeBytes(audioFile ?: byteArrayOf())
 
-                        if(response.isSuccessful){
-                            Log.d("response", response.body().toString())
-                        }
-                        else{
-                            Log.d("response failure", response.body().toString())
-                        }
-                        val audioBytes = response.body()?.bytes()
-                        val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
-                        tempMP3.writeBytes(audioBytes ?: byteArrayOf())
+                        mediaPlayer.setDataSource(tmpMP3.pathString)
 
-                        mediaPlayer.setDataSource(tempMP3.pathString)
                         mediaPlayer.prepare()
                         mediaPlayer.start()
 
-                        mediaPlayer.setOnCompletionListener{
+                        mediaPlayer.setOnCompletionListener {
                             mediaPlayer.release()
+                            mediaPlayer = MediaPlayer()
                         }
 
-                        mediaPlayer.setOnErrorListener{mp, what, extra ->
+                        mediaPlayer.setOnErrorListener { mp, what, extra ->
                             mediaPlayer.release()
+                            mediaPlayer = MediaPlayer()
                             false
                         }
 
-//                        if(!mediaPlayer.isPlaying){
-//                            mediaPlayer.release()
-//                        }
                     }
 
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        Log.d("onfailure", t.message.toString())
-                    }
+
+                } catch (e: Exception) {
+
+                    Log.d("exception", e.toString())
+
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        e.toString(),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
-            )}
+            }
+
+
+        }
     }
+
 
     override fun onStop() {
         super.onStop()
         mediaPlayer.release()
     }
+
+
 
 
     //audio stops playing when user leaves the screen
@@ -170,6 +181,21 @@ class VoiceGeneratorActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
     }
+
+    suspend fun getAudio(voice_id: String, requestBody: RequestBody): ByteArray? {
+
+        val response = voiceservice.generateVoiceAudio(voice_id, requestBody).apply {
+            delay(500)
+        }
+
+        return if(response.isSuccessful){
+            response.body()?.bytes()}
+        else{
+            null}
+
+        }
+
+
 
 
 
