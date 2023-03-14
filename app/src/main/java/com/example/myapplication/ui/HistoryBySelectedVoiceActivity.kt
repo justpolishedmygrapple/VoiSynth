@@ -171,11 +171,6 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
                     val file = File(tmpMP3.pathString)
 
-
-
-
-
-
                     tmpMP3.writeBytes(bytes!!)
 
                     val fileUri = FileProvider.getUriForFile(

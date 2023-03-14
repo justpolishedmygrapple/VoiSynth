@@ -62,11 +62,11 @@ class HistoryTextAdapter(private val onClick: (HistoryItem) -> Unit, private val
 
         private lateinit var currentHistoryItem: HistoryItem
 
-//        init {
-//            itemView.setOnClickListener {
-//                currentHistoryItem?.let(onClick)
-//            }
-//        }
+        init {
+            itemView.setOnClickListener {
+                currentHistoryItem?.let(onClick)
+            }
+        }
 
         init {
             itemView.setOnLongClickListener{
