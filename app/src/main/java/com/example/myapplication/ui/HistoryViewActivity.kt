@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,11 +24,14 @@ class HistoryViewActivity : AppCompatActivity() {
 
     private val voiceArray = mutableListOf<Voice>()
 
-    val voiceservice = VoiceInterface.create()
 
     private val voiceViewModel: ListOfVoicesViewModel by viewModels()
 
+    private val historySearchViewModel: HistorySearchViewModel by viewModels()
+
     private lateinit var voiceAdapter: VoiceAdapter
+
+    private var historyItems: HistoryResponse? = null
 
     private val TAG = "HistoryViewActivity"
 
@@ -43,99 +47,105 @@ class HistoryViewActivity : AppCompatActivity() {
 
         val button: Button = findViewById(R.id.button_history)
 
-
-
-
-
-        button.setOnClickListener {
-
-            var historyItems: HistoryResponse
-
-//            voiceservice.getHistory().enqueue(
-//                object: Callback<String>{
-//                    override fun onResponse(call: Call<String>, response: Response<String>) {
-//                        Log.d("button response", response.body().toString())
-//
-//                        if(response.isSuccessful){
-//                            val moshi = Moshi.Builder().build()
-//                            val jsonAdapter: JsonAdapter<HistoryResponse> =
-//                                moshi.adapter(HistoryResponse::class.java)
-//
-//                            historyItems = jsonAdapter.fromJson(response.body())!!
-//
-//                            val intent = Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
-//                                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
-//                                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
-//                                }
-//
-//                            startActivity(intent)
-//                            }
-//
-//
-//                        }
-//
-//                    override fun onFailure(call: Call<String>, t: Throwable) {
-//                        TODO("Not yet implemented")
-//                    }
-//                }
-//            )
-
-
+        if (historySearchViewModel.historySearchResults.value == null) {
+            historySearchViewModel.loadHistorySearchResults()
         }
-    }
+
+        historySearchViewModel.historySearchResults.observe(this) { histResults ->
+            if (histResults != null) {
+                historyItems = histResults
+
+            }
+        }
 
 
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                val selectedVoice = p0?.getItemAtPosition(p2) as? Voice
-//
-//                selectedVoice?.let {
-//                    Toast.makeText(
-//                        this@HistoryViewActivity,
-//                        "Selected item: ${it.voice_id}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//
-//                Log.d("selection", selectedVoice!!.name)
-//
-//            }
 
 
-    override fun onStart() {
-        super.onStart()
+
+
+        Log.d("history", historyItems.toString())
+
 
         if (voiceViewModel.voiceListResults.value == null) {
 
             voiceViewModel.loadListOfVoices()
 
-            }
+        }
 
-        voiceViewModel.voiceListResults.observe(this){ results ->
+        voiceViewModel.voiceListResults.observe(this) { results ->
 
-            if(results != null){
-                for (voice in results.voices){
+            if (results != null) {
+                for (voice in results.voices) {
                     voiceArray.add(voice)
                     Log.d("NewVoiceAdded", voice.toString())
                 }
+                spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
             }
         }
 
-        voiceNames = voiceArray.map {it.name}
+        voiceNames = voiceArray.map { it.name }
 
-        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
+
+        button.setOnClickListener {
+
+
+
+
+            val intent =
+                Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
+                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
+                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
+                }
+
+            startActivity(intent)
+        }
+
+
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val selectedVoice = p0?.getItemAtPosition(p2) as? Voice
+
+                selectedVoice?.let {
+                    Toast.makeText(
+                        this@HistoryViewActivity,
+                        "Selected item: ${it.voice_id}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                Log.d("selection", selectedVoice!!.name)
+
+            }
+
 
         }
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
+    override fun onStart() {
+        super.onStart()
 
 
+    }
 
+
+}
 
 
 
