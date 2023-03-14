@@ -40,7 +40,7 @@ class VoiceListActivity : AppCompatActivity() {
 
         voiceResultsRV.adapter = voiceAdapter
 
-        voiceViewModel.loadHistorySearchResults()
+
 
 //        Log.d("voice list results", voiceViewModel.voiceListResults.toString())
 //
@@ -52,9 +52,17 @@ class VoiceListActivity : AppCompatActivity() {
 
         dummyData.add(Voice("1234", "Obama"))
 
+        // Makes sure data for voice list is only called once
+        if(voiceViewModel.voiceListResults.value == null){
+            voiceViewModel.loadHistorySearchResults()
+        }
+
         voiceViewModel.voiceListResults.observe(this){ results->
             voiceAdapter.addVoice(results?.voices)
         }
+
+
+
 
 
 
