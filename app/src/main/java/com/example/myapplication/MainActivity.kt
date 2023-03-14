@@ -131,17 +131,6 @@ class MainActivity : AppCompatActivity() {
 //
 //    }
 
-        private fun generateTextQuery(text: String): String {
-
-            return "{\n" +
-                    "  \"text\": \"${text}\",\n" +
-                    "  \"voice_settings\": {\n" +
-                    "    \"stability\": 0,\n" +
-                    "    \"similarity_boost\": 0\n" +
-                    "  }\n" +
-                    "}"
-
-        }
 
 //        override fun onResume() {
 //            super.onResume()
