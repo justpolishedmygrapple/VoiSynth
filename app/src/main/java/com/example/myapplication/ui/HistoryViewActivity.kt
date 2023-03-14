@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,7 +44,7 @@ class HistoryViewActivity : AppCompatActivity() {
 
         spinner = findViewById<Spinner>(R.id.spinner_history)
 
-//        queryVoices(voiceArray)
+
 
         val button: Button = findViewById(R.id.button_history)
 
@@ -55,8 +56,14 @@ class HistoryViewActivity : AppCompatActivity() {
             if (histResults != null) {
                 historyItems = histResults
 
+                for(hist in historyItems!!.history){
+                    hist.url = uriSchemeBuilder(hist.history_item_id)
+                    Log.d("histurl", hist.url.toString())
+                }
+
             }
         }
+
 
 
 
@@ -133,8 +140,6 @@ class HistoryViewActivity : AppCompatActivity() {
 
 
 
-
-
     }
 
 
@@ -142,6 +147,10 @@ class HistoryViewActivity : AppCompatActivity() {
         super.onStart()
 
 
+    }
+
+    private fun uriSchemeBuilder(audioId: String): Uri {
+        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
     }
 
 
@@ -156,42 +165,6 @@ class HistoryViewActivity : AppCompatActivity() {
 
 
 
-
-
-//    private fun queryVoices(voiceList: List<Voice>){
-//        val serviceTest = voiceservice.getVoices().enqueue(
-//            object : Callback<String> {
-//                override fun onResponse(call: Call<String>, response: Response<String>) {
-//                    Log.d("apicall", response.body().toString())
-//
-//                    if(response.isSuccessful){
-//                        val moshi = Moshi.Builder().build()
-//
-//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
-//                            moshi.adapter(VoiceResponse::class.java)
-//
-//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
-//
-//                        for(i in voiceSearchResults!!.voices){
-//                            voiceArray.add(0,i)
-//                        }
-//
-//                        voiceNames = voiceArray.map { it.name }
-//
-//                        Log.d("help", voiceSearchResults.toString())
-//
-//                        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
-//
-//
-//
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<String>, t: Throwable) {
-//                    Log.d("Error", "Error making API call: ${t.message}")
-//                }
-//            })
-//    }
 
 
 

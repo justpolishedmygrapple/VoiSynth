@@ -290,7 +290,7 @@ class VoiceGeneratorActivity : AppCompatActivity() {
         ShareCompat.IntentBuilder(this@VoiceGeneratorActivity)
             .setType("audio/mpeg")
             .setSubject("Check out what $character just said!")
-            .setText("$character just said:\n\n\n\t $userRequestedText")
+            .setText("$character just said:\t\t\t\n\n\n\t $userRequestedText")
             .addStream(fileUri)
             .startChooser()
     }
