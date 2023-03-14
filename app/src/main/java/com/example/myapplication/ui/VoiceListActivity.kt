@@ -21,7 +21,7 @@ class VoiceListActivity : AppCompatActivity() {
 
     private val voiceservice = VoiceInterface.create()
 
-    private val voiceAdapter = VoiceAdapter()
+    private val voiceAdapter = VoiceAdapter(::onVoiceItemClick)
 
 
     private lateinit var voiceResultsRV: RecyclerView

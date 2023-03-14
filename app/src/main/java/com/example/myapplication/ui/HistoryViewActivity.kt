@@ -48,17 +48,6 @@ class HistoryViewActivity : AppCompatActivity() {
 
         val button: Button = findViewById(R.id.button_history)
 
-        voiceAdapter = VoiceAdapter()
-
-
-
-
-
-        voiceViewModel.voiceListResults.observe(this){ it ->
-            Log.d("voiceview", it.toString())
-        }
-
-
 
 
         button.setOnClickListener {
