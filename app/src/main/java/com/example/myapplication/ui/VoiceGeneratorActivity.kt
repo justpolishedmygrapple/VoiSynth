@@ -1,13 +1,19 @@
 package com.example.myapplication.ui
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import com.example.myapplication.R
 import com.example.myapplication.R.*
 import com.example.myapplication.data.Voice
@@ -23,7 +29,9 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.io.InputStream
+import java.net.URLConnection
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
@@ -38,6 +46,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
     private var userGeneratedText: String? = null
 
     private lateinit var mediaPlayer: MediaPlayer
+
+    private var filePath: String? = null
 
     //    private val GenerateButton: Button = findViewById<Button>(R.id.button_generate_text)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,6 +131,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                         val tmpMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
                         tmpMP3.writeBytes(audioFile ?: byteArrayOf())
 
+                        filePath = tmpMP3.pathString
+
                         mediaPlayer.setDataSource(tmpMP3.pathString)
 
                         mediaPlayer.prepare()
@@ -162,6 +174,35 @@ class VoiceGeneratorActivity : AppCompatActivity() {
         mediaPlayer.release()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_voice_generate, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.share_file -> {
+                Log.d("shareclick", "shareclick")
+
+
+
+                if(filePath != null){
+                    shareFileIntent(filePath!!, selectedVoice!!.name)
+                } else{
+                    Snackbar.make(
+                        this.findViewById(android.R.id.content),
+                        "You either haven't generated a file yet, or there was an error",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+                true
+            }
+            else ->{
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
 
 
 
@@ -173,10 +214,12 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
 
     //Allows for media to keep playing during rotates.
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("position", mediaPlayer.currentPosition)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        if(mediaPlayer.isPlaying){
+//            outState.putInt("position", mediaPlayer.currentPosition)
+//        }
+//    }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -217,6 +260,32 @@ class VoiceGeneratorActivity : AppCompatActivity() {
         return requestJSONObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
 
 
+    }
+
+
+    //Source I went to for help when things were going poorly with permissions -
+    // https://tinyurl.com/yfe6b2h5
+    private fun shareFileIntent(filePath: String, character: String){
+
+        val shareIntent = Intent(Intent.ACTION_SEND)
+
+        shareIntent.type = URLConnection.guessContentTypeFromName(filePath)
+
+        val userRequestedText: String =
+            findViewById<EditText>(R.id.edit_generated_text).text.toString()
+
+        val file = File(filePath)
+
+        val fileUri = FileProvider.getUriForFile(this@VoiceGeneratorActivity, "${this@VoiceGeneratorActivity.packageName}.fileprovider", file)
+
+
+
+        ShareCompat.IntentBuilder(this@VoiceGeneratorActivity)
+            .setType("audio/mpeg")
+            .setSubject("Check out what $character just said!")
+            .setText("$character just said:\n\n\n\t $userRequestedText")
+            .addStream(fileUri)
+            .startChooser()
     }
 
 
