@@ -49,7 +49,6 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
     private var filePath: String? = null
 
-    //    private val GenerateButton: Button = findViewById<Button>(R.id.button_generate_text)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_voice_generator)
@@ -131,6 +130,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                         val tmpMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
                         tmpMP3.writeBytes(audioFile ?: byteArrayOf())
 
+
+
                         filePath = tmpMP3.pathString
 
                         mediaPlayer.setDataSource(tmpMP3.pathString)
@@ -142,6 +143,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                             mediaPlayer.release()
                             mediaPlayer = MediaPlayer()
                         }
+
+
 
                         mediaPlayer.setOnErrorListener { mp, what, extra ->
                             mediaPlayer.release()
@@ -163,6 +166,8 @@ class VoiceGeneratorActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+
+
 
 
         }
@@ -212,8 +217,9 @@ class VoiceGeneratorActivity : AppCompatActivity() {
         mediaPlayer.release()
     }
 
+// Code is irrelevant because of coroutines
 
-    //Allows for media to keep playing during rotates.
+//    Allows for media to keep playing during rotates.
 //    override fun onSaveInstanceState(outState: Bundle) {
 //        super.onSaveInstanceState(outState)
 //        if(mediaPlayer.isPlaying){
@@ -265,6 +271,7 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
     //Source I went to for help when things were going poorly with permissions -
     // https://tinyurl.com/yfe6b2h5
+    // Android docs led me to ShareCompat... was way easier than doing it the way I was doing it before
     private fun shareFileIntent(filePath: String, character: String){
 
         val shareIntent = Intent(Intent.ACTION_SEND)

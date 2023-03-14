@@ -17,7 +17,7 @@ class ListOfVoicesViewModel: ViewModel() {
     val voiceListResults: LiveData<VoiceResponse> = _voiceListResults
 
 
-    fun loadHistorySearchResults(){
+    fun loadListOfVoices(){
         viewModelScope.launch {
             val result = repository.loadListOfVoices()
 

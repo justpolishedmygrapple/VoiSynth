@@ -34,16 +34,15 @@
         <activity
             android:name=".ui.VoiceGeneratorActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
             android:exported="false"
             android:parentActivityName=".ui.VoiceListActivity" />
         <activity
             android:name=".ui.VoiceListActivity"
-            android:launchMode="singleTop"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,12 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
-import com.example.myapplication.data.VoiceResponse
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class VoiceListActivity : AppCompatActivity() {
 
@@ -43,7 +37,7 @@ class VoiceListActivity : AppCompatActivity() {
 
         // Makes sure data for voice list is only called once
         if(voiceViewModel.voiceListResults.value == null){
-            voiceViewModel.loadHistorySearchResults()
+            voiceViewModel.loadListOfVoices()
         }
 
         voiceViewModel.voiceListResults.observe(this){ results->

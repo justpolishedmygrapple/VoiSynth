@@ -1,6 +1,5 @@
 package com.example.myapplication.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,11 +8,6 @@ import android.widget.*
 import androidx.activity.viewModels
 import com.example.myapplication.R
 import com.example.myapplication.data.*
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HistoryViewActivity : AppCompatActivity() {
 
@@ -35,6 +29,7 @@ class HistoryViewActivity : AppCompatActivity() {
 
     private lateinit var voiceAdapter: VoiceAdapter
 
+    private val TAG = "HistoryViewActivity"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +42,8 @@ class HistoryViewActivity : AppCompatActivity() {
 //        queryVoices(voiceArray)
 
         val button: Button = findViewById(R.id.button_history)
+
+
 
 
 
@@ -84,47 +81,68 @@ class HistoryViewActivity : AppCompatActivity() {
 //            )
 
 
-
-                }
-
-
-
-
-
-
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val selectedVoice = p0?.getItemAtPosition(p2) as? Voice
-
-                selectedVoice?.let {
-                    Toast.makeText(this@HistoryViewActivity, "Selected item: ${it.voice_id}", Toast.LENGTH_SHORT).show()
-                }
-
-                Log.d("selection", selectedVoice!!.name)
-
-            }
         }
-
     }
+
+
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+//                val selectedVoice = p0?.getItemAtPosition(p2) as? Voice
+//
+//                selectedVoice?.let {
+//                    Toast.makeText(
+//                        this@HistoryViewActivity,
+//                        "Selected item: ${it.voice_id}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//
+//                Log.d("selection", selectedVoice!!.name)
+//
+//            }
+
 
     override fun onStart() {
         super.onStart()
 
-//        if(voiceArray.size == 0){
-//
-//            queryVoices(voiceArray)
-//
-//        }
+        if (voiceViewModel.voiceListResults.value == null) {
 
-        Log.d("hello", "hello")
+            voiceViewModel.loadListOfVoices()
 
+            }
 
+        voiceViewModel.voiceListResults.observe(this){ results ->
+
+            if(results != null){
+                for (voice in results.voices){
+                    voiceArray.add(voice)
+                    Log.d("NewVoiceAdded", voice.toString())
+                }
+            }
+        }
+
+        voiceNames = voiceArray.map {it.name}
+
+        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
+
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,4 +185,3 @@ class HistoryViewActivity : AppCompatActivity() {
 
 
 
-}

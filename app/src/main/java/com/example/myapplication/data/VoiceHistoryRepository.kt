@@ -11,13 +11,13 @@ class VoiceHistoryRepository(
 ) {
 
 
-    suspend fun loadHistorySearch(): Result<List<HistoryItem>> = withContext(ioDispatcher) {
+    suspend fun loadHistorySearch(): Result<HistoryResponse> = withContext(ioDispatcher) {
 
         try{
             val response = service.getHistory()
 
             if(response.isSuccessful){
-                Result.success(response.body()?.history ?: listOf())
+                Result.success(response.body()!!)
             }
             else{
                 Result.failure(Exception(response.errorBody()?.string()))
