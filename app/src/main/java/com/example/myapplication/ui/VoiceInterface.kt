@@ -2,14 +2,13 @@ package com.example.myapplication.ui
 
 import com.example.myapplication.ELEVEN_LABS_API
 import com.example.myapplication.data.HistoryResponse
-import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceResponse
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
 
@@ -37,15 +36,15 @@ interface VoiceInterface {
         "accept: */*",
         "Content-Type: application/json",
     )
-     suspend fun generateVoiceAudio(@Path("voiceID") voiceID: String, @Body text: String): Call<ResponseBody>
+    fun generateVoiceAudio(@Path("voiceID") voiceID: String, @Body text: RequestBody): Call<ResponseBody>
 
 
-     @GET("history")
-     @Headers(
-         "xi-api-key: $ELEVEN_LABS_API",
-         "accept: application/json"
-     )
-     suspend fun getHistory(): Response<HistoryResponse>
+    @GET("history")
+    @Headers(
+        "xi-api-key: $ELEVEN_LABS_API",
+        "accept: application/json"
+    )
+    suspend fun getHistory(): Response<HistoryResponse>
 
 
     companion object{
@@ -57,7 +56,7 @@ interface VoiceInterface {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(VoiceInterface::class.java)
-    }
+        }
 
     }
 }

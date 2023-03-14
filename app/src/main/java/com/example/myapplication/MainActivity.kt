@@ -14,13 +14,16 @@ import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
 import com.example.myapplication.ui.HistoryViewActivity
+import com.example.myapplication.ui.VoiceInterface
 import com.example.myapplication.ui.VoiceListActivity
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import kotlin.io.path.writeBytes
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
@@ -30,11 +33,8 @@ class MainActivity : AppCompatActivity() {
 //
 ////    private val voiceAdapter = VoiceAdapter()
 //
-    private fun onVoiceItemClick(voice: Voice) {
 
-    }
-//
-//
+    //
 //    private lateinit var voiceResponse: VoiceResponse
 //    private lateinit var voiceResultsRV: RecyclerView
 //
@@ -42,10 +42,39 @@ class MainActivity : AppCompatActivity() {
 //
 //
     override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(layout.activity_main)
-}
+        super.onCreate(savedInstanceState)
+        setContentView(layout.activity_main)
+    }
 
+//    val voiceservice = VoiceInterface.create()
+//
+//    voiceservice.generateVoiceAudio("AZnzlk1XvdvUeBnXmlld", generateTextQuery("blah blah blah")).enqueue(
+//
+//
+//        object: Callback<ResponseBody>{
+//            override fun onResponse(
+//                call: Call<ResponseBody>,
+//                response: Response<ResponseBody>
+//            ) {
+//
+//                if(!response.isSuccessful){
+//                    Log.d("VoiceGeneratorActy", "response failure")
+//                }
+//                val audioBytes = response.body()?.bytes()
+//                val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
+//                tempMP3.writeBytes(audioBytes ?: byteArrayOf())
+//
+////                    mediaPlayer.setDataSource(tempMP3.pathString)
+////                    mediaPlayer.prepare()
+////                    mediaPlayer.start()
+//
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                Log.d("onfailure", t.message.toString())
+//            }
+//        }
+//    )}
 
 
 //
@@ -102,17 +131,21 @@ class MainActivity : AppCompatActivity() {
 //
 //    }
 
-    private fun generateTextQuery(text: String): String {
+        private fun generateTextQuery(text: String): String {
 
-        return "{\n" +
-                "  \"text\": \"${text}\",\n" +
-                "  \"voice_settings\": {\n" +
-                "    \"stability\": 0,\n" +
-                "    \"similarity_boost\": 0\n" +
-                "  }\n" +
-                "}"
+            return "{\n" +
+                    "  \"text\": \"${text}\",\n" +
+                    "  \"voice_settings\": {\n" +
+                    "    \"stability\": 0,\n" +
+                    "    \"similarity_boost\": 0\n" +
+                    "  }\n" +
+                    "}"
 
-    }
+        }
+
+//        override fun onResume() {
+//            super.onResume()
+//        }
 
 //    override fun onResume() {
 //        super.onResume()
@@ -140,11 +173,11 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        )
 
-    //        Testing playing a music file streamed from the internet... works.
-    //Now, how to apply headers?
+        //        Testing playing a music file streamed from the internet... works.
+        //Now, how to apply headers?
 
 
-    //Simply playing one single audio file in the main activity for now
+        //Simply playing one single audio file in the main activity for now
 //        val header = HashMap<String,String>()
 //
 //        header["xi-api-key"] = ELEVEN_LABS_API
@@ -158,19 +191,19 @@ class MainActivity : AppCompatActivity() {
 //        mediaPlayer.start()
 //    }
 
-    //Allows for the mediaPlayer to play the whole audio clip
-    //Error I was getting before: 'MediaPlayer finalized without being released'
+        //Allows for the mediaPlayer to play the whole audio clip
+        //Error I was getting before: 'MediaPlayer finalized without being released'
 //    override fun onStop() {
 //        super.onStop()
 //        mediaPlayer.stop()
 //        mediaPlayer.release()
 //    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_history_list, menu)
-        menuInflater.inflate(R.menu.activity_voice_list, menu)
-        return true
-    }
+        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+            menuInflater.inflate(R.menu.activity_history_list, menu)
+            menuInflater.inflate(R.menu.activity_voice_list, menu)
+            return true
+        }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -187,7 +220,8 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-}
+    }
+
 
 
     //Function that will be useful later to dynamically get the path to a particular audio file

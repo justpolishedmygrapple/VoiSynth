@@ -41,17 +41,6 @@ class VoiceListActivity : AppCompatActivity() {
         voiceResultsRV.adapter = voiceAdapter
 
 
-
-//        Log.d("voice list results", voiceViewModel.voiceListResults.toString())
-//
-//        voiceViewModel.voiceListResults.observe(this){it ->
-//            Log.d("voice list results", it.voices.toString())
-//        }
-//
-        val dummyData = mutableListOf<Voice>()
-
-        dummyData.add(Voice("1234", "Obama"))
-
         // Makes sure data for voice list is only called once
         if(voiceViewModel.voiceListResults.value == null){
             voiceViewModel.loadHistorySearchResults()
@@ -60,15 +49,6 @@ class VoiceListActivity : AppCompatActivity() {
         voiceViewModel.voiceListResults.observe(this){ results->
             voiceAdapter.addVoice(results?.voices)
         }
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -85,34 +65,3 @@ class VoiceListActivity : AppCompatActivity() {
 
     }
 }
-
-
-
-//    private fun queryVoices(){
-//        val serviceTest = voiceservice.getVoices().enqueue(
-//            object : Callback<String> {
-//                override fun onResponse(call: Call<String>, response: Response<String>) {
-//                    Log.d("apicall", response.body().toString())
-//
-//                    if(response.isSuccessful){
-//                        val moshi = Moshi.Builder().build()
-//
-//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
-//                            moshi.adapter(VoiceResponse::class.java)
-//
-//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
-//
-//
-//                        voiceAdapter.addVoice(voiceSearchResults?.voices)
-//
-//                        Log.d("help", voiceSearchResults.toString())
-//
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<String>, t: Throwable) {
-//                    Log.d("Error", "Error making API call: ${t.message}")
-//                }
-//            })
-//    }
-//}

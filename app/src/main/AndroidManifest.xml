@@ -16,7 +16,6 @@
         <activity
             android:name=".ui.HistoryViewActivity"
             android:parentActivityName=".MainActivity"
-            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".ui.HistoryBySelectedVoiceActivity"
@@ -25,10 +24,12 @@
         <activity
             android:name=".ui.VoiceGeneratorActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
             android:exported="false"
             android:parentActivityName=".ui.VoiceListActivity" />
         <activity
             android:name=".ui.VoiceListActivity"
+            android:launchMode="singleTop"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
