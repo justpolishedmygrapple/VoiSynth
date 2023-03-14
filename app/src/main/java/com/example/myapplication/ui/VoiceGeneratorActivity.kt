@@ -8,17 +8,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
 import com.example.myapplication.R.*
-import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.Voice
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
@@ -57,69 +54,69 @@ class VoiceGeneratorActivity : AppCompatActivity() {
 
     val generateButton = findViewById<Button>(R.id.button_generate_text)
 
-    generateButton.setOnClickListener {
-        onGenerateButtonClick(generateButton)
+//    generateButton.setOnClickListener {
+//        onGenerateButtonClick(generateButton)
+//
+//    }
+
 
     }
 
-
-    }
-
-    private fun onGenerateButtonClick(generateButton: Button) {
-        Log.d("buttonClick", "User entered: ${findViewById<EditText>(R.id.edit_generated_text).text.toString()}")
-
-        val userRequestedText: String = findViewById<EditText>(R.id.edit_generated_text).text.toString()
-
-
-
-        if(userRequestedText == "") {
-
-            Log.d("userText", "user text is null")
-            Snackbar.make(
-                this.findViewById(android.R.id.content),
-                "You have to enter some text in order to generate audio",
-                Snackbar.LENGTH_LONG
-            ).show()
-        }
-
-        if(mediaPlayer.isPlaying){
-            Snackbar.make(
-                this.findViewById(android.R.id.content),
-                "Please wait until audio is done playing before generating a new request",
-                Snackbar.LENGTH_LONG
-            ).show()
-        }
-
-        //Fixed critical bug
-        //Not checking that userRequestedText == "" before would send an API call anyway with
-        // An empty string and generate garbage audio.
-        else if(!mediaPlayer.isPlaying and (userRequestedText != "")){
-        voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
-        generateTextQuery(userRequestedText)).enqueue(
-            object: Callback<ResponseBody>{
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    val audioBytes = response.body()?.bytes()
-                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
-                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
-
-                    mediaPlayer.setDataSource(tempMP3.pathString)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-
-                    if(!mediaPlayer.isPlaying){
-                        mediaPlayer.release()
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.d("onfailure", t.message.toString())
-                }
-            }
-        )}
-    }
+//    private fun onGenerateButtonClick(generateButton: Button) {
+//        Log.d("buttonClick", "User entered: ${findViewById<EditText>(R.id.edit_generated_text).text.toString()}")
+//
+//        val userRequestedText: String = findViewById<EditText>(R.id.edit_generated_text).text.toString()
+//
+//
+//
+//        if(userRequestedText == "") {
+//
+//            Log.d("userText", "user text is null")
+//            Snackbar.make(
+//                this.findViewById(android.R.id.content),
+//                "You have to enter some text in order to generate audio",
+//                Snackbar.LENGTH_LONG
+//            ).show()
+//        }
+//
+//        if(mediaPlayer.isPlaying){
+//            Snackbar.make(
+//                this.findViewById(android.R.id.content),
+//                "Please wait until audio is done playing before generating a new request",
+//                Snackbar.LENGTH_LONG
+//            ).show()
+//        }
+//
+//        //Fixed critical bug
+//        //Not checking that userRequestedText == "" before would send an API call anyway with
+//        // An empty string and generate garbage audio.
+//        else if(!mediaPlayer.isPlaying and (userRequestedText != "")){
+//        voiceservice.generateVoiceAudio(selectedVoice!!.voice_id,
+//        generateTextQuery(userRequestedText)).enqueue(
+//            object: Callback<ResponseBody>{
+//                override fun onResponse(
+//                    call: Call<ResponseBody>,
+//                    response: Response<ResponseBody>
+//                ) {
+//                    val audioBytes = response.body()?.bytes()
+//                    val tempMP3 = kotlin.io.path.createTempFile("audio", ".mp3")
+//                    tempMP3.writeBytes(audioBytes ?: byteArrayOf())
+//
+//                    mediaPlayer.setDataSource(tempMP3.pathString)
+//                    mediaPlayer.prepare()
+//                    mediaPlayer.start()
+//
+//                    if(!mediaPlayer.isPlaying){
+//                        mediaPlayer.release()
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                    Log.d("onfailure", t.message.toString())
+//                }
+//            }
+//        )}
+//    }
 
     override fun onStop() {
         super.onStop()

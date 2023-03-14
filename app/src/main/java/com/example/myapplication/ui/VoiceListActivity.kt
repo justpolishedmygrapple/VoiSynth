@@ -4,10 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.data.VoiceResponse
@@ -21,11 +21,12 @@ class VoiceListActivity : AppCompatActivity() {
 
     private val voiceservice = VoiceInterface.create()
 
-    private val voiceAdapter = VoiceAdapter(::onVoiceItemClick)
+    private val voiceAdapter = VoiceAdapter()
 
 
     private lateinit var voiceResultsRV: RecyclerView
 
+    private val voiceViewModel: ListOfVoicesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +40,31 @@ class VoiceListActivity : AppCompatActivity() {
 
         voiceResultsRV.adapter = voiceAdapter
 
+        voiceViewModel.loadHistorySearchResults()
 
-        queryVoices()
+//        Log.d("voice list results", voiceViewModel.voiceListResults.toString())
+//
+//        voiceViewModel.voiceListResults.observe(this){it ->
+//            Log.d("voice list results", it.voices.toString())
+//        }
+//
+        val dummyData = mutableListOf<Voice>()
+
+        dummyData.add(Voice("1234", "Obama"))
+
+        voiceViewModel.voiceListResults.observe(this){ results->
+            voiceAdapter.addVoice(results?.voices)
+        }
+
+
+
+
+
 
 
     }
 
-    fun onVoiceItemClick(voice: Voice){
+    fun onVoiceItemClick(voice: Voice) {
 
         Log.d("onVoiceItemClick", "voice item clicked")
         Log.d("voiceID", voice.voice_id)
@@ -57,32 +76,35 @@ class VoiceListActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
-
-    private fun queryVoices(){
-        val serviceTest = voiceservice.getVoices().enqueue(
-            object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("apicall", response.body().toString())
-
-                    if(response.isSuccessful){
-                        val moshi = Moshi.Builder().build()
-
-                        val jsonAdapter: JsonAdapter<VoiceResponse> =
-                            moshi.adapter(VoiceResponse::class.java)
-
-                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
-
-
-                        voiceAdapter.addVoice(voiceSearchResults?.voices)
-
-                        Log.d("help", voiceSearchResults.toString())
-
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("Error", "Error making API call: ${t.message}")
-                }
-            })
-    }
 }
+
+
+
+//    private fun queryVoices(){
+//        val serviceTest = voiceservice.getVoices().enqueue(
+//            object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    Log.d("apicall", response.body().toString())
+//
+//                    if(response.isSuccessful){
+//                        val moshi = Moshi.Builder().build()
+//
+//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
+//                            moshi.adapter(VoiceResponse::class.java)
+//
+//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
+//
+//
+//                        voiceAdapter.addVoice(voiceSearchResults?.voices)
+//
+//                        Log.d("help", voiceSearchResults.toString())
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("Error", "Error making API call: ${t.message}")
+//                }
+//            })
+//    }
+//}

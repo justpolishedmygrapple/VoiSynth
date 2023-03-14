@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
 //
 ////    private val voiceAdapter = VoiceAdapter()
 //
-//    private fun onVoiceItemClick(voice: Voice) {
-//
-//    }
+    private fun onVoiceItemClick(voice: Voice) {
+
+    }
 //
 //
 //    private lateinit var voiceResponse: VoiceResponse
@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
 }
+
+
+
 //
 //        //Creating dir for app voice file data
 //        val audioFolder = filesDir

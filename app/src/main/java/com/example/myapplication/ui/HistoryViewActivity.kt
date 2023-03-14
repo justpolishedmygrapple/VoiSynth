@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import com.example.myapplication.R
-import com.example.myapplication.VoiceInterface
-import com.example.myapplication.data.HistoryAdapter
-import com.example.myapplication.data.HistoryResponse
-import com.example.myapplication.data.Voice
-import com.example.myapplication.data.VoiceResponse
+import com.example.myapplication.data.*
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import retrofit2.Call
@@ -34,6 +31,10 @@ class HistoryViewActivity : AppCompatActivity() {
 
     val voiceservice = VoiceInterface.create()
 
+    private val voiceViewModel: ListOfVoicesViewModel by viewModels()
+
+    private lateinit var voiceAdapter: VoiceAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +44,20 @@ class HistoryViewActivity : AppCompatActivity() {
 
         spinner = findViewById<Spinner>(R.id.spinner_history)
 
-        queryVoices(voiceArray)
+//        queryVoices(voiceArray)
 
         val button: Button = findViewById(R.id.button_history)
+
+        voiceAdapter = VoiceAdapter()
+
+
+
+
+
+        voiceViewModel.voiceListResults.observe(this){ it ->
+            Log.d("voiceview", it.toString())
+        }
+
 
 
 
@@ -53,34 +65,34 @@ class HistoryViewActivity : AppCompatActivity() {
 
             var historyItems: HistoryResponse
 
-            voiceservice.getHistory().enqueue(
-                object: Callback<String>{
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        Log.d("button response", response.body().toString())
-
-                        if(response.isSuccessful){
-                            val moshi = Moshi.Builder().build()
-                            val jsonAdapter: JsonAdapter<HistoryResponse> =
-                                moshi.adapter(HistoryResponse::class.java)
-
-                            historyItems = jsonAdapter.fromJson(response.body())!!
-
-                            val intent = Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
-                                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
-                                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
-                                }
-
-                            startActivity(intent)
-                            }
-
-
-                        }
-
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                }
-            )
+//            voiceservice.getHistory().enqueue(
+//                object: Callback<String>{
+//                    override fun onResponse(call: Call<String>, response: Response<String>) {
+//                        Log.d("button response", response.body().toString())
+//
+//                        if(response.isSuccessful){
+//                            val moshi = Moshi.Builder().build()
+//                            val jsonAdapter: JsonAdapter<HistoryResponse> =
+//                                moshi.adapter(HistoryResponse::class.java)
+//
+//                            historyItems = jsonAdapter.fromJson(response.body())!!
+//
+//                            val intent = Intent(this@HistoryViewActivity, HistoryBySelectedVoiceActivity::class.java).apply {
+//                                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
+//                                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
+//                                }
+//
+//                            startActivity(intent)
+//                            }
+//
+//
+//                        }
+//
+//                    override fun onFailure(call: Call<String>, t: Throwable) {
+//                        TODO("Not yet implemented")
+//                    }
+//                }
+//            )
 
 
 
@@ -129,40 +141,40 @@ class HistoryViewActivity : AppCompatActivity() {
 
 
 
-    private fun queryVoices(voiceList: List<Voice>){
-        val serviceTest = voiceservice.getVoices().enqueue(
-            object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("apicall", response.body().toString())
-
-                    if(response.isSuccessful){
-                        val moshi = Moshi.Builder().build()
-
-                        val jsonAdapter: JsonAdapter<VoiceResponse> =
-                            moshi.adapter(VoiceResponse::class.java)
-
-                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
-
-                        for(i in voiceSearchResults!!.voices){
-                            voiceArray.add(0,i)
-                        }
-
-                        voiceNames = voiceArray.map { it.name }
-
-                        Log.d("help", voiceSearchResults.toString())
-
-                        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
-
-
-
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("Error", "Error making API call: ${t.message}")
-                }
-            })
-    }
+//    private fun queryVoices(voiceList: List<Voice>){
+//        val serviceTest = voiceservice.getVoices().enqueue(
+//            object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    Log.d("apicall", response.body().toString())
+//
+//                    if(response.isSuccessful){
+//                        val moshi = Moshi.Builder().build()
+//
+//                        val jsonAdapter: JsonAdapter<VoiceResponse> =
+//                            moshi.adapter(VoiceResponse::class.java)
+//
+//                        val voiceSearchResults = jsonAdapter.fromJson(response.body())
+//
+//                        for(i in voiceSearchResults!!.voices){
+//                            voiceArray.add(0,i)
+//                        }
+//
+//                        voiceNames = voiceArray.map { it.name }
+//
+//                        Log.d("help", voiceSearchResults.toString())
+//
+//                        spinner.adapter = HistoryAdapter(this@HistoryViewActivity, voiceArray)
+//
+//
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("Error", "Error making API call: ${t.message}")
+//                }
+//            })
+//    }
 
 
 

@@ -1,18 +1,14 @@
 package com.example.myapplication.ui
 
-import android.media.MediaParser
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.BuildConfig.ELEVEN_LABS_API
 import com.example.myapplication.R
-import com.example.myapplication.VoiceInterface
 import com.example.myapplication.data.HistoryItem
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.HistoryTextAdapter

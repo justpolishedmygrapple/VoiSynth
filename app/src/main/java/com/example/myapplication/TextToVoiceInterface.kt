@@ -18,5 +18,5 @@ interface TextToVoiceInterface {
         "Content-Type: application/json",
     )
 
-    fun generateAudio(@Body text: TextToVoiceQuery) : Response<ResponseBody>
+    suspend fun generateAudio(@Body text: TextToVoiceQuery) : Response<ResponseBody>
 }

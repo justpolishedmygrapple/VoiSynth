@@ -16,6 +16,7 @@
         <activity
             android:name=".ui.HistoryViewActivity"
             android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
         <activity
             android:name=".ui.HistoryBySelectedVoiceActivity"
