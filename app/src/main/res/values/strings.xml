@@ -43,6 +43,7 @@
     <string name="label_history_view">History</string>
     <string name="label_voice_list">Available Voices</string>
     <string name="voice_generate">Generate Speech</string>
+    <string name="voicelisttitle">Your Voices</string>
 
 
     <string-array name="default_texts">

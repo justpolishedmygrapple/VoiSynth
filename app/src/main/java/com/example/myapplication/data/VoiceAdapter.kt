@@ -35,7 +35,6 @@ class VoiceAdapter(private val onVoiceItemClick: (Voice) -> Unit) : RecyclerView
     //before class VoiceViewHolder(view: View, val onClick: (Voice) -> Unit): RecyclerView.ViewHolder(view){
     class VoiceViewHolder(view: View, val onClick: (Voice) -> Unit): RecyclerView.ViewHolder(view){
         private val voiceNameTV: TextView = view.findViewById(R.id.tv_voice_name)
-        private val voiceIDTV: TextView = view.findViewById(R.id.tv_voice_id)
 
         private lateinit var currentVoice: Voice
 
@@ -47,7 +46,6 @@ class VoiceAdapter(private val onVoiceItemClick: (Voice) -> Unit) : RecyclerView
 
         fun bind(voice: Voice){
             currentVoice = voice
-            voiceIDTV.text = voice.voice_id
             voiceNameTV.text = voice.name
 
         }
