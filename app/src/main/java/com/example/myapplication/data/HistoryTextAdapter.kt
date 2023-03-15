@@ -31,22 +31,6 @@ class HistoryTextAdapter(private val onClick: (HistoryItem) -> Unit, private val
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.history_result_item, parent, false)
-
-        val vibrator = parent.context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-
-        view.setOnLongClickListener{it ->
-            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
-            Log.d("vibrate","vibrate")
-
-            val client = OkHttpClient()
-
-
-
-
-            true
-        }
-
         return ViewHolder(view, onClick, onLongClick)
     }
 

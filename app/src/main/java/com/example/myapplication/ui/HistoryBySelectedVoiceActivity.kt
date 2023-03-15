@@ -113,6 +113,7 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
         mediaPlayer.start()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun onHistoryItemLongClick(historyItem: HistoryItem) {
 
 //        val vibrator = parent.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
