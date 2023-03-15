@@ -19,6 +19,7 @@ import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.ui.*
+import java.lang.invoke.VolatileCallSite
 
 class HistoryViewFragment: Fragment(R.layout.history_view) {
 
@@ -32,7 +33,7 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
     private lateinit var spinnerAdapter: HistoryAdapter
 
-    private val voiceArray = mutableListOf<Voice>()
+    private var voiceArray = mutableListOf<Voice>()
 
 
     private val voiceViewModel: ListOfVoicesViewModel by viewModels()
@@ -47,6 +48,8 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        voiceArray = mutableListOf<Voice>()
 
 
         spinner = view.findViewById<Spinner>(R.id.spinner_history)
