@@ -10,15 +10,19 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.BuildConfig
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.HistoryTextAdapter
 import com.example.myapplication.data.Voice
+import com.example.myapplication.ui.MediaViewModel
 import com.example.myapplication.ui.VoiceInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
@@ -51,11 +55,25 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
     private lateinit var voiceName: String
 
+
     private val args: HistoryBySelectedVoiceFragmentArgs by navArgs()
+
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    private lateinit var viewModel: MediaViewModel
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
+
+
+        if (savedInstanceState != null) {
+            val position = savedInstanceState.getInt("position")
+            MainActivity().mediaPlayer?.seekTo(position)
+        }
+
 
         historyResponse = args.historyItems
 
@@ -84,24 +102,17 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
         historyTextRV.adapter = historyTextAdapter
 
+
     }
+
 
     private fun onHistoryItemClick(historyItem: HistoryItem) {
         Log.d("itempress", "Item ID is: ${historyItem.history_item_id}")
 
-        val mediaPlayer = MediaPlayer()
 
-        val uri = uriSchemeBuilder(historyItem.history_item_id)
+        playFile(historyItem)
 
-        val header = HashMap<String, String>()
-
-        header["xi-api-key"] = BuildConfig.ELEVEN_LABS_API
-
-        //TODO: possibly make mediaplayer global
-        //TODO: handle playing and stopping of mediaplayer resource gracefully as was implemented in the voicegenerator activity
-        mediaPlayer.setDataSource(requireContext(), uri, header)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
+//        mediaPlayer = MediaPlayer()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -112,6 +123,84 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         )
         shareMP3(historyItem)
     }
+
+    private fun playFile(historyItem: HistoryItem){
+
+        coroutineScope.launch {
+            withContext(Dispatchers.IO){
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                    .url("https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio")
+                    .header("xi-api-key", BuildConfig.ELEVEN_LABS_API)
+                    .build()
+
+                try {
+                    client.newCall(request).execute().use { response ->
+                        if (!response.isSuccessful) throw IOException("$response")
+
+                        val bytes = response.body?.bytes()
+
+                        val tmpMP3 = kotlin.io.path.createTempFile("${selectedVoice!!.name}", ".mp3")
+
+                        val file = File(tmpMP3.pathString)
+
+                        tmpMP3.writeBytes(bytes!!)
+
+                        val fileUri = FileProvider.getUriForFile(
+                            requireContext(),
+                            "${requireContext().packageName}.fileprovider",
+                            file
+                        )
+
+
+                        viewModel.mediaPlayer?.apply {
+                            stop()
+                            release()
+                        }
+
+                        viewModel.mediaPlayer = MediaPlayer.create(requireContext(), fileUri)?.apply {
+                            start()
+
+                            viewModel.playing = true
+
+
+                            setOnCompletionListener {
+                                release()
+                                viewModel.mediaPlayer = null
+                                viewModel.playing = false
+                            }
+                        }
+
+                    }
+                } catch(e: Exception){
+                    Snackbar.make(
+                        requireView(),
+                        e.toString(),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+        }
+        }
+
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.mediaPlayer?.pause()
+        viewModel.playing = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.mediaPlayer?.apply {
+            stop()
+            release()
+        }
+        viewModel.mediaPlayer = null
+        viewModel.playing = false
+    }
+
 
     private fun shareMP3(historyItem: HistoryItem) = CoroutineScope(Dispatchers.Main).launch {
         withContext(Dispatchers.IO){
@@ -141,6 +230,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
                         file
                     )
 
+
                     ShareCompat.IntentBuilder(requireContext())
                         .setType("audio/mpeg")
                         .setSubject("Check out what ${selectedVoice!!.name} just said!")
@@ -158,8 +248,5 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         }
     }
 
-    private fun uriSchemeBuilder(audioId: String): Uri {
-        return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
-    }
 
 }

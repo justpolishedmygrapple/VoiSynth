@@ -64,13 +64,11 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
                 for (hist in historyItems!!.history) {
                     hist.url = uriSchemeBuilder(hist.history_item_id)
-                    Log.d("histurl", hist.url.toString())
                 }
 
             }
         }
 
-        Log.d("history", historyItems.toString())
 
 
         if (voiceViewModel.voiceListResults.value == null) {

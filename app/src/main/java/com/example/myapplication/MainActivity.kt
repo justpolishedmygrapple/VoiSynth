@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +34,7 @@ import java.io.File
 import kotlin.io.path.writeBytes
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.example.myapplication.fragments.HistoryBySelectedVoiceFragment
 import com.google.android.material.navigation.NavigationView
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
@@ -42,9 +45,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfig: AppBarConfiguration
 
+    public var mediaPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
+
+        Log.d("mainactivity", "created()")
 
 
         var toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
@@ -71,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             appBarConfig
         )
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
 
