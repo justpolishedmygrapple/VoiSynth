@@ -155,19 +155,21 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
                         viewModel.mediaPlayer?.apply {
                             stop()
+                            reset()
                             release()
                         }
 
                         viewModel.mediaPlayer = MediaPlayer.create(requireContext(), fileUri)?.apply {
                             start()
 
-                            viewModel.playing = true
+                            viewModel.isPlaying = true
 
 
                             setOnCompletionListener {
+                                reset()
                                 release()
                                 viewModel.mediaPlayer = null
-                                viewModel.playing = false
+                                viewModel.isPlaying = false
                             }
                         }
 
@@ -188,17 +190,18 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
     override fun onPause() {
         super.onPause()
         viewModel.mediaPlayer?.pause()
-        viewModel.playing = false
+        viewModel.isPlaying = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         viewModel.mediaPlayer?.apply {
             stop()
+            reset()
             release()
         }
         viewModel.mediaPlayer = null
-        viewModel.playing = false
+        viewModel.isPlaying = false
     }
 
 
