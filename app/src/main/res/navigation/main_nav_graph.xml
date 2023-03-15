@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/history_view">
+
+    <fragment
+        android:id="@+id/quick_generate"
+        android:name="com.example.myapplication.fragments.QuickGenerateFragment"
+        android:label="@string/label_quick_generate"/>
+
+    <fragment
+        android:id="@+id/history_view"
+        android:name="com.example.myapplication.fragments.HistoryViewFragment"
+        android:label="@string/label_history_view">
+        <action
+            android:id="@+id/navigate_to_history_by_selected_voice"
+            app:destination="@id/history_by_selected_voice"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/history_by_selected_voice"
+        android:name="com.example.myapplication.fragments.HistoryBySelectedVoiceFragment"
+        android:label="@string/label_history_by_selected_voice">
+
+        <argument
+        android:name="selectedVoice"
+        app:argType="com.example.myapplication.data.Voice"/>
+        <argument
+            android:name="historyItems"
+            app:argType="com.example.myapplication.data.HistoryResponse"/>
+
+    </fragment>
+
+
+
+</navigation>

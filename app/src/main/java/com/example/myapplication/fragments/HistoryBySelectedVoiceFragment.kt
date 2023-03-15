@@ -1,32 +1,30 @@
-package com.example.myapplication.ui
+package com.example.myapplication.fragments
 
-import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.BuildConfig.ELEVEN_LABS_API
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.HistoryTextAdapter
 import com.example.myapplication.data.Voice
+import com.example.myapplication.ui.VoiceInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
@@ -35,7 +33,9 @@ const val EXTRA_SELECTED_VOICE = "SELECTED_VOICE"
 
 const val EXTRA_HISTORY_ITEMS = "HISTORY_ITEMS"
 
-class HistoryBySelectedVoiceActivity : AppCompatActivity() {
+
+class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voice) {
+
 
     private var historyResponse: HistoryResponse? = null
 
@@ -51,25 +51,15 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
     private lateinit var voiceName: String
 
+    private val args: HistoryBySelectedVoiceFragmentArgs by navArgs()
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history_by_selected_voice)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (intent != null && intent.hasExtra(EXTRA_HISTORY_ITEMS)) {
-            historyResponse = intent.getSerializableExtra(EXTRA_HISTORY_ITEMS) as HistoryResponse
-//            Log.d("HistoryBySelectedVoice", historyResponse.toString())
-        }
+        historyResponse = args.historyItems
 
-        if (intent != null && intent.hasExtra(EXTRA_SELECTED_VOICE)) {
-            selectedVoice = intent.getSerializableExtra(EXTRA_SELECTED_VOICE) as Voice
-            voiceName = selectedVoice!!.name
-            Log.d(
-                "HistoryBySelectedVoice", "The selected voice name is ${selectedVoice!!.name} " +
-                        "and the id is ${selectedVoice!!.voice_id}"
-            )
-        }
+        selectedVoice = args.selectedVoice
 
         historyResponseSearchResults = mutableListOf<HistoryItem>()
 
@@ -87,12 +77,13 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
         historyTextAdapter.addHistoryItem(historyResponseSearchResults)
 
-        historyTextRV = findViewById(R.id.rv_history_generated_text)
+        historyTextRV = view.findViewById(R.id.rv_history_generated_text)
 
-        historyTextRV.layoutManager = LinearLayoutManager(this)
+        historyTextRV.layoutManager = LinearLayoutManager(requireContext())
         historyTextRV.setHasFixedSize(true)
 
         historyTextRV.adapter = historyTextAdapter
+
     }
 
     private fun onHistoryItemClick(historyItem: HistoryItem) {
@@ -104,65 +95,33 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
         val header = HashMap<String, String>()
 
-        header["xi-api-key"] = ELEVEN_LABS_API
+        header["xi-api-key"] = BuildConfig.ELEVEN_LABS_API
 
         //TODO: possibly make mediaplayer global
         //TODO: handle playing and stopping of mediaplayer resource gracefully as was implemented in the voicegenerator activity
-        mediaPlayer.setDataSource(this, uri, header)
+        mediaPlayer.setDataSource(requireContext(), uri, header)
         mediaPlayer.prepare()
         mediaPlayer.start()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun onHistoryItemLongClick(historyItem: HistoryItem) {
-
-//        val vibrator = parent.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
         Log.d(
             "longpress",
             "https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio"
         )
-
-        GlobalScope.launch {
-            shareMP3(historyItem)
-        }
-
-
-//            val file = File(this.cacheDir, "${historyItem.history_item_id}.mp3")
-
-//            FileOutputStream(file).use { fileOutputStream ->
-//                fileOutputStream.write(bytes)
-//            }
+        shareMP3(historyItem)
     }
 
-//            val fileUri = FileProvider.getUriForFile(this@HistoryBySelectedVoiceActivity,
-//                "${this@HistoryBySelectedVoiceActivity.packageName}.fileprovider",
-//            file)
+    private fun shareMP3(historyItem: HistoryItem) = CoroutineScope(Dispatchers.Main).launch {
+        withContext(Dispatchers.IO){
+
+            val client = OkHttpClient()
 //
-//            ShareCompat.IntentBuilder(this@HistoryBySelectedVoiceActivity)
-//                .setType("audio/mpeg")
-//                .setText("Check this out!")
-//                .setText("${historyItem.text}")
-//                .addStream(fileUri)
-//                .startChooser()
-//
-//        }
-
-
-
-
-
-    //Functionality to long press on a history item and share the MP3
-
-    //TODO: LET THE USER KNOW AT THE TOP THAT LONG-PRESSING ON AN ITEM WILL SHARE IT
-    @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun shareMP3(historyItem: HistoryItem) {
-        val client = OkHttpClient()
-//
-    val request = Request.Builder()
-        .url("https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio")
-        .header("xi-api-key", ELEVEN_LABS_API)
-        .build()
+            val request = Request.Builder()
+                .url("https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio")
+                .header("xi-api-key", BuildConfig.ELEVEN_LABS_API)
+                .build()
 
             try {
                 client.newCall(request).execute().use { response ->
@@ -170,38 +129,37 @@ class HistoryBySelectedVoiceActivity : AppCompatActivity() {
 
                     val bytes = response.body?.bytes()
 
-                    val tmpMP3 = kotlin.io.path.createTempFile("$voiceName", ".mp3")
+                    val tmpMP3 = kotlin.io.path.createTempFile("${selectedVoice!!.name}", ".mp3")
 
                     val file = File(tmpMP3.pathString)
 
                     tmpMP3.writeBytes(bytes!!)
 
                     val fileUri = FileProvider.getUriForFile(
-                        this@HistoryBySelectedVoiceActivity,
-                        "${this@HistoryBySelectedVoiceActivity.packageName}.fileprovider",
+                        requireContext(),
+                        "${requireContext().packageName}.fileprovider",
                         file
                     )
 
-                    ShareCompat.IntentBuilder(this@HistoryBySelectedVoiceActivity)
+                    ShareCompat.IntentBuilder(requireContext())
                         .setType("audio/mpeg")
-                        .setSubject("Check out what $voiceName just said!")
-                        .setText("$voiceName just said:\t\t\t\n\n\n\t ${historyItem.text}")
+                        .setSubject("Check out what ${selectedVoice!!.name} just said!")
+                        .setText("${selectedVoice!!.name} just said:\n\n\n ${historyItem.text}")
                         .addStream(fileUri)
                         .startChooser()
                 }
             } catch(e: Exception){
                 Snackbar.make(
-                    this.findViewById(android.R.id.content),
+                    requireView(),
                     e.toString(),
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+        }
     }
-
-
 
     private fun uriSchemeBuilder(audioId: String): Uri {
         return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")
     }
-}
 
+}

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryAdapter
 import com.example.myapplication.data.HistoryResponse
@@ -94,14 +95,11 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
         button.setOnClickListener {
 
+            val directions = HistoryViewFragmentDirections.navigateToHistoryBySelectedVoice(
+                spinner.selectedItem as Voice, historyItems as HistoryResponse
+            )
+            findNavController().navigate(directions)
 
-            val intent =
-                Intent(requireContext(), HistoryBySelectedVoiceActivity::class.java).apply {
-                    putExtra(EXTRA_SELECTED_VOICE, spinner.selectedItem as Voice)
-                    putExtra(EXTRA_HISTORY_ITEMS, historyItems)
-                }
-
-            startActivity(intent)
         }
 
 
