@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
@@ -176,11 +177,6 @@ class VoiceGeneratorActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         mediaPlayer.release()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_voice_generate, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -4,13 +4,15 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -51,6 +53,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
+
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
 
@@ -70,6 +74,29 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
             onGenerateButtonClick()
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.activity_voice_generate, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.share_file -> {
+                if(filePath != null){
+                    shareFileIntent(filePath!!, selectedVoice!!.name)
+                }
+                else{
+                    Snackbar.make(requireView(),
+                    "You either haven't generated a file yet, or there was an error",
+                    Snackbar.LENGTH_LONG).show()
+                }
+                true
+            }
+            else ->{
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     private fun onGenerateButtonClick(){
@@ -165,6 +192,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
             null}
 
     }
+
+
 
     private fun generateJsonRequestBody(text: String): RequestBody {
 
