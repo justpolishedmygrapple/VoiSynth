@@ -19,19 +19,16 @@ import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.ui.*
+import com.google.android.material.snackbar.Snackbar
 import java.lang.invoke.VolatileCallSite
 
 class HistoryViewFragment: Fragment(R.layout.history_view) {
 
-    private lateinit var arrayAdapter: HistoryAdapter
-
-    private lateinit var voiceSpinner: Spinner
 
     private lateinit var voiceNames: List<String>
 
     private lateinit var spinner: Spinner
 
-    private lateinit var spinnerAdapter: HistoryAdapter
 
     private var voiceArray = mutableListOf<Voice>()
 
@@ -40,7 +37,6 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
     private val historySearchViewModel: HistorySearchViewModel by viewModels()
 
-    private lateinit var voiceAdapter: VoiceAdapter
 
     private var historyItems: HistoryResponse? = null
 
@@ -96,10 +92,16 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
         button.setOnClickListener {
 
-            val directions = HistoryViewFragmentDirections.navigateToHistoryBySelectedVoice(
-                spinner.selectedItem as Voice, historyItems as HistoryResponse
-            )
-            findNavController().navigate(directions)
+            try{
+                val directions = HistoryViewFragmentDirections.navigateToHistoryBySelectedVoice(
+                    spinner.selectedItem as Voice, historyItems as HistoryResponse)
+                findNavController().navigate(directions)
+            }catch (e: java.lang.Exception){
+                Snackbar.make(requireView(),
+                "There is no voice selected. Perhaps you aren't on the internet?",
+                Snackbar.LENGTH_LONG).show()
+                Log.d("NullException", e.toString())
+            }
 
         }
 
@@ -129,11 +131,6 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-
-    }
 
     private fun uriSchemeBuilder(audioId: String): Uri {
         return Uri.parse("https://api.elevenlabs.io/v1/history/${audioId}/audio")

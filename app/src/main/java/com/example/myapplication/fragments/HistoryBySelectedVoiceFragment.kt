@@ -62,7 +62,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
     private lateinit var viewModel: MediaViewModel
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -112,10 +112,8 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
         playFile(historyItem)
 
-//        mediaPlayer = MediaPlayer()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun onHistoryItemLongClick(historyItem: HistoryItem) {
         Log.d(
             "longpress",
@@ -209,7 +207,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         withContext(Dispatchers.IO){
 
             val client = OkHttpClient()
-//
+
             val request = Request.Builder()
                 .url("https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio")
                 .header("xi-api-key", BuildConfig.ELEVEN_LABS_API)
