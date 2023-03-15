@@ -78,14 +78,13 @@ class VoiceGeneratorActivity : AppCompatActivity() {
         val generateButton = findViewById<Button>(R.id.button_generate_text)
 
         generateButton.setOnClickListener {
-            onGenerateButtonClick(generateButton)
-
+            onGenerateButtonClick()
         }
 
 
     }
 
-    private fun onGenerateButtonClick(generateButton: Button) {
+    private fun onGenerateButtonClick() {
         Log.d(
             "buttonClick",
             "User entered: ${findViewById<EditText>(R.id.edit_generated_text).text.toString()}"

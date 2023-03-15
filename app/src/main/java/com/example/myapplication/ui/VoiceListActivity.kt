@@ -13,7 +13,7 @@ import com.example.myapplication.data.VoiceAdapter
 
 class VoiceListActivity : AppCompatActivity() {
 
-    private val voiceservice = VoiceInterface.create()
+
 
     private val voiceAdapter = VoiceAdapter(::onVoiceItemClick)
 

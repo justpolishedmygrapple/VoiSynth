@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_action_history"
         android:title="@string/label_history_view"/>
 
+    <item
+        android:id="@+id/voice_list"
+        android:icon="@drawable/ic_action_voices"
+        android:title="@string/label_voice_list"/>
+
 </menu>

@@ -20,6 +20,27 @@
     </fragment>
 
     <fragment
+        android:id="@+id/voice_list"
+        android:name="com.example.myapplication.fragments.VoiceListFragment"
+        android:label="@string/label_voice_list">
+
+        <action
+            android:id="@+id/navigate_to_voice_generator"
+            app:destination="@id/voice_generator"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/voice_generator"
+        android:name="com.example.myapplication.fragments.VoiceGeneratorFragment"
+        android:label="@string/voice_generate">
+
+        <argument
+            android:name="selected_voice"
+            app:argType="com.example.myapplication.data.Voice"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/history_by_selected_voice"
         android:name="com.example.myapplication.fragments.HistoryBySelectedVoiceFragment"
         android:label="@string/label_history_by_selected_voice">

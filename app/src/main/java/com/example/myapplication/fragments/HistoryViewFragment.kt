@@ -96,7 +96,7 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                 val directions = HistoryViewFragmentDirections.navigateToHistoryBySelectedVoice(
                     spinner.selectedItem as Voice, historyItems as HistoryResponse)
                 findNavController().navigate(directions)
-            }catch (e: java.lang.Exception){
+            }catch (e: Exception){
                 Snackbar.make(requireView(),
                 "There is no voice selected. Perhaps you aren't on the internet?",
                 Snackbar.LENGTH_LONG).show()

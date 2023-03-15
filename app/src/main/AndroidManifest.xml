@@ -26,16 +26,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-
-        <activity
-            android:name=".ui.VoiceGeneratorActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:parentActivityName=".ui.VoiceListActivity" />
-        <activity
-            android:name=".ui.VoiceListActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
