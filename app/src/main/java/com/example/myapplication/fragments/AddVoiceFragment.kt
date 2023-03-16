@@ -18,6 +18,7 @@ import java.io.File
 import java.net.URLConnection
 import androidx.documentfile.provider.DocumentFile
 import com.example.myapplication.ELEVEN_LABS_API
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import okhttp3.*
 import java.net.Inet4Address
@@ -86,66 +87,51 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
         coroutineScope.launch {
             withContext(Dispatchers.IO){
 
-                        Log.d(TAG, selectedFile.toString())
+                try{
+                    Log.d(TAG, selectedFile.toString())
 
-                        val inputStream = requireContext().contentResolver.openInputStream(uri)
+                    val inputStream = requireContext().contentResolver.openInputStream(uri)
 
-                        val reqBody = inputStream?.let { RequestBody.create("audio/mpeg".toMediaTypeOrNull(), it.readBytes()) }
-
-
-                        val multipartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
-                            .addFormDataPart("name", "${voiceName}")
-                            .addFormDataPart("labels", "")
-
-                        reqBody?.let {
-                            multipartBuilder.addFormDataPart("files", "whatever.mp3", it)
-                        }
-
-
-                        val request = Request.Builder()
-                            .url("https://api.elevenlabs.io/v1/voices/add")
-                            .header("accept", "application/json")
-                            .header("xi-api-key", ELEVEN_LABS_API)
-                            .post(multipartBuilder.build())
-                            .build()
-
-                        val client = OkHttpClient()
-                        val response = client.newCall(request).execute()
-
-                Log.d(TAG, response.toString())
-
+                    val reqBody = inputStream?.let {
+                        RequestBody.create(
+                            "audio/mpeg".toMediaTypeOrNull(),
+                            it.readBytes()
+                        )
                     }
+
+
+                    val multipartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("name", "${voiceName}")
+                        .addFormDataPart("labels", "")
+
+                    reqBody?.let {
+                        multipartBuilder.addFormDataPart("files", "whatever.mp3", it)
+                    }
+
+
+                    val request = Request.Builder()
+                        .url("https://api.elevenlabs.io/v1/voices/add")
+                        .header("accept", "application/json")
+                        .header("xi-api-key", ELEVEN_LABS_API)
+                        .post(multipartBuilder.build())
+                        .build()
+
+                    val client = OkHttpClient()
+                    val response = client.newCall(request).execute()
+
+                    Log.d(TAG, response.toString())
+
+                }catch(e: Exception){
+                    Snackbar.make(
+                        requireView(),
+                        e.toString(),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
 
 
             }
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//        button.setOnClickListener {
-//
-//            val openFileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//                if(result.resultCode == RESULT_OK){
-//                    selectedFile = result.data?.data
-//                }
-//            }
-//
-
-//            intent.addCategory(Intent.CATEGORY_OPENABLE)
-//            openFileLauncher.launch(intent)
-//        }
-//    }
-
-

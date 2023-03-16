@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/add_voice">
+    app:startDestination="@id/quick_generate">
 
     <fragment
         android:id="@+id/quick_generate"

@@ -10,5 +10,9 @@
         android:id="@+id/voice_list"
         android:icon="@drawable/ic_action_voices"
         android:title="@string/label_voice_list"/>
+    <item
+        android:id="@+id/add_voice"
+        android:icon="@drawable/add_voice"
+        android:title="@string/add_voice"/>
 
 </menu>
