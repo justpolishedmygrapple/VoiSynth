@@ -34,13 +34,6 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
     private lateinit var loadingIndicator: CircularProgressIndicator
 
-//    private lateinit var viewModel: AddVoiceViewModel
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get("AddVoiceView", AddVoiceViewModel::class.java)
-//    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
