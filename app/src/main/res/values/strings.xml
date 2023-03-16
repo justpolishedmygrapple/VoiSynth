@@ -44,6 +44,7 @@
     <string name="label_voice_list">Available Voices</string>
     <string name="voice_generate">Generate Speech</string>
     <string name="voicelisttitle">Your Voices</string>
+    <string name="add_voice">Add new voice</string>
 
 
     <string-array name="default_texts">

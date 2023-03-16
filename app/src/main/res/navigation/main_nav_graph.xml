@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/quick_generate">
+    app:startDestination="@id/add_voice">
 
     <fragment
         android:id="@+id/quick_generate"
@@ -29,6 +29,11 @@
             app:destination="@id/voice_generator"/>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/add_voice"
+        android:name="com.example.myapplication.fragments.AddVoiceFragment"
+        android:label="@string/add_voice"/>
 
     <fragment
         android:id="@+id/voice_generator"

@@ -1,16 +1,12 @@
 package com.example.myapplication.fragments
 
 import android.media.MediaPlayer
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +19,6 @@ import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.HistoryTextAdapter
 import com.example.myapplication.data.Voice
 import com.example.myapplication.ui.MediaViewModel
-import com.example.myapplication.ui.VoiceInterface
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
@@ -33,9 +28,8 @@ import java.io.IOException
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
-const val EXTRA_SELECTED_VOICE = "SELECTED_VOICE"
 
-const val EXTRA_HISTORY_ITEMS = "HISTORY_ITEMS"
+
 
 
 class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voice) {
@@ -47,7 +41,6 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
     private var historyResponseSearchResults: MutableList<HistoryItem>? = null
 
-    private val voiceService = VoiceInterface.create()
 
     private lateinit var historyTextAdapter: HistoryTextAdapter
 

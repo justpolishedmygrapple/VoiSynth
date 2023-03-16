@@ -3,13 +3,14 @@ package com.example.myapplication.ui
 import com.example.myapplication.ELEVEN_LABS_API
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.VoiceResponse
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+import java.io.File
 
 
 interface VoiceInterface {
@@ -28,6 +29,17 @@ interface VoiceInterface {
         "accept: application/json"
     )
     suspend fun getVoices(): Response<VoiceResponse>
+
+
+    @Multipart
+    @POST("voices/add")
+    @Headers(
+        "xi-api-key: $ELEVEN_LABS_API",
+        "accept: application/json",
+        "Content-Type: multipart/form-data",
+    )
+    suspend fun uploadVoice(@Part("name") name: String, @Part files: MultipartBody.Part,
+                            @Part("labels") labels: String)
 
 
     @POST("text-to-speech/{voiceID}/stream")
