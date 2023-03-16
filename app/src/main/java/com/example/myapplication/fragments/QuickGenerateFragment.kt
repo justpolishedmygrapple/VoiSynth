@@ -170,6 +170,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                         e.toString(),
                         Snackbar.LENGTH_LONG
                     ).show()
+
                 }
             }
 

@@ -48,6 +48,7 @@
     <string name="upload_voice_button">Upload MP3 file to clone voice</string>
     <string name="add_voice_field">Name of voice to clone</string>
     <string name="label_settings">Settings</string>
+    <string name="history_instructions">Tap to play, hold to share</string>
 
 
     <string-array name="default_texts">
