@@ -3,7 +3,9 @@ package com.example.myapplication.fragments
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -103,7 +105,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         Log.d("itempress", "Item ID is: ${historyItem.history_item_id}")
 
 
-        playFile(historyItem)
+        playFile(historyItem, historyItem.voice_name)
 
     }
 
@@ -115,7 +117,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         shareMP3(historyItem)
     }
 
-    private fun playFile(historyItem: HistoryItem){
+    private fun playFile(historyItem: HistoryItem, name: String){
 
         coroutineScope.launch {
             withContext(Dispatchers.IO){

@@ -10,6 +10,7 @@ import java.io.Serializable
 data class HistoryItem(
     val history_item_id: String,
     val voice_id: String,
+    val voice_name: String,
     val text: String,
     val date_unix: Int,
     @Transient

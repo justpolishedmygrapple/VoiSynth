@@ -20,4 +20,8 @@
         android:icon="@drawable/add_voice"
         android:title="@string/add_voice"/>
 
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/history_group" />
+
 </menu>
