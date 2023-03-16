@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/edit_voice_name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="268dp"
+        android:layout_height="87dp"
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="12dp"
@@ -37,12 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="214dp"
-        android:layout_marginBottom="21dp"
         android:indeterminate="true"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/edit_voice_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="181dp"
+        tools:layout_editor_absoluteY="114dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
