@@ -50,7 +50,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
         val navmenu = navView.menu
 
-        val drawerLayout: DrawerLayout = requireActivity().findViewById(R.id.drawer_layout)
 
         val historyVM: HistoryDBViewModel by viewModels()
 
@@ -72,8 +71,18 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                     historyItem.text,
                     historyItem.date_unix))
 
+
+                    //Src: https://www.bestprog.net/en/2022/05/23/kotlin-anonymous-functions-lambda-expressions/
+
+                    val textToUse = {str: String -> if(str.length < 30){
+                        str
+                    }
+                    else{
+                        str.substring(0,30) + "..."
+                    }}
+
                     val group = navmenu.addSubMenu(R.id.history_group, Menu.NONE, Menu.NONE, historyItem.voice_name)
-                    val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, historyItem.text)
+                    val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, textToUse(historyItem.text) )
 
                     val fragmentManager = fragmentManager
 
