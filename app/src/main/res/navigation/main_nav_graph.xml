@@ -5,6 +5,11 @@
     app:startDestination="@id/quick_generate">
 
     <fragment
+        android:id="@+id/settings"
+        android:name="com.example.myapplication.fragments.SettingsFragment"
+        android:label="@string/label_settings"/>
+
+    <fragment
         android:id="@+id/quick_generate"
         android:name="com.example.myapplication.fragments.QuickGenerateFragment"
         android:label="@string/label_quick_generate"/>
