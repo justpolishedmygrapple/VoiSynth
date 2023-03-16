@@ -5,23 +5,20 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore.Images.Media
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.ui.VoiceInterface
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import java.io.File
-import java.net.URLConnection
-import androidx.documentfile.provider.DocumentFile
 import com.example.myapplication.ELEVEN_LABS_API
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import okhttp3.*
-import java.net.Inet4Address
 
 class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
@@ -33,12 +30,30 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
+    private lateinit var nameTextField: EditText
+
+    private lateinit var loadingIndicator: CircularProgressIndicator
+
+//    private lateinit var viewModel: AddVoiceViewModel
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider(this).get("AddVoiceView", AddVoiceViewModel::class.java)
+//    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val button: Button = view.findViewById(R.id.button_browse_files)
+
+        nameTextField = view.findViewById(R.id.edit_voice_name)
+
+        loadingIndicator = view.findViewById(R.id.loading_indicator_add_voice)
+
+
+
+
 
         val openFileLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -65,29 +80,45 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
                 type = "audio/mpeg"
             }
 
+
             startActivityForResult(intent, 0)
 
-
-
         }
+
+//        viewModel.loading.observe(viewLifecycleOwner){ loading ->
+//            if(loading){
+//                loadingIndicator.visibility = View.VISIBLE
+//            }
+//            else{
+//                loadingIndicator.visibility = View.INVISIBLE
+//            }
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         if(requestCode == 0 && resultCode == Activity.RESULT_OK){
             data?.data?.let { fileUri ->
-                postMP3(fileUri, "David Attenborough")
+                loadingIndicator.visibility = View.VISIBLE
+                postMP3(fileUri, nameTextField.text.toString())
             }
         }
     }
 
 
-    fun postMP3(uri: Uri, voiceName: String){
-        coroutineScope.launch {
-            withContext(Dispatchers.IO){
+    fun postMP3(uri: Uri, voiceName: String): Boolean {
 
-                try{
+        var x: Boolean? = false
+
+        coroutineScope.launch {
+            loadingIndicator.visibility = View.VISIBLE
+            withContext(Dispatchers.IO) {
+
+                try {
+
+
                     Log.d(TAG, selectedFile.toString())
 
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
@@ -119,9 +150,16 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
                     val client = OkHttpClient()
                     val response = client.newCall(request).execute()
 
-                    Log.d(TAG, response.toString())
 
-                }catch(e: Exception){
+                    inputStream?.close()
+
+                    Snackbar.make(
+                        requireView(),
+                        "${voiceName}'s voice successfully cloned!",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                } catch (e: Exception) {
                     Snackbar.make(
                         requireView(),
                         e.toString(),
@@ -130,8 +168,12 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
                 }
             }
 
-
-            }
-
+            loadingIndicator.visibility = View.INVISIBLE
         }
+
+        return true
+    }
+
+
+
     }

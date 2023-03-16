@@ -45,6 +45,8 @@
     <string name="voice_generate">Generate Speech</string>
     <string name="voicelisttitle">Your Voices</string>
     <string name="add_voice">Add new voice</string>
+    <string name="upload_voice_button">Upload MP3 file to clone voice</string>
+    <string name="add_voice_field">Name of voice to clone</string>
 
 
     <string-array name="default_texts">
