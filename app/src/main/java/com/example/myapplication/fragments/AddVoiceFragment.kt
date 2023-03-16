@@ -105,6 +105,17 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
         var x: Boolean? = false
 
+        if(voiceName.length == 0 ){
+            loadingIndicator.visibility = View.INVISIBLE
+
+            Snackbar.make(
+                requireView(),
+                "Please enter the name for the voice you are cloning",
+                Snackbar.LENGTH_LONG
+            ).show()
+            return false
+        }
+
         coroutineScope.launch {
             loadingIndicator.visibility = View.VISIBLE
             withContext(Dispatchers.IO) {
