@@ -91,10 +91,10 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                 }
 
                 if(hidePremadeVoices == "Hide pre-made voices"){
-                    spinner.adapter = HistoryAdapter(requireContext(), voiceArray.filterNot { it.category == "premade" })
+                    spinner.adapter = HistoryAdapter(requireContext(), (voiceArray.filterNot { it.category == "premade" }).sortedBy { it.name })
                 }
                 else{
-                    spinner.adapter = HistoryAdapter(requireContext(), voiceArray) }
+                    spinner.adapter = HistoryAdapter(requireContext(), voiceArray.sortedBy { it.name }) }
                 }
             }
 
