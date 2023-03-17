@@ -130,7 +130,7 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                 selectedVoice?.let {
                     Toast.makeText(
                         requireContext(),
-                        "Selected item: ${it.voice_id}",
+                        "Selected voice: ${it.name}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

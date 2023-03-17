@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -61,6 +62,8 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         viewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
 
@@ -73,6 +76,8 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         historyResponse = args.historyItems
 
         selectedVoice = args.selectedVoice
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "${selectedVoice?.name}'s history"
 
         historyResponseSearchResults = mutableListOf<HistoryItem>()
 
