@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/pref_settings_title">
+
+        <ListPreference
+            android:title="@string/pref_hide_premade_title"
+            android:key="@string/pref_hide_premade_key"
+            android:dialogTitle="@string/pref_hide_premade_title"
+            android:entries="@array/prefs_hide_premade_entries"
+            android:entryValues="@array/pref_hide_premade_values"
+            android:defaultValue="@string/pref_hide_premade_voices_default_value"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
