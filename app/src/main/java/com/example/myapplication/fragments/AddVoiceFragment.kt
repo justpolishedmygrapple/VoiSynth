@@ -140,7 +140,7 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
                         .addFormDataPart("labels", "")
 
                     reqBody?.let {
-                        multipartBuilder.addFormDataPart("files", "whatever.mp3", it)
+                        multipartBuilder.addFormDataPart("files", "{$voiceName}.mp3", it)
                     }
 
 
