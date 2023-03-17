@@ -6,39 +6,40 @@
     android:layout_height="match_parent"
     android:background="@color/Thistle">
 
+
     <TextView
         android:id="@+id/tv_selected_voice"
-        android:layout_width="179dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginBottom="13dp"
+        android:layout_width="227dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="@string/voice_name"
-        app:layout_constraintBottom_toTopOf="@+id/default_text_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/edit_generated_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <EditText
         android:id="@+id/edit_generated_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginBottom="76dp"
-        android:gravity="center"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top|start"
         android:hint="@string/generate_hint"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/button_generate_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_selected_voice" />
 
     <Button
         android:id="@+id/button_generate_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="311dp"
+        android:layout_marginBottom="39dp"
         android:gravity="center"
         android:text="@string/generate_button"
         app:layout_constraintBottom_toBottomOf="parent"
