@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:text="@string/voicelisttitle" />
 
 

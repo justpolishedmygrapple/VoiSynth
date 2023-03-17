@@ -79,4 +79,23 @@
         vital system components comprising a full OS as defined by pozix."
         </item>
     </string-array>
+
+
+<!--    Preferences   -->
+
+    <string name="pref_settings_title">Configure preferences</string>
+
+
+
+    <string name="pref_hide_premade_title">Show/hide pre-made voices</string>
+
+    <string name="pref_hide_premade_entry_show_premade">Show pre-made voices</string>
+    <string name="pref_hide_premade_entry_hide_premade">Hide pre-made voices</string>
+
+    <string name="pref_hide_premade_value_show_premade">showpremade</string>
+    <string name="pref_hide_premade_value_hide_premade">hidepremade</string>
+
+    <string name="pref_hide_premade_key">hidepremade</string>
+    <string name="pref_hide_premade_voices_default_value">@string/pref_hide_premade_value_show_premade</string>
+
 </resources>

@@ -1,10 +1,12 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -30,6 +32,15 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
         voiceResultsRV.layoutManager = LinearLayoutManager(requireContext())
         voiceResultsRV.setHasFixedSize(true)
 
+        val prefManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        val hidePremade = prefManager.getString(getString(R.string.pref_hide_premade_key), null)
+
+        Log.d("hidePremade", hidePremade.toString())
+
+
+
+
 
         voiceResultsRV.adapter = voiceAdapter
 
@@ -37,8 +48,16 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
             voiceViewModel.loadListOfVoices()
         }
 
-        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){ results->
-            voiceAdapter.addVoice(results?.voices)
+        if(hidePremade == "Hide pre-made voices") {
+            voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
+                voiceAdapter.addVoice(results?.voices?.filterNot { it.category == "premade" })
+            }
+        }
+
+        else if(hidePremade == "Show pre-made voices"){
+            voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
+                voiceAdapter.addVoice(results?.voices)
+            }
         }
 
     }

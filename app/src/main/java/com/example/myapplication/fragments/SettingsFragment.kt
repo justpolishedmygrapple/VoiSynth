@@ -1,8 +1,14 @@
 package com.example.myapplication.fragments
 
-import androidx.fragment.app.Fragment
+import android.os.Bundle
 
-class SettingsFragment: Fragment() {
+import androidx.preference.PreferenceFragmentCompat
+import com.example.myapplication.R
 
+class SettingsFragment: PreferenceFragmentCompat() {
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.settings, rootKey)
+    }
 
 }
