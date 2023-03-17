@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -48,6 +49,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
 
 
     private val args: VoiceGeneratorFragmentArgs by navArgs()
+
+    private var currentlyGenerating: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -126,6 +129,7 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
         }
         else{
             playGeneratedAudio(userRequestedText)
+            currentlyGenerating = true
         }
 
     }
@@ -133,6 +137,17 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
 
 
     private fun playGeneratedAudio(userRequestedText: String){
+
+        if(currentlyGenerating){
+            val toast = Toast.makeText(
+                requireContext(),
+                "Please wait until your current request has finished before generating another" +
+                        "request",
+                Toast.LENGTH_SHORT
+            )
+            toast.show()
+            return
+        }
 
         coroutineScope.launch {
             withContext(Dispatchers.IO){
@@ -173,12 +188,14 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
                                 release()
                                 mediaViewModel.mediaPlayer = null
                                 mediaViewModel.isPlaying = false
+                                currentlyGenerating = false
                             }
                         }
 
 
                     }
                 } catch(e: Exception){
+                    currentlyGenerating = false
                     Snackbar.make(
                         requireView(),
                         e.toString(),
