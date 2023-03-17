@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.HistoryBySelectedVoiceActivity"
     tools:layout_editor_absoluteX="3dp"
-    tools:layout_editor_absoluteY="-8dp">
+    tools:layout_editor_absoluteY="-8dp"
+    android:background="@color/Thistle">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history_generated_text"
