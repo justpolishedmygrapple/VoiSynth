@@ -20,6 +20,7 @@ import com.example.myapplication.database.HistoryDatabaseItem
 import com.example.myapplication.ui.HistorySearchViewModel
 import com.example.myapplication.ui.MediaViewModel
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +50,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
 
         val navmenu = navView.menu
+
 
 
         val historyVM: HistoryDBViewModel by viewModels()

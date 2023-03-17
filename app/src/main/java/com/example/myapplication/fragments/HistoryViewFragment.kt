@@ -1,6 +1,5 @@
 package com.example.myapplication.fragments
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,10 +16,9 @@ import com.example.myapplication.R
 import com.example.myapplication.data.HistoryAdapter
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.Voice
-import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.ui.*
 import com.google.android.material.snackbar.Snackbar
-import java.lang.invoke.VolatileCallSite
+
 
 class HistoryViewFragment: Fragment(R.layout.history_view) {
 

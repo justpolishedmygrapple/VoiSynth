@@ -20,6 +20,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.Voice
 import com.example.myapplication.ui.MediaViewModel
 import com.example.myapplication.ui.VoiceInterface
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -37,15 +38,14 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
 
     private var selectedVoice: Voice? = null
 
-    private var userGeneratedText: String? = null
-
-    private lateinit var mediaPlayer: MediaPlayer
 
     private var filePath: String? = null
 
     private lateinit var mediaViewModel: MediaViewModel
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    private lateinit var loadingIndicator: CircularProgressIndicator
 
 
     private val args: VoiceGeneratorFragmentArgs by navArgs()
@@ -58,6 +58,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
         setHasOptionsMenu(true)
 
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
+
+        loadingIndicator = view.findViewById(R.id.voice_generator_loading_indicator)
 
 
         selectedVoice = args.selectedVoice
@@ -114,6 +116,7 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
     }
 
     private fun onGenerateButtonClick(){
+        loadingIndicator.visibility = View.VISIBLE
 
         val userRequestedText: String =
             view?.findViewById<EditText>(R.id.edit_generated_text)?.text.toString()
@@ -126,17 +129,21 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
                 "You have to enter some text in order to generate audio",
                 Snackbar.LENGTH_LONG
             ).show()
+            loadingIndicator.visibility = View.INVISIBLE
         }
         else{
             playGeneratedAudio(userRequestedText)
             currentlyGenerating = true
         }
 
+
     }
 
 
 
     private fun playGeneratedAudio(userRequestedText: String){
+
+        loadingIndicator.visibility = View.VISIBLE
 
         if(currentlyGenerating){
             val toast = Toast.makeText(
@@ -146,11 +153,13 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
                 Toast.LENGTH_SHORT
             )
             toast.show()
+            loadingIndicator.visibility = View.INVISIBLE
             return
         }
 
         coroutineScope.launch {
             withContext(Dispatchers.IO){
+
 
                 try{
 
@@ -204,7 +213,9 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
                 }
 
             }
+            loadingIndicator.visibility = View.INVISIBLE
         }
+
     }
 
 
