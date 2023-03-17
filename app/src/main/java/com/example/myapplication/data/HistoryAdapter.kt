@@ -1,6 +1,7 @@
 package com.example.myapplication.data
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,8 @@ class HistoryAdapter(context: Context, objects: List<Voice>):
         val textView = view.findViewById<TextView>(android.R.id.text1)
 
         textView.text = item?.name
+
+        textView.gravity = Gravity.CENTER
 
         return view
 
