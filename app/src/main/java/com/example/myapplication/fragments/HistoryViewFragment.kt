@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryAdapter
 import com.example.myapplication.data.HistoryResponse
@@ -25,7 +26,6 @@ import java.lang.invoke.VolatileCallSite
 class HistoryViewFragment: Fragment(R.layout.history_view) {
 
 
-    private lateinit var voiceNames: List<String>
 
     private lateinit var spinner: Spinner
 
@@ -57,6 +57,12 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
             historySearchViewModel.loadHistorySearchResults()
         }
 
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        val hidePremadeVoices = preferenceManager.getString(getString(R.string.pref_hide_premade_key),null)
+
+
+
         historySearchViewModel.historySearchResults.observe(viewLifecycleOwner) { histResults ->
             if (histResults != null) {
                 historyItems = histResults
@@ -83,11 +89,17 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                     voiceArray.add(voice)
                     Log.d("NewVoiceAdded", voice.toString())
                 }
-                spinner.adapter = HistoryAdapter(requireContext(), voiceArray)
-            }
-        }
 
-        voiceNames = voiceArray.map { it.name }
+                if(hidePremadeVoices == "Hide pre-made voices"){
+                    spinner.adapter = HistoryAdapter(requireContext(), voiceArray.filterNot { it.category == "premade" })
+                }
+                else{
+                    spinner.adapter = HistoryAdapter(requireContext(), voiceArray) }
+                }
+            }
+
+
+
 
 
         button.setOnClickListener {
