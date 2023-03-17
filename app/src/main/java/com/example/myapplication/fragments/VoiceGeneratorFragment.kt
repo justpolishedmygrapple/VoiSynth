@@ -1,13 +1,12 @@
 package com.example.myapplication.fragments
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -73,6 +72,18 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
         generateButton.setOnClickListener {
             onGenerateButtonClick()
         }
+
+        //Enter will close the keyboard
+        //Src: https://stackoverflow.com/questions/47298935/handling-enter-key-on-edittext-kotlin-android
+        //Src: https://developer.android.com/reference/android/view/inputmethod/InputMethodManager#hideSoftInputFromInputMethod(android.os.IBinder,%20int)
+        editText.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                val inputMethodManager = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
+                return@OnKeyListener true
+            }
+            false
+        })
 
     }
 

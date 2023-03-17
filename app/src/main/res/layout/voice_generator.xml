@@ -27,6 +27,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="10dp"
+        android:imeOptions="actionDone"
         android:gravity="top|start"
         android:hint="@string/generate_hint"
         android:textSize="18sp"
