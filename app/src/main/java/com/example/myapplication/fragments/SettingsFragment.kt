@@ -3,13 +3,16 @@ package com.example.myapplication.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.edit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.example.myapplication.R
 import com.example.myapplication.voicedatabase.VoiceDBViewModel
 import com.example.myapplication.voicedatabase.VoiceDao
@@ -58,6 +61,14 @@ class SettingsFragment: PreferenceFragmentCompat() {
         })
 
         }
+
+    override fun onPause() {
+        super.onPause()
+
+        //Saves preference when user navigates away
+        //Src: In java, but it helped: https://stackoverflow.com/questions/24039577/android-sharedpreferences-editing-not-working
+        PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().apply()
+    }
 
     }
 
