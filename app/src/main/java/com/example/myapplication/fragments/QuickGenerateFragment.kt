@@ -2,6 +2,7 @@ package com.example.myapplication.fragments
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.core.content.FileProvider
@@ -12,6 +13,7 @@ import androidx.preference.PreferenceManager
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
+import com.example.myapplication.data.Voice
 import com.example.myapplication.voicedatabase.VoiceDBViewModel
 import com.example.myapplication.voicedatabase.VoiceDatabaseItem
 import com.example.myapplication.database.HistoryDBViewModel
@@ -41,11 +43,14 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private val historyVM: HistoryDBViewModel by viewModels()
 
-    private  val voiceDBVM: VoiceDBViewModel by viewModels()
 
 
 
     private val voiceViewModel: ListOfVoicesViewModel by viewModels()
+    private val voiceDBViewModel: VoiceDBViewModel by viewModels()
+
+    private var prefVoiceName: String? = null
+
 
 
 
@@ -57,12 +62,31 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
         val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
 
+
+
+
         val navmenu = navView.menu
 
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-//        val preferredVoice = preferenceManager.getString()
+
+        val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), null)
+
+        voiceDBViewModel.searchVoice(prefVoiceID!!).observe(viewLifecycleOwner) { prefVoice ->
+
+            when(prefVoice) {
+                null ->
+                {
+
+                }
+                else ->
+                {Log.d("preferred voice is", prefVoice.name)}
+            }
+        }
+
+
+
 
 
 
@@ -71,16 +95,16 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
             voiceViewModel.loadListOfVoices()
         }
 
-        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){results ->
-
-            if(results != null){
-                for(voice in results.voices){
-                   voiceDBVM.addVoice(VoiceDatabaseItem(voice.voice_id, voice.name, voice.category))
-                }
-            }
-
-        }
-
+//        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){results ->
+//
+//            if(results != null){
+//                for(voice in results.voices){
+//                   voiceDBVM.addVoice(VoiceDatabaseItem(voice.voice_id, voice.name, voice.category))
+//                }
+//            }
+//
+//        }
+//
 
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 

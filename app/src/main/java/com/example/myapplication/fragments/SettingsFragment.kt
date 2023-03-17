@@ -31,7 +31,9 @@ class SettingsFragment: PreferenceFragmentCompat() {
         val voiceNames: MutableList<String> = mutableListOf()
         val voiceIDs: MutableList<String> = mutableListOf()
 
-        val listPreference = findPreference<ListPreference>("pref_voice_key")
+        val key = getString(R.string.pref_voice_key)
+
+        val listPreference = findPreference<ListPreference>(key)
         voiceDBViewModel.allVoices.observe(this, Observer { list ->
 
             for(voice in list){

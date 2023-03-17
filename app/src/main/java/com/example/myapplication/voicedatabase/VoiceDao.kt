@@ -13,6 +13,6 @@ interface VoiceDao {
     @Query("SELECT * FROM VoiceDatabaseItem ORDER BY name ASC")
     fun getVoices(): Flow<List<VoiceDatabaseItem>>
 
-    @Query("SELECT * from VoiceDatabaseItem WHERE voice_id = :voice_id")
+    @Query("SELECT * from VoiceDatabaseItem WHERE voice_id = :voice_id LIMIT 1")
     fun getVoiceByIDNumber(voice_id: String) : Flow<VoiceDatabaseItem?>
 }
