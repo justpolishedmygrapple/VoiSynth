@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -81,7 +82,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
                 }
                 else ->
-                {Log.d("preferred voice is", prefVoice.name)}
+                {(requireActivity() as AppCompatActivity).supportActionBar?.title = "Quickmode: ${prefVoice.name}"}
             }
         }
 
