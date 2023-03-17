@@ -16,7 +16,8 @@ class VoiceAdapter(private val onVoiceItemClick: (Voice) -> Unit) : RecyclerView
     override fun getItemCount() = this.voiceList.size
 
     fun addVoice(newVoiceList: List<Voice>?){
-        voiceList = newVoiceList ?: listOf()
+        voiceList = newVoiceList?.sortedBy { it.name } ?: listOf()
+
         notifyDataSetChanged()
     }
 
@@ -28,6 +29,9 @@ class VoiceAdapter(private val onVoiceItemClick: (Voice) -> Unit) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: VoiceViewHolder, position: Int) {
+
+
+
         holder.bind(this.voiceList[position])
     }
 
