@@ -8,11 +8,12 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
-import com.example.myapplication.data.voicedatabase.VoiceDBViewModel
-import com.example.myapplication.data.voicedatabase.VoiceDatabaseItem
+import com.example.myapplication.voicedatabase.VoiceDBViewModel
+import com.example.myapplication.voicedatabase.VoiceDatabaseItem
 import com.example.myapplication.database.HistoryDBViewModel
 import com.example.myapplication.database.HistoryDatabaseItem
 import com.example.myapplication.ui.HistorySearchViewModel
@@ -57,6 +58,11 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
 
         val navmenu = navView.menu
+
+
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+//        val preferredVoice = preferenceManager.getString()
 
 
 
@@ -105,7 +111,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                     }}
 
                     val group = navmenu.addSubMenu(R.id.history_group, Menu.NONE, Menu.NONE, historyItem.voice_name)
-                    val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, textToUse(historyItem.text) )
+                    val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, historyItem.text)
 
                     val fragmentManager = fragmentManager
 

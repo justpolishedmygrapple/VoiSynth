@@ -78,14 +78,6 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
         }
 
-//        viewModel.loading.observe(viewLifecycleOwner){ loading ->
-//            if(loading){
-//                loadingIndicator.visibility = View.VISIBLE
-//            }
-//            else{
-//                loadingIndicator.visibility = View.INVISIBLE
-//            }
-//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

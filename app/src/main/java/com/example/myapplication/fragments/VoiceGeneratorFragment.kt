@@ -276,4 +276,21 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
             .startChooser()
     }
 
+    override fun onPause() {
+        super.onPause()
+        mediaViewModel.mediaPlayer?.pause()
+        mediaViewModel.isPlaying = false
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaViewModel.mediaPlayer?.apply {
+            stop()
+            reset()
+            release()
+        }
+        mediaViewModel.mediaPlayer = null
+        mediaViewModel.isPlaying = false
+    }
+
+
 }

@@ -11,9 +11,9 @@ import androidx.preference.Preference
 
 import androidx.preference.PreferenceFragmentCompat
 import com.example.myapplication.R
-import com.example.myapplication.data.voicedatabase.VoiceDBViewModel
-import com.example.myapplication.data.voicedatabase.VoiceDao
-import com.example.myapplication.data.voicedatabase.VoiceDatabaseItem
+import com.example.myapplication.voicedatabase.VoiceDBViewModel
+import com.example.myapplication.voicedatabase.VoiceDao
+import com.example.myapplication.voicedatabase.VoiceDatabaseItem
 
 class SettingsFragment: PreferenceFragmentCompat() {
 

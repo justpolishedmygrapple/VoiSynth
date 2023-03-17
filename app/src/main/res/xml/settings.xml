@@ -17,6 +17,7 @@
         <ListPreference
             android:id="@+id/lp_voice_select"
             android:key="pref_voice_key"
+            android:defaultValue="2owqac1jZJ71Bszwun50"
             android:title="@string/choose_your_custom_voice"
             android:dialogTitle="@string/choose_your_custom_voice"
             app:useSimpleSummaryProvider="true" />

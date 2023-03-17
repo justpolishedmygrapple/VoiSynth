@@ -11,7 +11,7 @@ data class HistoryItem(
     val history_item_id: String,
     val voice_id: String,
     val voice_name: String,
-    val text: String,
+    var text: String,
     val date_unix: Int,
     @Transient
     var url: Uri? = null
