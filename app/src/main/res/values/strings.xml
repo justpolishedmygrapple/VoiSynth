@@ -97,5 +97,8 @@
 
     <string name="pref_hide_premade_key">hidepremade</string>
     <string name="pref_hide_premade_voices_default_value">@string/pref_hide_premade_value_show_premade</string>
+    <string name="pref_voice_key">"preferred_voice_key</string>
+    <string name="choose_your_custom_voice">Choose preferred voice</string>
+
 
 </resources>

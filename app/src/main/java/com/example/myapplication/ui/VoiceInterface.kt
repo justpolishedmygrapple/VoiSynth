@@ -15,12 +15,7 @@ import java.io.File
 
 interface VoiceInterface {
 
-    @GET("user")
-    @Headers(
-        "xi-api-key: $ELEVEN_LABS_API",
-        "accept: application/json"
-    )
-    suspend fun search() : Response<String>
+
 
 
     @GET("voices")
@@ -29,17 +24,6 @@ interface VoiceInterface {
         "accept: application/json"
     )
     suspend fun getVoices(): Response<VoiceResponse>
-
-
-    @Multipart
-    @POST("voices/add")
-    @Headers(
-        "xi-api-key: $ELEVEN_LABS_API",
-        "accept: application/json",
-        "Content-Type: multipart/form-data",
-    )
-    suspend fun uploadVoice(@Part("name") name: String, @Part files: MultipartBody.Part,
-                            @Part("labels") labels: String)
 
 
     @POST("text-to-speech/{voiceID}/stream")

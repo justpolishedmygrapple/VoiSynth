@@ -2,25 +2,23 @@ package com.example.myapplication.fragments
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.core.content.FileProvider
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
-import com.example.myapplication.data.HistoryResponse
+import com.example.myapplication.data.voicedatabase.VoiceDBViewModel
+import com.example.myapplication.data.voicedatabase.VoiceDatabaseItem
 import com.example.myapplication.database.HistoryDBViewModel
 import com.example.myapplication.database.HistoryDatabaseItem
 import com.example.myapplication.ui.HistorySearchViewModel
+import com.example.myapplication.ui.ListOfVoicesViewModel
 import com.example.myapplication.ui.MediaViewModel
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +38,15 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
+    private val historyVM: HistoryDBViewModel by viewModels()
+
+    private  val voiceDBVM: VoiceDBViewModel by viewModels()
+
+
+
+    private val voiceViewModel: ListOfVoicesViewModel by viewModels()
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +60,21 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
 
 
-        val historyVM: HistoryDBViewModel by viewModels()
+
+        if(voiceViewModel.voiceListResults.value == null){
+            voiceViewModel.loadListOfVoices()
+        }
+
+        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){results ->
+
+            if(results != null){
+                for(voice in results.voices){
+                   voiceDBVM.addVoice(VoiceDatabaseItem(voice.voice_id, voice.name, voice.category))
+                }
+            }
+
+        }
+
 
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
@@ -109,9 +130,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
             }
         }
-
-
-
 
 
     }

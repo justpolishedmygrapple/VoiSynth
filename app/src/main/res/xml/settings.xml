@@ -14,6 +14,13 @@
             android:defaultValue="@string/pref_hide_premade_voices_default_value"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:id="@+id/lp_voice_select"
+            android:key="pref_voice_key"
+            android:title="@string/choose_your_custom_voice"
+            android:dialogTitle="@string/choose_your_custom_voice"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
