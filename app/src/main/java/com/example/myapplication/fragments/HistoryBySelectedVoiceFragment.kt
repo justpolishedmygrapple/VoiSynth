@@ -77,7 +77,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
         selectedVoice = args.selectedVoice
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "${selectedVoice?.name}'s history"
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.history_title_bar, selectedVoice?.name)
 
         historyResponseSearchResults = mutableListOf<HistoryItem>()
 

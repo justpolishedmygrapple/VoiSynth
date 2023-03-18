@@ -95,10 +95,10 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
             when(prefVoice) {
                 null ->
-                {(requireActivity() as AppCompatActivity).supportActionBar?.title = "Quickmode: Biden"}
+                {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quick_generate_default_title_bar)}
 
                 else ->
-                {(requireActivity() as AppCompatActivity).supportActionBar?.title = "Quickmode: ${prefVoice.name}"}
+                {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quickmode_title_with_pref_set, prefVoice.name)}
             }
         }
 
