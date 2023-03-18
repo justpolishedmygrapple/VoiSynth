@@ -16,15 +16,29 @@ class ListOfVoicesViewModel: ViewModel() {
 
     val voiceListResults: LiveData<VoiceResponse> = _voiceListResults
 
+    private val _loadingStatus =
+        MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
+    val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
+
+
+
 
     fun loadListOfVoices(){
+//        _loadingStatus.value = LoadingStatus.LOADING
         viewModelScope.launch {
             val result = repository.loadListOfVoices()
 
             Log.d("resultzzz", result.toString())
 
             _voiceListResults.value = result.getOrNull()
+
+
+            _loadingStatus.value = when (result.isSuccess) {
+                true ->  LoadingStatus.SUCCESS
+                false -> LoadingStatus.ERROR
+            }
         }
+
     }
 
 }

@@ -60,6 +60,7 @@
     <string name="selected_value">"Selected voice: "</string>
     <string name="please_wait_generate_again">Please wait until your current request has finished before generating another request</string>
     <string name="no_text_entered">You have to enter some text in order to generate audio</string>
+    <string name="voice_error">No voices available. Perhaps you are not connected to the Internet?</string>
 
 
 </resources>
