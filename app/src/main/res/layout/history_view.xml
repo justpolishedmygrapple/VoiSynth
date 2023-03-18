@@ -7,6 +7,17 @@
     android:background="@color/Thistle"
     tools:context=".ui.HistoryViewActivity">
 
+    <TextView
+        android:id="@+id/tv_history_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/history_error"
+        android:textColor="#0A59B8"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
     <Spinner
         android:id="@+id/spinner_history"
         android:layout_width="match_parent"

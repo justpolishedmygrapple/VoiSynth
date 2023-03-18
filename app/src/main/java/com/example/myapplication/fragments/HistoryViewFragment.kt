@@ -4,10 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +12,7 @@ import androidx.preference.PreferenceManager
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryAdapter
 import com.example.myapplication.data.HistoryResponse
+import com.example.myapplication.data.LoadingStatus
 import com.example.myapplication.data.Voice
 import com.example.myapplication.ui.*
 import com.google.android.material.snackbar.Snackbar
@@ -77,6 +75,21 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
             voiceViewModel.loadListOfVoices()
 
+        }
+
+        val historyErrorText = view.findViewById<TextView>(R.id.tv_history_error)
+
+        voiceViewModel.loadingStatus.observe(viewLifecycleOwner){ uiState ->
+            when(uiState){
+                LoadingStatus.ERROR -> {
+                    spinner.visibility = View.INVISIBLE
+                    historyErrorText.visibility = View.VISIBLE
+                    button.visibility = View.INVISIBLE
+
+                } else -> {
+
+                }
+            }
         }
 
         voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
