@@ -48,10 +48,12 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
 
     private val voiceViewModel: ListOfVoicesViewModel by viewModels()
-    private val voiceDBViewModel: VoiceDBViewModel by viewModels()
+
 
     private var prefVoiceName: String? = null
 
+
+    private lateinit var voiceDBViewModel: VoiceDBViewModel
 
 
 
@@ -64,7 +66,21 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
 
 
+        voiceDBViewModel = ViewModelProvider(this).get(VoiceDBViewModel::class.java)
 
+        voiceViewModel.loadListOfVoices()
+
+        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){it ->
+
+            if(it != null) {
+                for (voice in it.voices) {
+                    val x = voice.name
+                    Log.d("desperate", x)
+
+                    voiceDBViewModel.addVoice(VoiceDatabaseItem(voice.voice_id, voice.name, voice.category))
+                }
+            }
+        }
 
         val navmenu = navView.menu
 
@@ -72,40 +88,20 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
 
-        val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), null)
+        //Makes sure Biden is the preferred voice by default
+        val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), "2owqac1jZJ71Bszwun50")
 
-        voiceDBViewModel.searchVoice(prefVoiceID!!).observe(viewLifecycleOwner) { prefVoice ->
+        voiceDBViewModel.searchVoice(prefVoiceID?: "2owqac1jZJ71Bszwun50").observe(viewLifecycleOwner) { prefVoice ->
 
             when(prefVoice) {
                 null ->
-                {
+                {(requireActivity() as AppCompatActivity).supportActionBar?.title = "Quickmode: Biden"}
 
-                }
                 else ->
                 {(requireActivity() as AppCompatActivity).supportActionBar?.title = "Quickmode: ${prefVoice.name}"}
             }
         }
 
-
-
-
-
-
-
-        if(voiceViewModel.voiceListResults.value == null){
-            voiceViewModel.loadListOfVoices()
-        }
-
-//        voiceViewModel.voiceListResults.observe(viewLifecycleOwner){results ->
-//
-//            if(results != null){
-//                for(voice in results.voices){
-//                   voiceDBVM.addVoice(VoiceDatabaseItem(voice.voice_id, voice.name, voice.category))
-//                }
-//            }
-//
-//        }
-//
 
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 

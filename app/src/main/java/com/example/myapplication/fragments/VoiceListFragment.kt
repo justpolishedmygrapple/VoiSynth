@@ -44,31 +44,34 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
 
         voiceResultsRV.adapter = voiceAdapter
 
-        if(voiceViewModel.voiceListResults.value == null){
-            voiceViewModel.loadListOfVoices()
-        }
+//        if(voiceViewModel.voiceListResults.value == null){
+        voiceViewModel.loadListOfVoices()
+//        }
 
-        if(hidePremade == "Hide pre-made voices") {
+        if (hidePremade == "Hide pre-made voices") {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
                 voiceAdapter.addVoice(results?.voices?.filterNot { it.category == "premade" })
             }
-        }
-
-        else if(hidePremade == "Show pre-made voices"){
+        } else if (hidePremade == "Show pre-made voices") {
+            voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
+                voiceAdapter.addVoice(results?.voices)
+            }
+        } else {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
                 voiceAdapter.addVoice(results?.voices)
             }
         }
 
+
+
+
     }
 
-    private fun onVoiceItemClick(voice: Voice){
+    private fun onVoiceItemClick(voice: Voice) {
 
         val directions = VoiceListFragmentDirections.navigateToVoiceGenerator(voice)
 
         findNavController().navigate(directions)
 
     }
-
-
 }

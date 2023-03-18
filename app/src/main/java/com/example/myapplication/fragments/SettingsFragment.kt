@@ -43,17 +43,17 @@ class SettingsFragment: PreferenceFragmentCompat() {
             .getString(preference?.key, "")
 
 
-            voiceDBViewModel.searchVoice(value!!).observe(viewLifecycleOwner){it ->
-                if(it != null){
-                    Log.d("ttttt", it.name)
+        voiceDBViewModel.searchVoice(value!!).observe(viewLifecycleOwner){it ->
+            if(it != null){
+                Log.d("ttttt", it.name)
 
-                    preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
-                        val value = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                            .getString(preference.key, "")
-                        "Selected value: ${it.name}"
-                    }
+                preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
+                    val value = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        .getString(preference.key, "")
+                    "Selected value: ${it.name}"
+                }
 
-                    globalPreferredVoice = it.name
+                globalPreferredVoice = it.name
 
                 }
             }
@@ -126,7 +126,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
             ///Whoooooa I finally figured it out.
             preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
 
-                Log.d("globalPreferredVoice", globalPreferredVoice)
+//                Log.d("globalPreferredVoice", globalPreferredVoice)
 
                 "Selected value: ${newlySelectedVoice}"
             }
