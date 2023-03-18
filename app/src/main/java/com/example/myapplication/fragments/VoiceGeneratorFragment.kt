@@ -104,7 +104,7 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
                 }
                 else{
                     Snackbar.make(requireView(),
-                    "You either haven't generated a file yet, or there was an error",
+                    getString(R.string.no_file_generated_error),
                     Snackbar.LENGTH_LONG).show()
                 }
                 true

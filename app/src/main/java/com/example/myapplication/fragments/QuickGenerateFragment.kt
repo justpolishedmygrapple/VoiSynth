@@ -5,9 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.Menu
-import android.view.View
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -62,11 +60,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
     private var filePath: String? = null
 
 
-
     private val voiceViewModel: ListOfVoicesViewModel by viewModels()
-
-
-    private var prefVoiceName: String? = null
 
 
     private lateinit var voiceDBViewModel: VoiceDBViewModel
@@ -79,9 +73,37 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private var hintText: String? = null
 
+    private var enteredText: String? = null
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.quick_voice_generate, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.share_file_quick_mode  ->{
+                if(filePath != null){
+                    shareFileIntent(filePath!!, selectedVoice!!.name)
+                }
+                else{
+                    Snackbar.make(requireView(),
+                    getString(R.string.no_file_generated_error),
+                    Snackbar.LENGTH_LONG).show()
+                }
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
 
         val historySearchViewModel:  HistorySearchViewModel by viewModels()
 
@@ -130,7 +152,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val quickGenEditText: EditText = view.findViewById(R.id.quick_gen_edit_text)
 
 
-        hintText = quickGenEditText.hint.toString()
 
             quickGenEditText.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -226,10 +247,11 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
     private fun onGenerateButtonClick(){
         loadingIndicator.visibility = View.VISIBLE
 
-        val userRequestedText: String =
-            view?.findViewById<EditText>(R.id.quick_gen_edit_text)?.text.toString()
+        enteredText = view?.findViewById<EditText>(R.id.quick_gen_edit_text)?.text.toString()
 
-        if (userRequestedText == "") {
+
+
+        if (enteredText == "") {
 
             Log.d("userText", "user text is null")
             Snackbar.make(
@@ -240,7 +262,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
             loadingIndicator.visibility = View.INVISIBLE
         }
         else{
-            playGeneratedAudio(userRequestedText)
+            playGeneratedAudio(enteredText!!)
             currentlyGenerating = true
         }
 
@@ -436,7 +458,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         ShareCompat.IntentBuilder(requireContext())
             .setType("audio/mpeg")
             .setSubject(getString(R.string.checkout_what_just_said, character))
-            .setText(getString(R.string.share_text, character, userRequestedText))
+            .setText(getString(R.string.share_text, character, enteredText))
             .addStream(fileUri)
             .startChooser()
     }

@@ -48,8 +48,8 @@
     <string name="show_history">Show history</string>
     <string name="successfully_cloned">%1$s voice successfully cloned!</string>
     <string name="please_enter_name">Please enter the name for the voice you are cloning</string>
-    <string name="checkout_what_just_said">Check out what $1%s just said!</string>
-    <string name="share_text">%1$s just said: \n\n\n %2$s</string>
+    <string name="checkout_what_just_said">Check out what %1$s just said!</string>
+    <string name="share_text">%1$s just said: \n\n\n %2$s \n\n\n Sent from VoiSynth</string>
     <string name="history_title_bar">%1$s\'s history</string>
     <string name="no_voice_selected">No voice selected. Perhaps you aren\'t on the Internet?</string>
     <string name="quick_generate_default_title_bar">VoiSynth Quickmode: Biden</string>
