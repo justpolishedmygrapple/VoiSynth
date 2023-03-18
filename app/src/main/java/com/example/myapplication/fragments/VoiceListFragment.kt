@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.data.LoadingStatus
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.ui.ListOfVoicesViewModel
@@ -47,15 +48,25 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
 
         voiceViewModel.loadListOfVoices()
 
-        if(voiceViewModel.voiceListResults.value == null ){
-            Log.d("voice view model shows nothing", "voice view model shows nothing")
-            voiceResultsRV.visibility = View.INVISIBLE
-            val errorText: TextView = view.findViewById(R.id.tv_error_voice_view)
+        val voiceTVError = view.findViewById<TextView>(R.id.tv_error_voice_view)
+        val voiceListTitle = view.findViewById<TextView>(R.id.textView)
+        voiceViewModel.loadingStatus.observe(viewLifecycleOwner){ uiState ->
 
-            errorText.text = getString(R.string.no_voices_error)
+            when(uiState){
 
-            errorText.visibility = View.VISIBLE
+                LoadingStatus.ERROR -> {
+                    voiceTVError.visibility = View.VISIBLE
+                    voiceResultsRV.visibility = View.INVISIBLE
+                    voiceListTitle.visibility = View.INVISIBLE
+                }
+                else ->{
+                    voiceTVError.visibility = View.INVISIBLE
+                    voiceResultsRV.visibility = View.VISIBLE
+                    voiceListTitle.visibility = View.VISIBLE
+                }
+            }
         }
+
 
 
         if (hidePremade == "Hide pre-made voices" || hidePremade == "Göm konstgjorda röster") {

@@ -17,7 +17,7 @@ class ListOfVoicesViewModel: ViewModel() {
     val voiceListResults: LiveData<VoiceResponse> = _voiceListResults
 
     private val _loadingStatus = MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
-
+//
     val loadingStatus : LiveData<LoadingStatus> = _loadingStatus
 
 

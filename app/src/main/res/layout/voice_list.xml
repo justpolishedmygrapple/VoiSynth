@@ -9,13 +9,14 @@
     android:background="@color/Thistle">
 
     <TextView
-        android:id="@+id/tv_voice_error"
+        android:id="@+id/tv_error_voice_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/voice_error"
-        android:textColor="#0A59B8"
-        android:textSize="24sp"
+        android:text="@string/no_voices_error"
+        android:textColor="#1629CD"
+        android:textSize="20sp"
         android:visibility="invisible" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,10 +24,8 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-
-
         <TextView
-            android:id="@+id/tv_your_voices"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline6"
@@ -35,14 +34,6 @@
             android:text="@string/voicelisttitle" />
 
 
-        <TextView
-            android:id="@+id/tv_error_voice_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/no_voices_error"
-            android:textColor="#1629CD"
-            android:textSize="20sp"
-            android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_voice_list"
