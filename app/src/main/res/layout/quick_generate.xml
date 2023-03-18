@@ -31,13 +31,13 @@
         android:hint="@string/generate_hint_quick_mode"
         android:imeOptions="actionDone"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_generate_text"
+        app:layout_constraintBottom_toTopOf="@+id/button_generate_text_quick_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_selected_voice_quick_gen" />
 
     <Button
-        android:id="@+id/button_generate_text"
+        android:id="@+id/button_generate_text_quick_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="39dp"
