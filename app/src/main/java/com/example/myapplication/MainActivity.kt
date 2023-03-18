@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         var toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        Log.d("clonedvoice", getString(R.string.successfully_cloned, "hello"))
 
 
         val navHostFragment =

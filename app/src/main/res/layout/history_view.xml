@@ -26,7 +26,7 @@
         android:layout_marginBottom="173dp"
         android:background="@color/white"
         android:gravity="center"
-        android:text="Show History"
+        android:text="@string/show_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

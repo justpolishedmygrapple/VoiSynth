@@ -234,8 +234,8 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
                     ShareCompat.IntentBuilder(requireContext())
                         .setType("audio/mpeg")
-                        .setSubject("Check out what ${selectedVoice!!.name} just said!")
-                        .setText("${selectedVoice!!.name} just said:\n\n\n ${historyItem.text}")
+                        .setSubject(getString(R.string.checkout_what_just_said, selectedVoice!!.name))
+                        .setText(getString(R.string.share_text, selectedVoice!!.name, historyItem.text))
                         .addStream(fileUri)
                         .startChooser()
                 }

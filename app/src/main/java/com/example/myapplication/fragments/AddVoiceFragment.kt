@@ -102,7 +102,7 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
             Snackbar.make(
                 requireView(),
-                "Please enter the name for the voice you are cloning",
+                getString(R.string.please_enter_name),
                 Snackbar.LENGTH_LONG
             ).show()
             return false
@@ -151,7 +151,7 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
                     Snackbar.make(
                         requireView(),
-                        "${voiceName}'s voice successfully cloned!",
+                        getString(R.string.successfully_cloned, voiceName),
                         Snackbar.LENGTH_LONG
                     ).show()
 
