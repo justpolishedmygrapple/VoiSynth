@@ -46,7 +46,7 @@
     <string name="pref_voice_key" translatable="false">"preferred_voice_key</string>
     <string name="choose_your_custom_voice">Choose preferred voice</string>
     <string name="show_history">Show history</string>
-    <string name="successfully_cloned">%1$s voice successfully cloned!</string>
+    <string name="successfully_cloned">%1$s\'s voice successfully cloned!</string>
     <string name="please_enter_name">Please enter the name for the voice you are cloning</string>
     <string name="checkout_what_just_said">Check out what %1$s just said!</string>
     <string name="share_text">%1$s just said: \n\n\n %2$s \n\n\n Sent from VoiSynth</string>

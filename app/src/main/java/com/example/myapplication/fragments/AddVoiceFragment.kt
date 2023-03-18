@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
@@ -149,10 +150,11 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
                     inputStream?.close()
 
-                    Snackbar.make(
-                        requireView(),
+
+                    Toast.makeText(
+                        requireContext(),
                         getString(R.string.successfully_cloned, voiceName),
-                        Snackbar.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
 
                 } catch (e: Exception) {
