@@ -77,8 +77,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private var selectedVoice: Voice? = null
 
-
-
+    private var hintText: String? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,6 +86,8 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         val historySearchViewModel:  HistorySearchViewModel by viewModels()
 
         loadingIndicator = view.findViewById(R.id.quick_gen_loading_indicator)
+
+
 
 
 
@@ -128,7 +129,10 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
         val quickGenEditText: EditText = view.findViewById(R.id.quick_gen_edit_text)
 
-        quickGenEditText.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+
+        hintText = quickGenEditText.hint.toString()
+
+            quickGenEditText.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(quickGenEditText.windowToken, 0)
@@ -150,6 +154,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                     quickGenVoiceSelectedTextView.text = getString(R.string.voice_name_quick_gen, prefVoice.name)
                     quickGenEditText.hint = getString(R.string.generate_hint_quick_mode, prefVoice.name)
                     selectedVoice = Voice(prefVoice.voice_id, prefVoice.name, "")
+
 
                 }
             }
@@ -442,7 +447,11 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         super.onPause()
         mediaViewModel.mediaPlayer?.pause()
         mediaViewModel.isPlaying = false
+
+        view?.findViewById<EditText>(R.id.quick_gen_edit_text)?.setText("")
+
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mediaViewModel.mediaPlayer?.apply {
