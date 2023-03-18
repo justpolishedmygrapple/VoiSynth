@@ -3,6 +3,7 @@ package com.example.myapplication.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -44,9 +45,8 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
 
         voiceResultsRV.adapter = voiceAdapter
 
-//        if(voiceViewModel.voiceListResults.value == null){
         voiceViewModel.loadListOfVoices()
-//        }
+
 
         if (hidePremade == "Hide pre-made voices" || hidePremade == "Göm konstgjorda röster") {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
