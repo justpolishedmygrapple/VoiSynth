@@ -6,5 +6,8 @@
 https://www.youtube.com/watch?v=JIUEJsBCNGY
 
 
-# API:
+# ElevenLabs:
 https://beta.elevenlabs.io/
+
+# API:
+https://api.elevenlabs.io/docs
