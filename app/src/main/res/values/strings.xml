@@ -11,10 +11,7 @@
     <string name="generate_hint">Enter some text you\'d like to hear %1$s say</string>
 
     <string name="generate_button">Generate</string>
-
-
-    <!--  Default text choices that the user can choose from<-->
-
+    
 
     <string name="share_audio">Share audio</string>
     <string name="label_quick_generate" translatable="false">Generate audio based off preferences</string>
@@ -57,8 +54,12 @@
     <string name="no_voice_selected">No voice selected. Perhaps you aren\'t on the Internet?</string>
     <string name="quick_generate_default_title_bar">Quickmode: Biden</string>
     <string name="quickmode_title_with_pref_set">Quickmode: %1$s</string>
+    <string name="biden_default_key" translatable="false">2owqac1jZJ71Bszwun50</string>
 
     <string name="no_file_generated_error">You either haven\'t generated an audio clip, or there was an error</string>
+    <string name="selected_value">"Selected voice: "</string>
+    <string name="please_wait_generate_again">Please wait until your current request has finished before generating another request</string>
+    <string name="no_text_entered">You have to enter some text in order to generate audio</string>
 
 
 </resources>

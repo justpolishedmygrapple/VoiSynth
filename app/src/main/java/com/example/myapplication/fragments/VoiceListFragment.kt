@@ -48,7 +48,7 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
         voiceViewModel.loadListOfVoices()
 //        }
 
-        if (hidePremade == "Hide pre-made voices") {
+        if (hidePremade == "Hide pre-made voices" || hidePremade == "Göm konstgjorda röster") {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
                 voiceAdapter.addVoice(results?.voices?.filterNot { it.category == "premade" })
             }

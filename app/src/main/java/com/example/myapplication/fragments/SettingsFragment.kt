@@ -50,7 +50,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
                     val value = PreferenceManager.getDefaultSharedPreferences(requireContext())
                         .getString(preference.key, "")
-                    "Selected value: ${it.name}"
+                    "${getString(R.string.selected_value)} ${it.name}"
                 }
 
                 globalPreferredVoice = it.name
@@ -128,7 +128,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
 //                Log.d("globalPreferredVoice", globalPreferredVoice)
 
-                "Selected value: ${newlySelectedVoice}"
+                "${getString(R.string.selected_value)} ${newlySelectedVoice}"
             }
             true
         }

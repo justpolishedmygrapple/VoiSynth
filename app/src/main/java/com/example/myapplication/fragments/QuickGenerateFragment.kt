@@ -89,9 +89,9 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
 
         //Makes sure Biden is the preferred voice by default
-        val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), "2owqac1jZJ71Bszwun50")
+        val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), getString(R.string.biden_default_key))
 
-        voiceDBViewModel.searchVoice(prefVoiceID?: "2owqac1jZJ71Bszwun50").observe(viewLifecycleOwner) { prefVoice ->
+        voiceDBViewModel.searchVoice(prefVoiceID?: getString(R.string.biden_default_key)).observe(viewLifecycleOwner) { prefVoice ->
 
             when(prefVoice) {
                 null ->

@@ -126,7 +126,7 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
             Log.d("userText", "user text is null")
             Snackbar.make(
                 requireView(),
-                "You have to enter some text in order to generate audio",
+                getString(R.string.no_text_entered),
                 Snackbar.LENGTH_LONG
             ).show()
             loadingIndicator.visibility = View.INVISIBLE
@@ -148,8 +148,7 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
         if(currentlyGenerating){
             val toast = Toast.makeText(
                 requireContext(),
-                "Please wait until your current request has finished before generating another" +
-                        "request",
+                getString(R.string.please_wait_generate_again),
                 Toast.LENGTH_SHORT
             )
             toast.show()
@@ -270,8 +269,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
 
         ShareCompat.IntentBuilder(requireContext())
             .setType("audio/mpeg")
-            .setSubject("Check out what $character just said!")
-            .setText("$character just said:\t\t\t\n\n\n\t $userRequestedText")
+            .setSubject(getString(R.string.checkout_what_just_said, character))
+            .setText(getString(R.string.share_text, character, userRequestedText))
             .addStream(fileUri)
             .startChooser()
     }

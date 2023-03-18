@@ -107,7 +107,7 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                 findNavController().navigate(directions)
             }catch (e: Exception){
                 Snackbar.make(requireView(),
-                "There is no voice selected. Perhaps you aren't on the internet?",
+                getString(R.string.no_voice_selected),
                 Snackbar.LENGTH_LONG).show()
                 Log.d("NullException", e.toString())
             }
