@@ -4,7 +4,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -69,6 +73,31 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
             }
         }
 
+        val tvError: TextView = view.findViewById(R.id.tv_error_history_view)
+
+
+        voiceViewModel.loadingStatus.observe(viewLifecycleOwner){ uiState ->
+
+            when (uiState){
+
+                LoadingStatus.ERROR -> {
+                    tvError.visibility = View.VISIBLE
+                    spinner.visibility = View.INVISIBLE
+                    button.visibility = View.INVISIBLE
+                } else -> {
+                tvError.visibility = View.INVISIBLE
+                spinner.visibility = View.VISIBLE
+                button.visibility = View.VISIBLE
+
+                }
+
+
+            }
+
+        }
+
+
+
 
 
         if (voiceViewModel.voiceListResults.value == null) {
@@ -77,22 +106,11 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
 
         }
 
-        val historyErrorText = view.findViewById<TextView>(R.id.tv_history_error)
 
-        voiceViewModel.loadingStatus.observe(viewLifecycleOwner){ uiState ->
-            when(uiState){
-                LoadingStatus.ERROR -> {
-                    spinner.visibility = View.INVISIBLE
-                    historyErrorText.visibility = View.VISIBLE
-                    button.visibility = View.INVISIBLE
-
-                } else -> {
-
-                }
-            }
-        }
 
         voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
+
+
 
             if (results != null) {
                 for (voice in results.voices) {
@@ -100,12 +118,18 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                     Log.d("NewVoiceAdded", voice.toString())
                 }
 
+
                 if(hidePremadeVoices == "Hide pre-made voices" || hidePremadeVoices == "Göm konstgjorda röster"){
                     spinner.adapter = HistoryAdapter(requireContext(), (voiceArray.filterNot { it.category == "premade" }).sortedBy { it.name })
                 }
                 else{
                     spinner.adapter = HistoryAdapter(requireContext(), voiceArray.sortedBy { it.name }) }
                 }
+
+
+
+
+
             }
 
 

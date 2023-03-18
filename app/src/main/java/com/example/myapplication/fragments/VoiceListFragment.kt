@@ -11,11 +11,9 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.LoadingStatus
 import com.example.myapplication.data.Voice
 import com.example.myapplication.data.VoiceAdapter
 import com.example.myapplication.ui.ListOfVoicesViewModel
-import org.w3c.dom.Text
 
 class VoiceListFragment: Fragment(R.layout.voice_list) {
 
@@ -43,23 +41,20 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
 
 
 
-        val tvVoiceError: TextView = view.findViewById(R.id.tv_voice_error)
-        val voiceListFragTitle: TextView = view.findViewById(R.id.tv_your_voices)
 
 
         voiceResultsRV.adapter = voiceAdapter
 
         voiceViewModel.loadListOfVoices()
 
-        voiceViewModel.loadingStatus.observe(viewLifecycleOwner){uiState ->
-            when(uiState){
-                LoadingStatus.ERROR ->{
-                    tvVoiceError.visibility = View.VISIBLE
-                    voiceListFragTitle.visibility = View.INVISIBLE
-                } else -> {
+        if(voiceViewModel.voiceListResults.value == null ){
+            Log.d("voice view model shows nothing", "voice view model shows nothing")
+            voiceResultsRV.visibility = View.INVISIBLE
+            val errorText: TextView = view.findViewById(R.id.tv_error_voice_view)
 
-                }
-            }
+            errorText.text = getString(R.string.no_voices_error)
+
+            errorText.visibility = View.VISIBLE
         }
 
 

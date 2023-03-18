@@ -134,6 +134,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
         coroutineScope.launch {
             withContext(Dispatchers.IO){
+
                 val client = OkHttpClient()
                 val request = Request.Builder()
                     .url("https://api.elevenlabs.io/v1/history/${historyItem.history_item_id}/audio")

@@ -30,6 +30,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/tv_error_history_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_history_error"
+        android:textColor="#1629CD"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/button_history"
         android:layout_width="wrap_content"
