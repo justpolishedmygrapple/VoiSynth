@@ -52,8 +52,8 @@
     <string name="share_text">%1$s just said: \n\n\n %2$s</string>
     <string name="history_title_bar">%1$s\'s history</string>
     <string name="no_voice_selected">No voice selected. Perhaps you aren\'t on the Internet?</string>
-    <string name="quick_generate_default_title_bar">Quickmode: Biden</string>
-    <string name="quickmode_title_with_pref_set">Quickmode: %1$s</string>
+    <string name="quick_generate_default_title_bar">VoiSynth Quickmode: Biden</string>
+    <string name="quickmode_title_with_pref_set">VoiSynth Quickmode: %1$s</string>
     <string name="biden_default_key" translatable="false">2owqac1jZJ71Bszwun50</string>
 
     <string name="no_file_generated_error">You either haven\'t generated an audio clip, or there was an error</string>
