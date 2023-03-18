@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -91,6 +93,11 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         //Makes sure Biden is the preferred voice by default
         val prefVoiceID: String? = preferenceManager.getString(getString(R.string.pref_voice_key), getString(R.string.biden_default_key))
 
+        val quickGenVoiceSelectedTextView: TextView = view.findViewById(R.id.tv_selected_voice_quick_gen)
+
+        val quickGenEditText: EditText = view.findViewById(R.id.quick_gen_edit_text)
+
+
         voiceDBViewModel.searchVoice(prefVoiceID?: getString(R.string.biden_default_key)).observe(viewLifecycleOwner) { prefVoice ->
 
             when(prefVoice) {
@@ -98,9 +105,18 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                 {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quick_generate_default_title_bar)}
 
                 else ->
-                {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quickmode_title_with_pref_set, prefVoice.name)}
+                {
+                    (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quickmode_title_with_pref_set, prefVoice.name)
+                    quickGenVoiceSelectedTextView.text = getString(R.string.voice_name_quick_gen, prefVoice.name)
+                    quickGenEditText.hint = getString(R.string.generate_hint_quick_mode, prefVoice.name)
+
+                }
             }
         }
+
+
+
+
 
 
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)

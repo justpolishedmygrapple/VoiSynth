@@ -62,6 +62,8 @@
     <string name="no_text_entered">You have to enter some text in order to generate audio</string>
     <string name="no_voices_error" translatable="false">No voices available. Check to see if you\'re on the Internet.</string>
     <string name="no_history_error">No history data available. Perhaps you are off the Internet?</string>
+    <string name="voice_name_quick_gen">Voice selected: %1$s</string>
+    <string name="generate_hint_quick_mode">Enter some text you\'d like to hear %1$s say</string>
 
 
 </resources>

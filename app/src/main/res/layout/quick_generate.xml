@@ -8,33 +8,33 @@
 
 
     <TextView
-        android:id="@+id/tv_selected_voice"
+        android:id="@+id/tv_selected_voice_quick_gen"
         android:layout_width="227dp"
         android:layout_height="23dp"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="@string/voice_name"
-        app:layout_constraintBottom_toTopOf="@+id/edit_generated_text"
+        android:text="@string/voice_name_quick_gen"
+        app:layout_constraintBottom_toTopOf="@+id/quick_gen_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edit_generated_text"
+        android:id="@+id/quick_gen_edit_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="10dp"
         android:gravity="top|start"
-        android:hint="@string/generate_hint"
+        android:hint="@string/generate_hint_quick_mode"
         android:imeOptions="actionDone"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/button_generate_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_selected_voice" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_selected_voice_quick_gen" />
 
     <Button
         android:id="@+id/button_generate_text"
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_generated_text" />
+        app:layout_constraintTop_toBottomOf="@+id/quick_gen_edit_text" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/quick_gen_loading_indicator"
