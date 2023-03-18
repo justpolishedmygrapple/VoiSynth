@@ -15,7 +15,7 @@
     <string name="upload_voice_button">Ladda upp mp3:fil för att klona röst</string>
     <string name="add_voice_field">Vad heter personen vars röst du klonar?</string>
     <string name="label_settings">Inställningar</string>
-    <string name="history_instructions">Tryck för att spela upp, håll ned för att dela med dig av en ljudklipp</string>
+    <string name="history_instructions">Tryck för att spela upp, håll ned för att dela med dig av ett ljudklipp</string>
     <string name="pref_settings_title">Konfigurera inställningar</string>
     <string name="pref_hide_premade_title">Visa eller göm konstgjorda röster</string>
     <string name="pref_hide_premade_entry_show_premade">Visa konstgjorda röster</string>
