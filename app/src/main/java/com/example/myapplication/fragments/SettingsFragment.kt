@@ -45,6 +45,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
                     val value = PreferenceManager.getDefaultSharedPreferences(requireContext())
                         .getString(preference.key, "")
+
                     "${getString(R.string.selected_value)} ${it.name}"
                 }
 

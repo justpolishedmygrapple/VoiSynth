@@ -164,7 +164,11 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
             when(prefVoice) {
                 null ->
-                {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quick_generate_default_title_bar)}
+                {(requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.quick_generate_default_title_bar)
+                    selectedVoice = Voice("2owqac1jZJ71Bszwun50", "Biden","cloned")
+                    quickGenEditText.hint = getString(R.string.generate_hint_quick_mode, selectedVoice!!.name)
+                    quickGenVoiceSelectedTextView.text = getString(R.string.voice_name_quick_gen, selectedVoice!!.name)
+                }
 
                 else ->
                 {
