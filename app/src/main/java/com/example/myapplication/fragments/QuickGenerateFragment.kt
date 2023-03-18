@@ -75,6 +75,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private var enteredText: String? = null
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.quick_voice_generate, menu)
     }
@@ -181,7 +182,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
             }
         }
 
-
+        loadHistoryResults()
 
 
 
@@ -189,57 +190,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
 
-        historySearchViewModel.loadHistorySearchResults()
-
-
-        historySearchViewModel.historySearchResults.observe(viewLifecycleOwner){ it ->
-
-            navmenu.removeGroup(R.id.history_group)
-
-            var i = 0
-            if(it != null){
-                for(historyItem in it.history){
-                    historyVM.addHistoryItem(HistoryDatabaseItem(historyItem.history_item_id,
-                    historyItem.voice_name,
-                    historyItem.text,
-                    historyItem.date_unix))
-
-
-                    //Src: https://www.bestprog.net/en/2022/05/23/kotlin-anonymous-functions-lambda-expressions/
-
-                    val textToUse = {str: String -> if(str.length < 30){
-                        str
-                    }
-                    else{
-                        str.substring(0,30) + "..."
-                    }}
-
-                    val group = navmenu.addSubMenu(R.id.history_group, Menu.NONE, Menu.NONE, historyItem.voice_name)
-                    val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, historyItem.text)
-
-                    val fragmentManager = fragmentManager
-
-                    fragmentManager?.findFragmentById(R.id.history_by_selected_voice)
-
-                    menuItemClicked.setOnMenuItemClickListener {
-
-                        playFile(historyItem)
-
-                        true
-                    }
-
-                    i+=1
-
-                    //Show the last ten menu items in the history, by any character
-                    if(i == 10){
-                        break
-                    }
-
-                }
-
-
-            }
-        }
 
 
     }
@@ -338,6 +288,9 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
+
+                loadHistoryResults()
+
 
             }
             loadingIndicator.visibility = View.INVISIBLE
@@ -461,6 +414,75 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
             .setText(getString(R.string.share_text, character, enteredText))
             .addStream(fileUri)
             .startChooser()
+    }
+
+    private fun loadHistoryResults(){
+
+        coroutineScope.launch {
+            withContext(Dispatchers.IO){
+            }
+            val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
+
+
+            val navmenu = navView.menu
+
+            val historySearchViewModel:  HistorySearchViewModel by viewModels()
+
+            historySearchViewModel.loadHistorySearchResults()
+
+
+            historySearchViewModel.historySearchResults.observe(viewLifecycleOwner){ it ->
+
+                navmenu.removeGroup(R.id.history_group)
+
+                var i = 0
+                if(it != null){
+                    for(historyItem in it.history){
+                        historyVM.addHistoryItem(HistoryDatabaseItem(historyItem.history_item_id,
+                            historyItem.voice_name,
+                            historyItem.text,
+                            historyItem.date_unix))
+
+
+                        //Src: https://www.bestprog.net/en/2022/05/23/kotlin-anonymous-functions-lambda-expressions/
+
+                        val textToUse = {str: String -> if(str.length < 30){
+                            str
+                        }
+                        else{
+                            str.substring(0,30) + "..."
+                        }}
+
+                        val group = navmenu.addSubMenu(R.id.history_group, Menu.NONE, Menu.NONE, historyItem.voice_name)
+                        val menuItemClicked = group.add(Menu.NONE, Menu.NONE, Menu.NONE, historyItem.text)
+
+                        val fragmentManager = fragmentManager
+
+                        fragmentManager?.findFragmentById(R.id.history_by_selected_voice)
+
+                        menuItemClicked.setOnMenuItemClickListener {
+
+                            playFile(historyItem)
+
+                            true
+                        }
+
+                        i+=1
+
+                        //Show the last ten menu items in the history, by any character
+                        if(i == 10){
+                            break
+                        }
+
+                    }
+
+
+                }
+            }
+
+            }
+
+
     }
 
 
