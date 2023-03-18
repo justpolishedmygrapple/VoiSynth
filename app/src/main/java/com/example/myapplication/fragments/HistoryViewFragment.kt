@@ -87,7 +87,7 @@ class HistoryViewFragment: Fragment(R.layout.history_view) {
                     Log.d("NewVoiceAdded", voice.toString())
                 }
 
-                if(hidePremadeVoices == "Hide pre-made voices"){
+                if(hidePremadeVoices == "Hide pre-made voices" || hidePremadeVoices == "Göm konstgjorda röster"){
                     spinner.adapter = HistoryAdapter(requireContext(), (voiceArray.filterNot { it.category == "premade" }).sortedBy { it.name })
                 }
                 else{
