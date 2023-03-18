@@ -73,7 +73,11 @@ class VoiceListFragment: Fragment(R.layout.voice_list) {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
                 voiceAdapter.addVoice(results?.voices?.filterNot { it.category == "premade" })
             }
-        }else {
+        } else if (hidePremade == "Show pre-made voices") {
+            voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
+                voiceAdapter.addVoice(results?.voices)
+            }
+        } else {
             voiceViewModel.voiceListResults.observe(viewLifecycleOwner) { results ->
                 voiceAdapter.addVoice(results?.voices)
             }
