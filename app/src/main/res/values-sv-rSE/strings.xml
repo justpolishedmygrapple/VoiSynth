@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_voices">Röster</string>
+    <string name="action_history">Historik</string>
+    <string name="voice_name">Utvald röst: %1$s</string>
+    <string name="generate_hint">Vad vill du att %1$s ska säga?</string>
+    <string name="generate_button">Skapa ljudklipp</string>
+    <string name="share_audio">Dela med dig av ljudklipp</string>
+    <string name="label_history_by_selected_voice">Röstvalhistorik</string>
+    <string name="label_history_view">Historik</string>
+    <string name="label_voice_list">Tillgängliga röster</string>
+    <string name="voice_generate">Skapa ljudklipp</string>
+    <string name="voicelisttitle">Dina röster</string>
+    <string name="add_voice">Lägg till ny röst</string>
+    <string name="upload_voice_button">Ladda upp mp3:fil för att klona röst</string>
+    <string name="add_voice_field">Vad heter personen vars röst du klonar?</string>
+    <string name="label_settings">Inställningar</string>
+    <string name="history_instructions">Tryck för att spela upp, håll ned för att dela med dig av en ljudklipp</string>
+    <string name="pref_settings_title">Konfigurera inställningar</string>
+    <string name="pref_hide_premade_title">Visa eller göm konstgjorda röster</string>
+    <string name="pref_hide_premade_entry_show_premade">Visa konstgjorda röster</string>
+    <string name="pref_hide_premade_entry_hide_premade">Göm konstgjorda röster</string>
+    <string name="choose_your_custom_voice">Välj din favoritröst</string>
+    <string name="show_history">Visa historik</string>
+    <string name="successfully_cloned">Lyckades med att klona %1$s\s röst</string>
+    <string name="please_enter_name">Var god och ange ett namn för rösten</string>
+    <string name="checkout_what_just_said">Du kommer inte tro vad %1$s sagt!</string>
+    <string name="share_text">%1$s sa: \n \n \n %2$s \n\n\n Skickat från VoiSynth</string>
+    <string name="no_voice_selected">Ingen röst har utvalts. Kanske är du inte ansluten till Internet?</string>
+    <string name="toast_selected_voice">Utvald röst: %1$s</string>
+    <string name="no_file_generated_error">Antingen har du inte skapat något ljudklipp än eller ett fel har uppstått</string>
+    <string name="quickmode_title_with_character_name">Snabbläge: %1$s</string>
+    <string name="history_title_bar">%1$s\s historik</string>
+    <string name="quick_generate_default_title_bar">Snabbläge: Biden</string>
+    <string name="quickmode_title_with_pref_set">Snabbläge: %1$s</string>
+    <string name="selected_value">"Utvald röst: "</string>
+    <string name="please_wait_generate_again">Var god och vänta tills din begäran har genomförts</string>
+    <string name="no_text_entered">Var god och skriva något innan du försöker skapa ett ljudklipp</string>
+    <string name="no_history_error">Ingen historik tillgänglig. Är du säker på att du är ansluten till Internet?</string>
+    <string name="voice_name_quick_gen">Utvald röst: %1$s</string>
+    <string name="generate_hint_quick_mode">Vad vill du att %1$s ska säga?</string>
+</resources>
