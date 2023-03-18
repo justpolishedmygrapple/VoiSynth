@@ -1,8 +1,5 @@
-# final-project-ai-voice austin branch
+# VoiSynth
 
 
-
-Please do not post to this branch. Copy it and work on it in a separate branch.
-
-# 15 Mar: ViewModels are done
-# 15 Mar: Converting everything to fragments
+# Demo video I made for my family and friends friends: 
+https://www.youtube.com/watch?v=JIUEJsBCNGY
