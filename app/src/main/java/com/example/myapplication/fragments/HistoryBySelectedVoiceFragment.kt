@@ -51,6 +51,7 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
     private lateinit var voiceName: String
 
+    private lateinit var mediaViewModel: MediaViewModel
 
     private val args: HistoryBySelectedVoiceFragmentArgs by navArgs()
 
@@ -63,13 +64,20 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
         super.onViewCreated(view, savedInstanceState)
 
 
+        mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
+
+
 
         viewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
 
+
+        //Bug fix where media player wasn't using the  ViewModel's player
         if (savedInstanceState != null) {
             val position = savedInstanceState.getInt("position")
-            MainActivity().mediaPlayer?.seekTo(position)
+            mediaViewModel.mediaPlayer?.seekTo(position)
+
+
         }
 
 
