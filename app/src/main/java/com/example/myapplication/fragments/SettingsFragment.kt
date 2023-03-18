@@ -1,14 +1,10 @@
 package com.example.myapplication.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.edit
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 
@@ -16,8 +12,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.example.myapplication.R
 import com.example.myapplication.voicedatabase.VoiceDBViewModel
-import com.example.myapplication.voicedatabase.VoiceDao
-import com.example.myapplication.voicedatabase.VoiceDatabaseItem
+
 
 class SettingsFragment: PreferenceFragmentCompat() {
 

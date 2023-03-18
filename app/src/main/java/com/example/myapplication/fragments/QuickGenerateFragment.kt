@@ -71,7 +71,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     private var selectedVoice: Voice? = null
 
-    private var hintText: String? = null
 
     private var enteredText: String? = null
 
@@ -106,8 +105,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
         setHasOptionsMenu(true)
 
-        val historySearchViewModel:  HistorySearchViewModel by viewModels()
-
         loadingIndicator = view.findViewById(R.id.quick_gen_loading_indicator)
 
 
@@ -139,7 +136,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
             }
         }
 
-        val navmenu = navView.menu
 
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())

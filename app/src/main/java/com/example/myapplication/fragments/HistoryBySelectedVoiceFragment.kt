@@ -3,9 +3,7 @@ package com.example.myapplication.fragments
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
@@ -15,7 +13,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.BuildConfig
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.HistoryItem
 import com.example.myapplication.data.HistoryResponse

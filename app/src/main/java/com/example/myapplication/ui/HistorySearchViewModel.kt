@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.HistoryItem
 import com.example.myapplication.data.HistoryResponse
 import com.example.myapplication.data.VoiceHistoryRepository
 import kotlinx.coroutines.launch

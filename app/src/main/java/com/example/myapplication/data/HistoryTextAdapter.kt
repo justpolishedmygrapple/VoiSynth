@@ -1,18 +1,12 @@
 package com.example.myapplication.data
 
-import android.content.Context
-import android.net.Uri
+
 import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class HistoryTextAdapter(private val onClick: (HistoryItem) -> Unit, private val onLongClick: (HistoryItem) -> Unit) : RecyclerView.Adapter<HistoryTextAdapter.ViewHolder>(){
 
