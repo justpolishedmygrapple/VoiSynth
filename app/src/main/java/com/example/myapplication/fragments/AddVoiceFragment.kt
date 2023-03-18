@@ -150,11 +150,10 @@ class AddVoiceFragment: Fragment(R.layout.add_voice) {
 
                     inputStream?.close()
 
-
-                    Toast.makeText(
-                        requireContext(),
+                    Snackbar.make(
+                        requireView(),
                         getString(R.string.successfully_cloned, voiceName),
-                        Toast.LENGTH_SHORT
+                        Snackbar.LENGTH_LONG
                     ).show()
 
                 } catch (e: Exception) {
