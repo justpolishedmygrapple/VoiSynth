@@ -1,66 +1,86 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.myapplication.R.*
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
+import android.text.Html
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 
-const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
-
+import com.example.myapplication.data.ViewPagerAdapter
+import com.example.myapplication.R
 
 class MainActivity : AppCompatActivity() {
-
-
-    private lateinit var appBarConfig: AppBarConfiguration
-
-
-
+    var mSLideViewPager: ViewPager? = null
+    var mDotLayout: LinearLayout? = null
+    lateinit var backbtn: Button
+    lateinit var nextbtn: Button
+    lateinit var skipbtn: Button
+    lateinit var dots: Array<TextView?>
+    var viewPagerAdapter: ViewPagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_main)
-
-        Log.d("mainactivity", "created()")
-
-
-        var toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        Log.d("clonedvoice", getString(R.string.successfully_cloned, "hello"))
-
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(
-                R.id.nav_host_fragment
-            ) as NavHostFragment
-        val navController = navHostFragment.navController
-        appBarConfig = AppBarConfiguration(navController.graph)
-
-        val drawerLayout: DrawerLayout =
-            findViewById(R.id.drawer_layout)
-        appBarConfig =
-            AppBarConfiguration(navController.graph, drawerLayout)
-
-        findViewById<NavigationView>(R.id.nav_view)
-            ?.setupWithNavController(navController)
-
-        setupActionBarWithNavController(
-            navController,
-            appBarConfig
-        )
+        setContentView(R.layout.activity_onboarding)
+        backbtn = findViewById(R.id.backbtn)
+        nextbtn = findViewById(R.id.nextbtn)
+        skipbtn = findViewById(R.id.skipBtn)
+        backbtn.setOnClickListener(View.OnClickListener {
+            if (getitem(0) > 0) {
+                mSLideViewPager!!.setCurrentItem(getitem(-1), true)
+            }
+        })
+        nextbtn.setOnClickListener(View.OnClickListener {
+            if (getitem(0) < 3) mSLideViewPager!!.setCurrentItem(getitem(1), true) else {
+                val i = Intent(this@MainActivity, MainScreen::class.java)
+                startActivity(i)
+                finish()
+            }
+        })
+        skipbtn.setOnClickListener(View.OnClickListener {
+            val i = Intent(this@MainActivity, MainScreen::class.java)
+            startActivity(i)
+            finish()
+        })
+        mSLideViewPager = findViewById<View>(R.id.slideViewPager) as ViewPager
+        mDotLayout = findViewById<View>(R.id.indicator_layout) as LinearLayout
+        viewPagerAdapter = ViewPagerAdapter(this)
+        mSLideViewPager!!.adapter = viewPagerAdapter
+        setUpindicator(0)
+        mSLideViewPager!!.addOnPageChangeListener(viewListener)
     }
 
-
-    override fun onSupportNavigateUp(): Boolean {
-
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfig) || super.onSupportNavigateUp()
+    fun setUpindicator(position: Int) {
+        dots = arrayOfNulls(4)
+        mDotLayout!!.removeAllViews()
+        for (i in dots.indices) {
+            dots[i] = TextView(this)
+            dots[i]!!.text = Html.fromHtml("&#8226")
+            dots[i]!!.textSize = 35f
+            dots[i]!!.setTextColor(resources.getColor(R.color.DarkGray, applicationContext.theme))
+            mDotLayout!!.addView(dots[i])
+        }
+        dots[position]!!.setTextColor(resources.getColor(R.color.LightBlue, applicationContext.theme))
     }
 
+    var viewListener: OnPageChangeListener = object : OnPageChangeListener {
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+        override fun onPageSelected(position: Int) {
+            setUpindicator(position)
+            if (position > 0) {
+                backbtn!!.visibility = View.VISIBLE
+            } else {
+                backbtn!!.visibility = View.INVISIBLE
+            }
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {}
+    }
+
+    private fun getitem(i: Int): Int {
+        return mSLideViewPager!!.currentItem + i
+    }
 }

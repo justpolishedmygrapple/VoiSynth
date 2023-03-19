@@ -39,4 +39,14 @@
     <string name="no_history_error">Ingen historik tillgänglig. Är du säker på att du är ansluten till Internet?</string>
     <string name="voice_name_quick_gen">Utvald röst: %1$s</string>
     <string name="generate_hint_quick_mode">Vad vill du att %1$s ska säga?</string>
+
+    <string name="onboard_heading1">Head1</string>
+    <string name="onboard_heading2">Head2</string>
+    <string name="onboard_heading3">Head3</string>
+    <string name="onboard_heading4">Head4</string>
+
+    <string name="onboard_desc1">Desc1</string>
+    <string name="onboard_desc2">Desc2</string>
+    <string name="onboard_desc3">Desc3</string>
+    <string name="onboard_desc4">Desc4</string>
 </resources>

@@ -65,5 +65,14 @@
     <string name="voice_name_quick_gen">Voice selected: %1$s</string>
     <string name="generate_hint_quick_mode">Enter some text you\'d like to hear %1$s say</string>
 
+    <string name="onboard_heading1">Head1</string>
+    <string name="onboard_heading2">Head2</string>
+    <string name="onboard_heading3">Head3</string>
+    <string name="onboard_heading4">Head4</string>
+
+    <string name="onboard_desc1">Desc1</string>
+    <string name="onboard_desc2">Desc2</string>
+    <string name="onboard_desc3">Desc3</string>
+    <string name="onboard_desc4">Desc4</string>
 
 </resources>
