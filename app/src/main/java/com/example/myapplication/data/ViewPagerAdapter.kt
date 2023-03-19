@@ -13,10 +13,10 @@ import androidx.viewpager.widget.PagerAdapter
 
 class ViewPagerAdapter(var context: Context) : PagerAdapter() {
     var images = intArrayOf(
-        com.example.myapplication.R.drawable.ic_action_voices,
-        com.example.myapplication.R.drawable.ic_action_voices,
-        com.example.myapplication.R.drawable.ic_action_voices,
-        com.example.myapplication.R.drawable.ic_action_voices
+        com.example.myapplication.R.drawable.main_icon,
+        com.example.myapplication.R.drawable.main_icon,
+        com.example.myapplication.R.drawable.main_icon,
+        com.example.myapplication.R.drawable.main_icon
     )
     var headings = intArrayOf(
         com.example.myapplication.R.string.onboard_heading1,
