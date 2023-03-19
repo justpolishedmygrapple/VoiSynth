@@ -40,6 +40,11 @@
     <string name="voice_name_quick_gen">Utvald röst: %1$s</string>
     <string name="generate_hint_quick_mode">Vad vill du att %1$s ska säga?</string>
 
+    <string name="pref_onboard_key">onboard</string>
+    <string name="pref_onboard_on">onboard-on</string>
+    <string name="pref_onboard_off">onboard-off</string>
+    <string name="pref_onboard_text">Display Tutorial?</string>
+
     <string name="onboard_heading1">Head1</string>
     <string name="onboard_heading2">Head2</string>
     <string name="onboard_heading3">Head3</string>

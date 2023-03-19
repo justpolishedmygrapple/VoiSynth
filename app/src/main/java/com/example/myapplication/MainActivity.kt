@@ -11,6 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
+
 import com.example.myapplication.data.ViewPagerAdapter
 import com.example.myapplication.R
 
@@ -23,34 +29,52 @@ class MainActivity : AppCompatActivity() {
     lateinit var dots: Array<TextView?>
     var viewPagerAdapter: ViewPagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
-        backbtn = findViewById(R.id.backbtn)
-        nextbtn = findViewById(R.id.nextbtn)
-        skipbtn = findViewById(R.id.skipBtn)
-        backbtn.setOnClickListener(View.OnClickListener {
-            if (getitem(0) > 0) {
-                mSLideViewPager!!.setCurrentItem(getitem(-1), true)
-            }
-        })
-        nextbtn.setOnClickListener(View.OnClickListener {
-            if (getitem(0) < 3) mSLideViewPager!!.setCurrentItem(getitem(1), true) else {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "onboard-on")
+
+        if(onBoard == "onboard-on") {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_onboarding)
+            backbtn = findViewById(R.id.backbtn)
+            nextbtn = findViewById(R.id.nextbtn)
+            skipbtn = findViewById(R.id.skipBtn)
+            backbtn.setOnClickListener(View.OnClickListener {
+                if (getitem(0) > 0) {
+                    mSLideViewPager!!.setCurrentItem(getitem(-1), true)
+                }
+            })
+            nextbtn.setOnClickListener(View.OnClickListener {
+                if (getitem(0) < 3) mSLideViewPager!!.setCurrentItem(getitem(1), true) else {
+                    with(prefs.edit()) {
+                        putString(getString(R.string.pref_onboard_key), getString(R.string.pref_onboard_off))
+                        apply()
+                    }
+                    val i = Intent(this@MainActivity, MainScreen::class.java)
+                    startActivity(i)
+                    finish()
+                }
+            })
+            skipbtn.setOnClickListener(View.OnClickListener {
+                with(prefs.edit()) {
+                    putString(getString(R.string.pref_onboard_key), getString(R.string.pref_onboard_off))
+                    apply()
+                }
                 val i = Intent(this@MainActivity, MainScreen::class.java)
                 startActivity(i)
                 finish()
-            }
-        })
-        skipbtn.setOnClickListener(View.OnClickListener {
+            })
+            mSLideViewPager = findViewById<View>(R.id.slideViewPager) as ViewPager
+            mDotLayout = findViewById<View>(R.id.indicator_layout) as LinearLayout
+            viewPagerAdapter = ViewPagerAdapter(this)
+            mSLideViewPager!!.adapter = viewPagerAdapter
+            setUpindicator(0)
+            mSLideViewPager!!.addOnPageChangeListener(viewListener)
+        } else if (onBoard == "onboard-off") {
             val i = Intent(this@MainActivity, MainScreen::class.java)
             startActivity(i)
             finish()
-        })
-        mSLideViewPager = findViewById<View>(R.id.slideViewPager) as ViewPager
-        mDotLayout = findViewById<View>(R.id.indicator_layout) as LinearLayout
-        viewPagerAdapter = ViewPagerAdapter(this)
-        mSLideViewPager!!.adapter = viewPagerAdapter
-        setUpindicator(0)
-        mSLideViewPager!!.addOnPageChangeListener(viewListener)
+        }
     }
 
     fun setUpindicator(position: Int) {

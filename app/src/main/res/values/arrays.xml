@@ -11,4 +11,14 @@
         <item>@string/pref_hide_premade_entry_show_premade</item>
         <item>@string/pref_hide_premade_entry_hide_premade</item>
     </string-array>
+
+    <string-array name="pref_onboard_entries">
+        <item>@string/pref_onboard_on</item>
+        <item>@string/pref_onboard_off</item>
+    </string-array>
+
+    <string-array name="pref_onboard_values">
+        <item>@string/pref_onboard_on</item>
+        <item>@string/pref_onboard_off</item>
+    </string-array>
 </resources>

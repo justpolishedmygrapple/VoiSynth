@@ -22,6 +22,16 @@
             android:dialogTitle="@string/choose_your_custom_voice"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:id="@+id/tutorial"
+            android:key="@string/pref_onboard_key"
+            android:entries="@array/pref_onboard_entries"
+            android:entryValues="@array/pref_onboard_values"
+            android:defaultValue="onboard-on"
+            android:title="@string/pref_onboard_text"
+            android:dialogTitle="@string/pref_onboard_text"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
