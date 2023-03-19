@@ -29,12 +29,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var dots: Array<TextView?>
     var viewPagerAdapter: ViewPagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "onboard-on")
+        val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "Show Tutorial")
 
-        if(onBoard == "onboard-on") {
-            super.onCreate(savedInstanceState)
+        if(onBoard == "Show Tutorial") {
+
             setContentView(R.layout.activity_onboarding)
             backbtn = findViewById(R.id.backbtn)
             nextbtn = findViewById(R.id.nextbtn)
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             mSLideViewPager!!.adapter = viewPagerAdapter
             setUpindicator(0)
             mSLideViewPager!!.addOnPageChangeListener(viewListener)
-        } else if (onBoard == "onboard-off") {
+        } else if (onBoard == "Tutorial Disabled") {
             val i = Intent(this@MainActivity, MainScreen::class.java)
             startActivity(i)
             finish()
