@@ -71,13 +71,15 @@
     <string name="pref_onboard_text">Display Tutorial?</string>
 
     <string name="onboard_heading1">Welcome to VoiSynth</string>
-    <string name="onboard_heading2">Main Menu</string>
+    <string name="onboard_heading2">Quickmode Screen</string>
     <string name="onboard_heading3">Navigation Options</string>
     <string name="onboard_heading4">Available Voices</string>
 
     <string name="onboard_desc1">This app will give you the ability to generate voice clips of ANY voice using text-to-speech. </string>
     <string name="onboard_desc2">The main menu screen contains a text-to-speech generate text box, with a default voice set in the settings menu which can be accessed using the navigation pane with the button in the top left of the screen. </string>
-    <string name="onboard_desc3">Desc3</string>
-    <string name="onboard_desc4">Desc4</string>
+    <string name="onboard_desc3">In the navigation dropdown, you can access the settings menu, a history of each voice clip you have generated, a list of all voices avaliable to you, as well as the menu to add new voices from an MP3 file.</string>
+    <string name="onboard_desc4">In the Avaliable Voices menu, you can scroll and select any voice that is either in the default listings, or from the voices you have generated. You can generate any voice with just an MP3 file!</string>
+
+
 
 </resources>

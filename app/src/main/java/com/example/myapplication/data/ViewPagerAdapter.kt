@@ -15,8 +15,8 @@ class ViewPagerAdapter(var context: Context) : PagerAdapter() {
     var images = intArrayOf(
         com.example.myapplication.R.drawable.main_icon,
         com.example.myapplication.R.drawable.onboard_slide1,
-        com.example.myapplication.R.drawable.main_icon,
-        com.example.myapplication.R.drawable.main_icon
+        com.example.myapplication.R.drawable.onboarding_slide2,
+        com.example.myapplication.R.drawable.onboard_slide3
     )
     var headings = intArrayOf(
         com.example.myapplication.R.string.onboard_heading1,

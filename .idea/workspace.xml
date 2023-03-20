@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/HistoryBySelectedVoiceFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/HistoryBySelectedVoiceFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/history_result_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/history_result_item.xml" afterDir="false" />
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Changed icon color of app and small changes to history item xml to make it look better on physical devices.">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679289826160</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changed icon color of app and small changes to history item xml to make it look better on physical devices.">
+      <created>1679300525877</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679300525877</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,6 +247,7 @@
     <MESSAGE value="merged the previous 'delete delay by 500s' from main" />
     <MESSAGE value="Started localizing tutorial screen." />
     <MESSAGE value="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings." />
-    <option name="LAST_COMMIT_MESSAGE" value="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings." />
+    <MESSAGE value="Changed icon color of app and small changes to history item xml to make it look better on physical devices." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed icon color of app and small changes to history item xml to make it look better on physical devices." />
   </component>
 </project>
