@@ -9,15 +9,24 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Images in tutorial are localized.">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon.xml" afterDir="false" />
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="changed main icon color per @DomWilson2 suggestion">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/QuickGenerateFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/QuickGenerateFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R5CW12JNCGK]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Default.DESKTOP-7EV5VRC\.android\avd\Pixel_6_Pro_API_33.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -268,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679304136123</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="changed main icon color per @DomWilson2 suggestion">
+      <created>1679304300622</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679304300622</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,25 +324,16 @@
     <MESSAGE value="modified a string in strings.xml so that it looks better (not cut off) when in swedish" />
     <MESSAGE value="Changed strings in tutorial from string literals to references to string resources, localized them" />
     <MESSAGE value="Images in tutorial are localized." />
-    <option name="LAST_COMMIT_MESSAGE" value="Images in tutorial are localized." />
+    <MESSAGE value="changed main icon color per @DomWilson2 suggestion" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed main icon color per @DomWilson2 suggestion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt</url>
-          <line>56</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt</url>
-          <line>58</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt</url>
-          <line>59</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt</url>
+          <line>43</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

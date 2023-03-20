@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -43,6 +44,7 @@ import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.net.URLConnection
+import java.util.*
 import kotlin.io.path.pathString
 import kotlin.io.path.writeBytes
 
@@ -105,11 +107,10 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
         setHasOptionsMenu(true)
 
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+
         loadingIndicator = view.findViewById(R.id.quick_gen_loading_indicator)
-
-
-
-
 
         val navView: NavigationView = requireActivity().findViewById(R.id.nav_view)
 
@@ -138,7 +139,6 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
 
 
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
 
         //Makes sure Biden is the preferred voice by default

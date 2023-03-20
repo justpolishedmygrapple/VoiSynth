@@ -7,7 +7,9 @@
     <fragment
         android:id="@+id/settings"
         android:name="com.example.myapplication.fragments.SettingsFragment"
-        android:label="@string/label_settings"/>
+        android:label="@string/label_settings">
+    </fragment>
+
 
     <fragment
         android:id="@+id/quick_generate"

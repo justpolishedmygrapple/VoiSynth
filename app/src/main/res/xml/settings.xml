@@ -32,6 +32,16 @@
             android:dialogTitle="@string/pref_onboard_text"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:id="@+id/lp_change_lang"
+            android:key="@string/pref_language_key"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_values"
+            android:defaultValue="@string/pref_lang_eng"
+            android:title="@string/change_language"
+            android:dialogTitle="@string/change_language"
+            app:useSimpleSummaryProvider="true"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

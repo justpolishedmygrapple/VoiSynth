@@ -21,4 +21,14 @@
         <item>@string/pref_onboard_on</item>
         <item>@string/pref_onboard_off</item>
     </string-array>
+
+    <string-array name="pref_language_entries">
+        <item>@string/pref_lang_eng</item>
+        <item>@string/pref_lang_sv</item>
+    </string-array>
+
+    <string-array name="pref_language_values">
+        <item>@string/pref_lang_eng</item>
+        <item>@string/pref_lang_sv</item>
+    </string-array>
 </resources>

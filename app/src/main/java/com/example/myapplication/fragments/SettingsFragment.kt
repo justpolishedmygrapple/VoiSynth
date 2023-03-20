@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.recreate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.example.myapplication.MainActivity
+import com.example.myapplication.MainScreen
 import com.example.myapplication.R
 import com.example.myapplication.voicedatabase.VoiceDBViewModel
+import java.util.*
 
 
 class SettingsFragment: PreferenceFragmentCompat() {
@@ -24,19 +29,14 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
 
-        val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "Show Tutorial")
-
-
 
 
         val key = getString(R.string.pref_voice_key)
-        val listPref = findPreference<ListPreference>(getString(R.string.pref_voice_key))
 
 
         voiceDBViewModel = ViewModelProvider(this).get(VoiceDBViewModel::class.java)
@@ -62,11 +62,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
                 }
             }
-
-
-
-
-
 
     }
 
@@ -132,6 +127,27 @@ class SettingsFragment: PreferenceFragmentCompat() {
             true
         }
 
+        val languagePref = findPreference<ListPreference>(getString(R.string.pref_language_key))
+
+        languagePref?.setOnPreferenceChangeListener { preference, newValue ->
+
+            val key = getString(R.string.pref_language_key)
+
+            sharedPreferences?.edit()?.putString(key, newValue.toString())?.apply()
+
+            preference.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
+                "$newValue"
+            }
+
+            if (newValue == "English") {
+                val locale = Locale("en")
+                changeLanguage(locale)
+            } else if (newValue == "svenska") {
+                val locale = Locale("sv", "SE")
+                changeLanguage(locale)
+            }
+            true
+        }
 //
 //
         listPref?.setOnPreferenceChangeListener { preference, newValue ->
@@ -153,7 +169,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
             ///Whoooooa I finally figured it out.
             preference?.summaryProvider = Preference.SummaryProvider<Preference> { preference ->
 
-//                Log.d("globalPreferredVoice", globalPreferredVoice)
 
                 "${getString(R.string.selected_value)} ${newlySelectedVoice}"
             }
@@ -166,6 +181,15 @@ class SettingsFragment: PreferenceFragmentCompat() {
     //Src = https://developer.android.com/develop/ui/views/components/settings/customize-your-settings
 
 
+    private fun changeLanguage(locale: Locale){
+        val resources = activity?.resources
+        val configuration = resources?.configuration
+        configuration?.setLocale(locale)
+        resources?.updateConfiguration(configuration, resources.displayMetrics)
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
 
     override fun onPause() {
         super.onPause()

@@ -82,6 +82,10 @@
     <string name="tutorial_skip">Skip</string>
     <string name="tutorial_back">Back</string>
     <string name="tutorial_next">Next</string>
+    <string name="pref_language_key" translatable="false">lang</string>
+    <string name="pref_lang_eng" translatable="false">English</string>
+    <string name="pref_lang_sv" translatable="false">svenska</string>
+    <string name="change_language">Change language</string>
 
 
 </resources>
