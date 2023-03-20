@@ -363,9 +363,7 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
 
     suspend fun getAudio(voice_id: String, requestBody: RequestBody): ByteArray? {
 
-        val response = voiceservice.generateVoiceAudio(voice_id, requestBody).apply {
-            delay(500)
-        }
+        val response = voiceservice.generateVoiceAudio(voice_id, requestBody)
 
         return if(response.isSuccessful){
             response.body()?.bytes()}

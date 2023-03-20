@@ -9,10 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="preference is set up to go back">
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="SettingsFragment.kt is set up now so that if the user presses show tutorial, it does show the tutorial, does not require a reboot as before. working on localization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/QuickGenerateFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/QuickGenerateFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/VoiceGeneratorFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/VoiceGeneratorFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,6 +169,14 @@
       <option name="presentableId" value="Default" />
       <updated>1679265620405</updated>
     </task>
+    <task id="LOCAL-00001" summary="SettingsFragment.kt is set up now so that if the user presses show tutorial, it does show the tutorial, does not require a reboot as before. working on localization">
+      <created>1679286161595</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679286161595</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,6 +192,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="preference is set up to go back" />
-    <option name="LAST_COMMIT_MESSAGE" value="preference is set up to go back" />
+    <MESSAGE value="SettingsFragment.kt is set up now so that if the user presses show tutorial, it does show the tutorial, does not require a reboot as before. working on localization" />
+    <option name="LAST_COMMIT_MESSAGE" value="SettingsFragment.kt is set up now so that if the user presses show tutorial, it does show the tutorial, does not require a reboot as before. working on localization" />
   </component>
 </project>
