@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "Show Tutorial")
 
-        if(onBoard == "Show Tutorial") {
+        if(onBoard == "Show Tutorial" || onBoard == "Ja") {
 
             setContentView(R.layout.activity_onboarding)
             backbtn = findViewById(R.id.backbtn)
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             backbtn!!.visibility = View.INVISIBLE
             backbtnbg!!.visibility = View.INVISIBLE
             mSLideViewPager!!.addOnPageChangeListener(viewListener)
-        } else if (onBoard == "Tutorial Disabled") {
+        } else if (onBoard == "Tutorial Disabled" || onBoard == "Nej") {
             val i = Intent(this@MainActivity, MainScreen::class.java)
             startActivity(i)
             finish()

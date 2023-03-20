@@ -122,9 +122,13 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 "$newValue"
             }
 
-            val intent = Intent(activity, MainActivity::class.java)
+            if(newValue == "Show Tutorial" || newValue == "Ja") {
 
-            startActivity(intent)
+                val intent = Intent(activity, MainActivity::class.java)
+
+                startActivity(intent)
+            }
+
             true
         }
 

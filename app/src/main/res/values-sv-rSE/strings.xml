@@ -42,8 +42,8 @@
     <string name="generate_hint_quick_mode">Vad vill du att %1$s ska säga?</string>
 
     <string name="pref_onboard_key">onboard</string>
-    <string name="pref_onboard_on">Show Tutorial</string>
-    <string name="pref_onboard_off">Tutorial Disabled</string>
+    <string name="pref_onboard_on">Ja</string>
+    <string name="pref_onboard_off">Nej</string>
     <string name="pref_onboard_text">Visa steg-för-steg guide?</string>
 
     <string name="onboard_heading1">Välkommen till VoiSynth</string>
