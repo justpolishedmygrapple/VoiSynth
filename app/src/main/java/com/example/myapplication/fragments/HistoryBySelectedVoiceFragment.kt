@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -104,6 +105,8 @@ class HistoryBySelectedVoiceFragment: Fragment(R.layout.history_by_selected_voic
 
         historyTextRV.layoutManager = LinearLayoutManager(requireContext())
         historyTextRV.setHasFixedSize(true)
+
+        historyTextRV
 
         historyTextRV.adapter = historyTextAdapter
 

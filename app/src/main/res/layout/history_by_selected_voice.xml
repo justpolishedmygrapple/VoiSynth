@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HistoryBySelectedVoiceActivity"
+    tools:context=".fragments.HistoryBySelectedVoiceFragment"
     tools:layout_editor_absoluteX="3dp"
     tools:layout_editor_absoluteY="-8dp"
     android:background="@color/Thistle">
@@ -25,15 +25,15 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="53dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="53dp"
-        android:layout_marginBottom="107dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.424" />
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

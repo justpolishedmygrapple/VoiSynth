@@ -9,18 +9,19 @@
     android:layout_margin="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="407dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="2dp"
+        android:padding="10dp"
         tools:context=".ui.HistoryBySelectedVoiceActivity">
 
         <ImageView
             android:id="@+id/imageview_play_history_item"
-            android:layout_width="19dp"
+            android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp"
+            app:layout_constraintWidth_percent="0.1"
             android:background="#262DA3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_history_item_text"
@@ -30,7 +31,7 @@
 
         <TextView
             android:id="@+id/tv_history_item_text"
-            android:layout_width="358dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="9dp"
@@ -39,20 +40,14 @@
             android:scrollHorizontally="false"
             android:text="TextView"
             android:ellipsize="none"
+            app:layout_constraintWidth_percent="0.9"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_play_history_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageview_play_history_item"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_play_history_item"
+            app:layout_constraintVertical_bias="0.5" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="top"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="42dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
