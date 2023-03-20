@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Started localizing tutorial screen.">
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/fragments/SettingsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/history_by_selected_voice.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,17 +87,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PROJECT_TRUSTED_KEY": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Razzelcrack/AndroidStudioProjects/assignment-3-atteberm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Razzelcrack/AndroidStudioProjects/assignment-3-atteberm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="My_Application.app.main" />
@@ -190,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679289371582</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings.">
+      <created>1679289826160</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679289826160</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +214,7 @@
     <MESSAGE value="SettingsFragment.kt is set up now so that if the user presses show tutorial, it does show the tutorial, does not require a reboot as before. working on localization" />
     <MESSAGE value="merged the previous 'delete delay by 500s' from main" />
     <MESSAGE value="Started localizing tutorial screen." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started localizing tutorial screen." />
+    <MESSAGE value="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings." />
   </component>
 </project>
