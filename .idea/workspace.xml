@@ -9,9 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="grammar... tillgänglig to tillgängliga">
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="modified a string in strings.xml so that it looks better (not cut off) when in swedish">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_onboarding.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_onboarding.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679301891693</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="modified a string in strings.xml so that it looks better (not cut off) when in swedish">
+      <created>1679302044779</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679302044779</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,6 +294,7 @@
     <MESSAGE value="Localized @DomWilson2 strings to Swedish" />
     <MESSAGE value="Small change to where History by selected voice looked crappy in swedish" />
     <MESSAGE value="grammar... tillgänglig to tillgängliga" />
-    <option name="LAST_COMMIT_MESSAGE" value="grammar... tillgänglig to tillgängliga" />
+    <MESSAGE value="modified a string in strings.xml so that it looks better (not cut off) when in swedish" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified a string in strings.xml so that it looks better (not cut off) when in swedish" />
   </component>
 </project>

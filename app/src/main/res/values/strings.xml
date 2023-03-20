@@ -79,7 +79,9 @@
     <string name="onboard_desc2">The main menu screen contains a text-to-speech generate text box, with a default voice set in the settings menu which can be accessed using the navigation pane with the button in the top left of the screen. </string>
     <string name="onboard_desc3">In the navigation dropdown, you can access the settings menu, a history of each voice clip you have generated, a list of all voices avaliable to you, as well as the menu to add new voices from an MP3 file.</string>
     <string name="onboard_desc4">In the Avaliable Voices menu, you can scroll and select any voice that is either in the default listings, or from the voices you have generated. You can generate any voice with just an MP3 file!</string>
-
+    <string name="tutorial_skip">Skip</string>
+    <string name="tutorial_back">Back</string>
+    <string name="tutorial_next">Next</string>
 
 
 </resources>
