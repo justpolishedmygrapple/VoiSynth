@@ -1,8 +1,10 @@
 package com.example.myapplication.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.ListPreference
@@ -10,6 +12,7 @@ import androidx.preference.Preference
 
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.voicedatabase.VoiceDBViewModel
 
@@ -24,6 +27,12 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+
+        val onBoard = prefs.getString(getString(R.string.pref_onboard_key), "Show Tutorial")
+
+
 
 
         val key = getString(R.string.pref_voice_key)
@@ -100,6 +109,24 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        val tutorialPref = findPreference<ListPreference>(getString(R.string.pref_onboard_key))
+
+        tutorialPref?.setOnPreferenceChangeListener{preference, newValue ->
+
+            val key = getString(R.string.pref_voice_key)
+            sharedPreferences?.edit()?.putString(key, newValue.toString())?.apply()
+
+            preference?.summaryProvider= Preference.SummaryProvider<Preference> { preference ->
+
+                "$newValue"
+            }
+
+            val intent = Intent(activity, MainActivity::class.java)
+
+            startActivity(intent)
+            true
+        }
 
 //
 //
