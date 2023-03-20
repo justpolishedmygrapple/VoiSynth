@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Changing languages is no longer an easter egg. Implemented in SettingsFragment.kt. Src: https://stackoverflow.com/questions/4985805/set-locale-programmatically">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" afterDir="false" />
-    </list>
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="grammar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -285,7 +281,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679310948661</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed so that if a user changed language to Swedish and then opened the tutorial, the tutorial would be in the wrong language">
+      <created>1679312001367</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679312001367</updated>
+    </task>
+    <task id="LOCAL-00016" summary="grammar">
+      <created>1679312155418</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679312155418</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,7 +337,9 @@
     <MESSAGE value="Images in tutorial are localized." />
     <MESSAGE value="changed main icon color per @DomWilson2 suggestion" />
     <MESSAGE value="Changing languages is no longer an easter egg. Implemented in SettingsFragment.kt. Src: https://stackoverflow.com/questions/4985805/set-locale-programmatically" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing languages is no longer an easter egg. Implemented in SettingsFragment.kt. Src: https://stackoverflow.com/questions/4985805/set-locale-programmatically" />
+    <MESSAGE value="Fixed so that if a user changed language to Swedish and then opened the tutorial, the tutorial would be in the wrong language" />
+    <MESSAGE value="grammar" />
+    <option name="LAST_COMMIT_MESSAGE" value="grammar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
