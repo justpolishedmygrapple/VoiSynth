@@ -52,9 +52,9 @@
     <string name="onboard_heading4">Tillgängliga röster</string>
 
     <string name="onboard_desc1">Den här appen ger dig möjligheten att skapa ljudklipp av vilken röst som helst med hjälp av  text-till-tal-teknik</string>
-    <string name="onboard_desc2">Huvudskärmen innehåller en ruta där text kan skrivas in. Vid tryck på \'skapa\':knappen säger rösten som du förvalt den text som du skrivit. Du kan ställa in din favoritröst i inställningsmenyn, som nås genom navigeringsfältet med knappen längst upp till vänster på skärmen.</string>
+    <string name="onboard_desc2">Huvudskärmen innehåller en ruta där text kan skrivas in. Vid tryck på \'skapa\':knappen säger rösten som du förvalt den text som du skrivit. Du kan ställa in din favoritröst i inställningsmenyn, som nås i navigeringsfältet med knappen längst upp till vänster på skärmen.</string>
     <string name="onboard_desc3">I navigationsfältet kan du få tillgång till inställningsmenyn, visa historik över alla de ljudklipp som du skapat, en lista över alla röster som finns tillgängliga, såväl som en meny där du kan lägga till nya röster genom att ladda upp en MP3:fil</string>
-    <string name="onboard_desc4">I \"Tillgängliga röster\"-menyn kan du bläddra igenom och välja en röst, oavsett om den är konstgjord eller en som du lagt till. Du kan klona vilken röst som helst med bara en mp3:fil!</string>
+    <string name="onboard_desc4">I \"Tillgängliga röster\"-menyn kan du bläddra igenom dina röster och välja en, oavsett om den är konstgjord eller en som du lagt till. Du kan klona vilken röst som helst med bara en mp3:fil!</string>
     <string name="tutorial_skip">Hoppa över</string>
     <string name="tutorial_back">Tillbaka</string>
     <string name="tutorial_next">Nästa</string>

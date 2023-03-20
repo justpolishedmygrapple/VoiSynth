@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="grammar" />
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Navigeringsalternativ -&gt; navigeringsfält">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -295,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679312155418</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Navigeringsalternativ -&gt; navigeringsfält">
+      <created>1679312756050</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679312756050</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,7 +348,8 @@
     <MESSAGE value="Changing languages is no longer an easter egg. Implemented in SettingsFragment.kt. Src: https://stackoverflow.com/questions/4985805/set-locale-programmatically" />
     <MESSAGE value="Fixed so that if a user changed language to Swedish and then opened the tutorial, the tutorial would be in the wrong language" />
     <MESSAGE value="grammar" />
-    <option name="LAST_COMMIT_MESSAGE" value="grammar" />
+    <MESSAGE value="Navigeringsalternativ -&gt; navigeringsfält" />
+    <option name="LAST_COMMIT_MESSAGE" value="Navigeringsalternativ -&gt; navigeringsfält" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
