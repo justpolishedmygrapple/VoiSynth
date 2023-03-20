@@ -9,20 +9,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Changed strings in tutorial from string literals to references to string resources, localized them">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/onboarding_slide_sv1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/onboarding_slide_sv2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/onboarding_slide_sv3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/data/ViewPagerAdapter.kt" afterDir="false" />
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Images in tutorial are localized.">
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Default.DESKTOP-7EV5VRC\.android\avd\Pixel_6_Pro_API_33.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R5CW12JNCGK]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -266,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679302758205</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Images in tutorial are localized.">
+      <created>1679304136123</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679304136123</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,7 +307,8 @@
     <MESSAGE value="grammar... tillgänglig to tillgängliga" />
     <MESSAGE value="modified a string in strings.xml so that it looks better (not cut off) when in swedish" />
     <MESSAGE value="Changed strings in tutorial from string literals to references to string resources, localized them" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed strings in tutorial from string literals to references to string resources, localized them" />
+    <MESSAGE value="Images in tutorial are localized." />
+    <option name="LAST_COMMIT_MESSAGE" value="Images in tutorial are localized." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
