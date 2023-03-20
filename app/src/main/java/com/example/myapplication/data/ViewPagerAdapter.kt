@@ -14,7 +14,7 @@ import androidx.viewpager.widget.PagerAdapter
 class ViewPagerAdapter(var context: Context) : PagerAdapter() {
     var images = intArrayOf(
         com.example.myapplication.R.drawable.main_icon,
-        com.example.myapplication.R.drawable.main_icon,
+        com.example.myapplication.R.drawable.onboard_slide1,
         com.example.myapplication.R.drawable.main_icon,
         com.example.myapplication.R.drawable.main_icon
     )

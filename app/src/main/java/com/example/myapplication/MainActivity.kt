@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var backbtn: Button
     lateinit var nextbtn: Button
     lateinit var skipbtn: Button
+    lateinit var backbtnbg: ImageView
     lateinit var dots: Array<TextView?>
     var viewPagerAdapter: ViewPagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             backbtn = findViewById(R.id.backbtn)
             nextbtn = findViewById(R.id.nextbtn)
             skipbtn = findViewById(R.id.skipBtn)
+            backbtnbg = findViewById(R.id.ellipse1)
             backbtn.setOnClickListener(View.OnClickListener {
                 if (getitem(0) > 0) {
                     mSLideViewPager!!.setCurrentItem(getitem(-1), true)
@@ -70,6 +73,8 @@ class MainActivity : AppCompatActivity() {
             viewPagerAdapter = ViewPagerAdapter(this)
             mSLideViewPager!!.adapter = viewPagerAdapter
             setUpindicator(0)
+            backbtn!!.visibility = View.INVISIBLE
+            backbtnbg!!.visibility = View.INVISIBLE
             mSLideViewPager!!.addOnPageChangeListener(viewListener)
         } else if (onBoard == "Tutorial Disabled") {
             val i = Intent(this@MainActivity, MainScreen::class.java)
@@ -88,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             dots[i]!!.setTextColor(resources.getColor(R.color.DarkGray, applicationContext.theme))
             mDotLayout!!.addView(dots[i])
         }
-        dots[position]!!.setTextColor(resources.getColor(R.color.LightBlue, applicationContext.theme))
+        dots[position]!!.setTextColor(resources.getColor(R.color.Purple, applicationContext.theme))
     }
 
     var viewListener: OnPageChangeListener = object : OnPageChangeListener {
@@ -97,8 +102,10 @@ class MainActivity : AppCompatActivity() {
             setUpindicator(position)
             if (position > 0) {
                 backbtn!!.visibility = View.VISIBLE
+                backbtnbg!!.visibility = View.VISIBLE
             } else {
                 backbtn!!.visibility = View.INVISIBLE
+                backbtnbg!!.visibility = View.INVISIBLE
             }
         }
 
