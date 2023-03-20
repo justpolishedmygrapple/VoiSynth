@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
+import java.util.*
 
 
 class ViewPagerAdapter(var context: Context) : PagerAdapter() {
@@ -17,6 +18,13 @@ class ViewPagerAdapter(var context: Context) : PagerAdapter() {
         com.example.myapplication.R.drawable.onboard_slide1,
         com.example.myapplication.R.drawable.onboarding_slide2,
         com.example.myapplication.R.drawable.onboard_slide3
+    )
+
+    var swedishImages = intArrayOf(
+        com.example.myapplication.R.drawable.main_icon,
+        com.example.myapplication.R.drawable.onboarding_slide_sv1,
+        com.example.myapplication.R.drawable.onboarding_slide_sv2,
+        com.example.myapplication.R.drawable.onboarding_slide_sv3
     )
     var headings = intArrayOf(
         com.example.myapplication.R.string.onboard_heading1,
@@ -45,7 +53,17 @@ class ViewPagerAdapter(var context: Context) : PagerAdapter() {
         val slidetitleimage = view.findViewById<View>(com.example.myapplication.R.id.titleImage) as ImageView
         val slideHeading = view.findViewById<View>(com.example.myapplication.R.id.texttitle) as TextView
         val slideDesciption = view.findViewById<View>(com.example.myapplication.R.id.textdeccription) as TextView
-        slidetitleimage.setImageResource(images[position])
+
+        val currLocale = Locale.getDefault().displayLanguage
+
+        if(currLocale == "svenska"){
+            slidetitleimage.setImageResource(swedishImages[position])
+        }
+        else{
+            slidetitleimage.setImageResource(images[position])
+        }
+
+
         slideHeading.setText(headings[position])
         slideDesciption.setText(description[position])
         container.addView(view)

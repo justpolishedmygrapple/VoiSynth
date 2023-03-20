@@ -12,6 +12,7 @@ import com.example.myapplication.R.*
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import java.util.*
 
 const val ELEVEN_LABS_API = BuildConfig.ELEVEN_LABS_API
 
@@ -27,7 +28,6 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
 
-        Log.d("mainactivity", "created()")
 
 
         var toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
