@@ -105,6 +105,8 @@ class QuickGenerateFragment: Fragment(R.layout.quick_generate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        currentlyGenerating = false
+
         setHasOptionsMenu(true)
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())

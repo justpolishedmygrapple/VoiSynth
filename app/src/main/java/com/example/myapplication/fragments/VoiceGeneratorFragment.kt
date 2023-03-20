@@ -57,6 +57,8 @@ class VoiceGeneratorFragment: Fragment(R.layout.voice_generator) {
 
         setHasOptionsMenu(true)
 
+        currentlyGenerating = false
+
         mediaViewModel = ViewModelProvider(requireActivity()).get(MediaViewModel::class.java)
 
         loadingIndicator = view.findViewById(R.id.voice_generator_loading_indicator)
