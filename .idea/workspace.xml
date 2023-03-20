@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Credit to @DomWilson2 for new images for tutorial and for new string values. Did not pull because binary files uploaded were conflicting">
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="grammar... tillgänglig to tillgängliga">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-sv-rSE/strings.xml" afterDir="false" />
     </list>
@@ -227,7 +227,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679300949907</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Localized @DomWilson2 strings to Swedish">
+      <created>1679301602597</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679301602597</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Small change to where History by selected voice looked crappy in swedish">
+      <created>1679301746372</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679301746372</updated>
+    </task>
+    <task id="LOCAL-00009" summary="grammar... tillgänglig to tillgängliga">
+      <created>1679301891693</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679301891693</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,6 +282,9 @@
     <MESSAGE value="SettingsFragment.kt changed so that when a user clicks &quot;no&quot; on show tutorial, the user will not automatically be launched back into the start fragment. Modified MainActivity.kt and MainActivity.kt to support Swedish localization settings." />
     <MESSAGE value="Changed icon color of app and small changes to history item xml to make it look better on physical devices." />
     <MESSAGE value="Credit to @DomWilson2 for new images for tutorial and for new string values. Did not pull because binary files uploaded were conflicting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Credit to @DomWilson2 for new images for tutorial and for new string values. Did not pull because binary files uploaded were conflicting" />
+    <MESSAGE value="Localized @DomWilson2 strings to Swedish" />
+    <MESSAGE value="Small change to where History by selected voice looked crappy in swedish" />
+    <MESSAGE value="grammar... tillgänglig to tillgängliga" />
+    <option name="LAST_COMMIT_MESSAGE" value="grammar... tillgänglig to tillgängliga" />
   </component>
 </project>
