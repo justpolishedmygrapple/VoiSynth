@@ -36,6 +36,7 @@
     <string name="selected_value">"Utvald röst: "</string>
     <string name="please_wait_generate_again">Var god och vänta tills din begäran har genomförts</string>
     <string name="no_text_entered">Var god och skriva något innan du försöker skapa ett ljudklipp</string>
+    <string name="no_voices_error">Inga röster tillgängliga. Se till att du är ansluten till Internet.</string>
     <string name="no_history_error">Ingen historik tillgänglig. Är du säker på att du är ansluten till Internet?</string>
     <string name="voice_name_quick_gen">Utvald röst: %1$s</string>
     <string name="generate_hint_quick_mode">Vad vill du att %1$s ska säga?</string>
@@ -50,8 +51,8 @@
     <string name="onboard_heading3">Navigeringsalternativ</string>
     <string name="onboard_heading4">Tillgängliga röster</string>
 
-    <string name="onboard_desc1">Den här appen ger dig möjligheten att skapa ljudklipp av vilken röst som hest med hjälp av  text-till-tal-teknik</string>
-    <string name="onboard_desc2">Desc2</string>
+    <string name="onboard_desc1">Den här appen ger dig möjligheten att skapa ljudklipp av vilken röst som helst med hjälp av  text-till-tal-teknik</string>
+    <string name="onboard_desc2">Huvudskärmen innehåller en tom ruta där text kan skrivas in. Vid tryck på \'skapa ljudklipp\':knappen säger rösten som du förvalt den text som du skrivit. Du kan ställa in din förvalda röst i inställningsmenyn, som nås genom navigeringsfönstret med knappen längst upp till vänster på skärmen.</string>
     <string name="onboard_desc3">Desc3</string>
     <string name="onboard_desc4">Desc4</string>
 </resources>

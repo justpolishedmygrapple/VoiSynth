@@ -114,7 +114,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
         tutorialPref?.setOnPreferenceChangeListener{preference, newValue ->
 
-            val key = getString(R.string.pref_voice_key)
+            val key = getString(R.string.pref_onboard_key)
             sharedPreferences?.edit()?.putString(key, newValue.toString())?.apply()
 
             preference?.summaryProvider= Preference.SummaryProvider<Preference> { preference ->
