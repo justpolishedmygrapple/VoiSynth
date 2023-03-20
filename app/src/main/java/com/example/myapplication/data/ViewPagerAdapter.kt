@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.preference.ListPreference
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.PagerAdapter
 import java.util.*
 
 
-class ViewPagerAdapter(var context: Context) : PagerAdapter() {
+class ViewPagerAdapter(var context: Context, var language: String) : PagerAdapter() {
     var images = intArrayOf(
         com.example.myapplication.R.drawable.main_icon,
         com.example.myapplication.R.drawable.onboard_slide1,
@@ -54,9 +57,9 @@ class ViewPagerAdapter(var context: Context) : PagerAdapter() {
         val slideHeading = view.findViewById<View>(com.example.myapplication.R.id.texttitle) as TextView
         val slideDesciption = view.findViewById<View>(com.example.myapplication.R.id.textdeccription) as TextView
 
-        val currLocale = Locale.getDefault().displayLanguage
 
-        if(currLocale == "svenska"){
+
+        if(language == "svenska"){
             slidetitleimage.setImageResource(swedishImages[position])
         }
         else{

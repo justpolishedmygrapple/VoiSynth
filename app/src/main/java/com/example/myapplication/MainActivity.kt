@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             })
             mSLideViewPager = findViewById<View>(R.id.slideViewPager) as ViewPager
             mDotLayout = findViewById<View>(R.id.indicator_layout) as LinearLayout
-            viewPagerAdapter = ViewPagerAdapter(this)
+            viewPagerAdapter = ViewPagerAdapter(this, lang)
             mSLideViewPager!!.adapter = viewPagerAdapter
             setUpindicator(0)
             backbtn!!.visibility = View.INVISIBLE
