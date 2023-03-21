@@ -6,9 +6,9 @@ VoiSynth allows you to say whatever you want in anyone's voice and share your cl
 
 ## Authors
 
-- Dom Wilson: [@DomWilson2](https://github.com/DomWilson2)
-- Matthew Attebery: [@atteberm](https://github.com/atteberm)
-- Austin Mangel: [@justpolishedmygrapple](https://github.com/justpolishedmygrapple)
+- Dom Wilson: [@DomWilson2](https://github.com/DomWilson2) - Tutorial onboarding screen and graphics
+- Matthew Attebery: [@atteberm](https://github.com/atteberm) - XML styling, tutorial onboarding graphics
+- Austin Mangel: [@justpolishedmygrapple](https://github.com/justpolishedmygrapple) - Kotlin, except for majority of onboarding screen 
 
 ## Demo
 
