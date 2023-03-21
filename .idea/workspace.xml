@@ -9,15 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="Navigeringsalternativ -&gt; navigeringsfält">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="33ee7dc0-80d0-4834-b2c6-085878b70631" name="Changes" comment="readme" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R5CW12JNCGK]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/opethfan91/.android/avd/Pixel_6_Pro_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -99,18 +97,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PROJECT_TRUSTED_KEY": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "ScreenRecorder.SavePath": "C:\\Users\\Default.DESKTOP-7EV5VRC\\android_language.webm",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/opethfan91/492_final/final-project-ai-voice",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;ScreenRecorder.SavePath&quot;: &quot;C:\\Users\\Default.DESKTOP-7EV5VRC\\android_language.webm&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/opethfan91/492_final/final-project-ai-voice&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Default.DESKTOP-7EV5VRC\StudioProjects\releases\final-project-ai-voice\app\src\main\res\drawable" />
@@ -304,7 +302,13 @@
       <option name="project" value="LOCAL" />
       <updated>1679312756050</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL−00018" summary="readme">
+      <created>1679372578938</created>
+      <option name="number" value="LOCAL−00018" />
+      <option name="presentableId" value="LOCAL−00018" />
+      <updated>1679372578938</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -349,7 +353,8 @@
     <MESSAGE value="Fixed so that if a user changed language to Swedish and then opened the tutorial, the tutorial would be in the wrong language" />
     <MESSAGE value="grammar" />
     <MESSAGE value="Navigeringsalternativ -&gt; navigeringsfält" />
-    <option name="LAST_COMMIT_MESSAGE" value="Navigeringsalternativ -&gt; navigeringsfält" />
+    <MESSAGE value="readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
