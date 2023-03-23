@@ -90,5 +90,5 @@ echo "ELEVEN_LABS_API="\"YOUR_API_KEY\"" >> ~/.gradle/gradle.properties
 ## API Reference
 
 ### See [the voice interface](https://github.com/osu-cs492-w23/final-project-ai-voice/blob/austin-splash/app/src/main/java/com/example/myapplication/ui/VoiceInterface.kt) for the majority of the API endpoints used in this app. 
-### Posting an MP3 is defined in [(fun postMP3(uri: Uri, voiceName: String): Boolean](https://github.com/osu-cs492-w23/final-project-ai-voice/blob/austin-splash/app/src/main/java/com/example/myapplication/fragments/AddVoiceFragment.kt)
+### Posting an MP3 is defined in [fun postMP3(uri: Uri, voiceName: String): Boolean](https://github.com/osu-cs492-w23/final-project-ai-voice/blob/austin-splash/app/src/main/java/com/example/myapplication/fragments/AddVoiceFragment.kt)
 
