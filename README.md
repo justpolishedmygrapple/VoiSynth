@@ -19,7 +19,7 @@ VoiSynth allows you to say whatever you want in anyone's voice and share your cl
 
 * On Linux and Mac: 
 ```bash
-echo "ELEVEN_LABS_API="YOUR_API_KEY" >> ~/.gradle/gradle.properties
+echo "ELEVEN_LABS_API="\"YOUR_API_KEY\"" >> ~/.gradle/gradle.properties
 ```
 
 * On Windows:
