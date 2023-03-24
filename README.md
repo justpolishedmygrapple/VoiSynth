@@ -92,3 +92,8 @@ echo "ELEVEN_LABS_API="\"YOUR_API_KEY\"" >> ~/.gradle/gradle.properties
 ### See [the voice interface](https://github.com/osu-cs492-w23/final-project-ai-voice/blob/austin-splash/app/src/main/java/com/example/myapplication/ui/VoiceInterface.kt) for the majority of the API endpoints used in this app. 
 ### Posting an MP3 is defined in [fun postMP3(uri: Uri, voiceName: String): Boolean](https://github.com/osu-cs492-w23/final-project-ai-voice/blob/austin-splash/app/src/main/java/com/example/myapplication/fragments/AddVoiceFragment.kt)
 
+## Notes
+
+- A user requested that I build them this API using their API key and it failed on Android 10
+  - Bumping down the Minimum SDK version to 29 in the build.gradle seemes to fix this.
+  - YMMV if you bump down the minimum SDK. Minimum only tested with SDK 30 (Android 11)
