@@ -95,5 +95,5 @@ echo "ELEVEN_LABS_API="\"YOUR_API_KEY\"" >> ~/.gradle/gradle.properties
 ## Notes
 
 - A user requested that I build them this app using their API key and it failed on Android 10
-  - Bumping down the Minimum SDK version to 29 in the build.gradle seemes to fix this.
+  - Bumping down the Minimum SDK version to 29 in the build.gradle seems to fix this.
   - YMMV if you bump down the minimum SDK. Minimum only tested with SDK 30 (Android 11)
